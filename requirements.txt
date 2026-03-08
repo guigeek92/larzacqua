@@ -1,0 +1,12 @@
+streamlit
+fastapi
+uvicorn
+python-multipart
+requests
+pypdf
+groq
+python-dotenv
+pymupdf
+pytesseract
+pillow
+reportlab
