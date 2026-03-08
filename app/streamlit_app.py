@@ -491,29 +491,80 @@ def compute_udi_priority_score(result_json: dict) -> int:
 	return compute_hydro_score(result_json)
 
 
-def build_ranked_steu_rows(results: list[dict]) -> list[dict]:
+def _flow_score_from_m3j(flow_m3_j: float | int | None) -> int:
+	if not isinstance(flow_m3_j, (int, float)):
+		return 0
+	if flow_m3_j >= 250:
+		return 3
+	if flow_m3_j >= 100:
+		return 2
+	if flow_m3_j >= 50:
+		return 1
+	return 0
+
+
+def _head_score_from_m(head_m: float | int | None) -> int:
+	if not isinstance(head_m, (int, float)):
+		return 0
+	if head_m >= 25:
+		return 3
+	if head_m >= 15:
+		return 2
+	if head_m >= 8:
+		return 1
+	return 0
+
+
+def build_ranked_steu_rows(
+	results: list[dict],
+	min_surface_m2: float = 0,
+	min_completeness_pct: int = 0,
+	weight_pv: float = 1.0,
+	weight_completeness: float = 0.0,
+) -> list[dict]:
 	rows: list[dict] = []
 	for entry in results:
 		if entry.get("document_type", "").lower() != "steu":
 			continue
 		result_json = entry.get("result_json", {})
 		pv_surface = result_json.get("surface_potentielle_solaire_m2")
+		completeness_pct, _ = compute_data_completeness(result_json, "steu")
+		if completeness_pct < min_completeness_pct:
+			continue
+		if isinstance(pv_surface, (int, float)) and pv_surface < min_surface_m2:
+			continue
+
+		pv_priority = compute_steu_priority_score(result_json)
+		weighted_priority = round(
+			(weight_pv * pv_priority) + (weight_completeness * (completeness_pct / 20)),
+			2,
+		)
 		rows.append(
 			{
 				"Station": entry.get("site_name", "Site"),
 				"Commune": result_json.get("commune"),
 				"Surface PV (m2)": pv_surface,
-				"Complétude (%)": compute_data_completeness(result_json, "steu")[0],
+				"Complétude (%)": completeness_pct,
 				"Classe surface": pv_surface_band(pv_surface),
 				"Potentiel PV": "Oui" if isinstance(pv_surface, (int, float)) else "N/D",
 				"Score PV": compute_pv_score(result_json),
-				"Priorité PV": compute_steu_priority_score(result_json),
+				"Priorité PV": weighted_priority,
 			}
 		)
 	return sorted(rows, key=lambda row: row["Priorité PV"], reverse=True)
 
 
-def build_ranked_udi_rows(results: list[dict]) -> list[dict]:
+def build_ranked_udi_rows(
+	results: list[dict],
+	min_flow_m3j: float = 0,
+	min_head_m: float = 0,
+	min_completeness_pct: int = 0,
+	weight_hydro: float = 1.0,
+	weight_flow: float = 1.0,
+	weight_head: float = 1.0,
+	weight_points: float = 0.5,
+	weight_completeness: float = 0.0,
+) -> list[dict]:
 	rows: list[dict] = []
 	for entry in results:
 		if entry.get("document_type", "").lower() != "udi":
@@ -521,30 +572,67 @@ def build_ranked_udi_rows(results: list[dict]) -> list[dict]:
 		result_json = entry.get("result_json", {})
 		hydro_status = result_json.get("potentiel_hydraulique")
 		points = result_json.get("points_pression_reduction") or []
+		flow_m3_j = result_json.get("debit_m3_j")
+		head_m = result_json.get("hauteur_chute_estimee_m")
+		completeness_pct, _ = compute_data_completeness(result_json, "udi")
+
+		if completeness_pct < min_completeness_pct:
+			continue
+		if isinstance(flow_m3_j, (int, float)) and flow_m3_j < min_flow_m3j:
+			continue
+		if isinstance(head_m, (int, float)) and head_m < min_head_m:
+			continue
+
+		weighted_priority = round(
+			(weight_hydro * compute_hydro_score(result_json))
+			+ (weight_flow * _flow_score_from_m3j(flow_m3_j))
+			+ (weight_head * _head_score_from_m(head_m))
+			+ (weight_points * min(len(points), 3))
+			+ (weight_completeness * (completeness_pct / 25)),
+			2,
+		)
 		rows.append(
 			{
 				"Site réservoir": entry.get("site_name", "Site"),
 				"Localisation": result_json.get("localisation"),
-				"Complétude (%)": compute_data_completeness(result_json, "udi")[0],
-				"Débit (m3/j)": result_json.get("debit_m3_j"),
+				"Complétude (%)": completeness_pct,
+				"Débit (m3/j)": flow_m3_j,
 				"Volume réservoir (m3)": result_json.get("volume_reservoir_m3"),
-				"Hauteur chute (m)": result_json.get("hauteur_chute_estimee_m"),
+				"Hauteur chute (m)": head_m,
 				"Points pression": len(points),
 				"Potentiel hydro": "Oui" if hydro_status is True else "Non" if hydro_status is False else "N/D",
 				"Score Hydro": compute_hydro_score(result_json),
-				"Priorité Hydro": compute_udi_priority_score(result_json),
+				"Priorité Hydro": weighted_priority,
 			}
 		)
 	return sorted(rows, key=lambda row: row["Priorité Hydro"], reverse=True)
 
 
-def render_comparative_analysis(results: list[dict]) -> None:
+def render_comparative_analysis(results: list[dict], compare_config: dict | None = None) -> None:
 	if not results:
 		st.info("Aucun site à comparer pour ce run.")
 		return
 
-	ranked_steu = build_ranked_steu_rows(results)
-	ranked_udi = build_ranked_udi_rows(results)
+	config = compare_config or {}
+
+	ranked_steu = build_ranked_steu_rows(
+		results,
+		min_surface_m2=float(config.get("min_surface_m2", 0)),
+		min_completeness_pct=int(config.get("min_completeness_pct", 0)),
+		weight_pv=float(config.get("weight_pv", 1.0)),
+		weight_completeness=float(config.get("weight_steu_completeness", 0.0)),
+	)
+	ranked_udi = build_ranked_udi_rows(
+		results,
+		min_flow_m3j=float(config.get("min_flow_m3j", 0)),
+		min_head_m=float(config.get("min_head_m", 0)),
+		min_completeness_pct=int(config.get("min_completeness_pct", 0)),
+		weight_hydro=float(config.get("weight_hydro", 1.0)),
+		weight_flow=float(config.get("weight_flow", 1.0)),
+		weight_head=float(config.get("weight_head", 1.0)),
+		weight_points=float(config.get("weight_points", 0.5)),
+		weight_completeness=float(config.get("weight_udi_completeness", 0.0)),
+	)
 
 	col1, col2, col3 = st.columns(3)
 	col1.metric("Sites comparés", len(results))
@@ -567,6 +655,49 @@ def render_comparative_analysis(results: list[dict]) -> None:
 
 	if not ranked_steu and not ranked_udi:
 		st.info("Aucun indicateur STEU/UDI disponible pour la comparaison.")
+
+
+def render_comparison_controls() -> dict:
+	"""
+	STEP 6 - Interactive comparison:
+	Allow filtering and weighting directly in UI to support decision scenarios.
+	"""
+	with st.expander("Filtres et pondérations de comparaison", expanded=False):
+		st.caption("Ajuste les seuils métier et les pondérations avant d'interpréter le classement.")
+
+		col1, col2 = st.columns(2)
+		with col1:
+			min_surface_m2 = st.slider("STEU - Surface PV minimale (m2)", min_value=0, max_value=2000, value=0, step=50)
+			min_flow_m3j = st.slider("UDI - Débit minimal (m3/j)", min_value=0, max_value=500, value=0, step=10)
+			min_head_m = st.slider("UDI - Hauteur de chute minimale (m)", min_value=0, max_value=80, value=0, step=1)
+			min_completeness_pct = st.slider("Complétude minimale (%)", min_value=0, max_value=100, value=0, step=5)
+
+		with col2:
+			weight_pv = st.slider("Poids score PV (STEU)", min_value=0.0, max_value=4.0, value=1.0, step=0.1)
+			weight_steu_completeness = st.slider(
+				"Poids complétude (STEU)", min_value=0.0, max_value=2.0, value=0.0, step=0.1
+			)
+			weight_hydro = st.slider("Poids score hydro (UDI)", min_value=0.0, max_value=4.0, value=1.0, step=0.1)
+			weight_flow = st.slider("Poids débit (UDI)", min_value=0.0, max_value=3.0, value=1.0, step=0.1)
+			weight_head = st.slider("Poids chute (UDI)", min_value=0.0, max_value=3.0, value=1.0, step=0.1)
+			weight_points = st.slider("Poids points pression (UDI)", min_value=0.0, max_value=2.0, value=0.5, step=0.1)
+			weight_udi_completeness = st.slider(
+				"Poids complétude (UDI)", min_value=0.0, max_value=2.0, value=0.0, step=0.1
+			)
+
+	return {
+		"min_surface_m2": min_surface_m2,
+		"min_flow_m3j": min_flow_m3j,
+		"min_head_m": min_head_m,
+		"min_completeness_pct": min_completeness_pct,
+		"weight_pv": weight_pv,
+		"weight_steu_completeness": weight_steu_completeness,
+		"weight_hydro": weight_hydro,
+		"weight_flow": weight_flow,
+		"weight_head": weight_head,
+		"weight_points": weight_points,
+		"weight_udi_completeness": weight_udi_completeness,
+	}
 
 
 def build_comparison_report(run_data: dict) -> str:
@@ -669,12 +800,15 @@ def render_site_detail(entry: dict, show_debug: bool) -> None:
 		third_label = f"{capacite} EH" if capacite is not None else "N/A"
 		third_title = "Capacité"
 
+	completeness_pct, completeness_label = compute_data_completeness(result_json, document_type)
+
 	st.markdown(f"### {site_name}")
 	st.caption(f"Fichier : {filename} | Type détecté : {document_type.upper()}")
 	col1, col2, col3 = st.columns(3)
 	col1.metric("Référence", main_name)
 	col2.metric("Localisation", localisation)
 	col3.metric(third_title, third_label)
+	st.caption(f"Complétude extraction : {completeness_pct}% ({completeness_label})")
 
 	tab_desc, tab_hydro, tab_pv, tab_json, tab_debug = st.tabs(
 		["Description", "Hydro", "PV", "JSON", "Debug"]
@@ -1045,7 +1179,8 @@ def main() -> None:
 						st.error(f"{item.get('filename', 'fichier')} : {item.get('error', 'Erreur inconnue')}")
 
 			with tab_compare:
-				render_comparative_analysis(selected_run.get("results", []))
+				compare_config = render_comparison_controls()
+				render_comparative_analysis(selected_run.get("results", []), compare_config=compare_config)
 
 			with tab_sites:
 				site_results = selected_run.get("results", [])
