@@ -1,0 +1,529 @@
+{
+  "run_id": "711b1f2f28714bba8883090a24973f8a",
+  "timestamp": "2026-03-09 10:36:57",
+  "model": "llama-3.1-8b-instant",
+  "api_url": "http://127.0.0.1:8010/extract",
+  "total_files": 3,
+  "success_count": 3,
+  "error_count": 0,
+  "results": [
+    {
+      "filename": "UDI 7 Soulages - 8 Vernède & 9 Lambeyran__UDI_7_s1.pdf",
+      "site_name": "UDI 7",
+      "document_type": "udi",
+      "result_json": {
+        "nom_udi": "UDI 7",
+        "communes": [
+          "Soulages"
+        ],
+        "localisation": "Soulages",
+        "sites_udi": [
+          {
+            "site": "UDI 7 - Soulages",
+            "source_altitude_ngf_m": null,
+            "reservoir_altitude_ngf_m": null,
+            "denivele_source_reservoir_m": null,
+            "source_au_dessus_reservoir": null,
+            "volume_reservoir_m3": null,
+            "volume_reservoir_confidence": "low"
+          }
+        ],
+        "reservoirs_udi": [
+          {
+            "site_udi": "UDI 7 - Soulages",
+            "reservoir": "UDI 7 - Soulages",
+            "source_altitude_ngf_m": null,
+            "reservoir_altitude_ngf_m": null,
+            "denivele_source_reservoir_m": null,
+            "hauteur_chute_disponible_m": null,
+            "volume_reservoir_m3": null
+          }
+        ],
+        "description_reservoirs": [
+          "Réservoir de Soulages TN",
+          "Réservoir de Lambeyran TN",
+          "Réservoir de la Vernède TN",
+          "Réservoir de l'Esparrou TN",
+          "Réservoir de Séviac TN"
+        ],
+        "presence_brise_charge": true,
+        "nombre_brise_charge": 1,
+        "presence_reducteurs_pression": true,
+        "nombre_reducteurs_pression": 2,
+        "hauteur_chute_estimee_m": 4.0,
+        "denivele_source_reservoir_m": 4.0,
+        "denivele_estime_m": 4.0,
+        "altitudes_ngf_m": [
+          487,
+          464,
+          356,
+          320,
+          375
+        ],
+        "volume_reservoir_m3": 122.0,
+        "volume_reservoir_confidence": "low",
+        "volume_reservoir_confidence_by_site": [
+          {
+            "site": "UDI 7 - Soulages",
+            "confidence": "low"
+          },
+          {
+            "site": "UDI 9 - Lambeyran",
+            "confidence": "low"
+          },
+          {
+            "site": "UDI 8 - Vernède",
+            "confidence": "high"
+          }
+        ],
+        "volume_reference_m3_j": null,
+        "debit_m3_j": null,
+        "points_pression_reduction": [
+          "RP"
+        ],
+        "emplacements_turbine_potentiels": [
+          "Source de Soulages TN",
+          "Source de la Vernède TN",
+          "Source de l'Esparrou TN"
+        ],
+        "elements_interessants_micro_hydro": [
+          "Réduction de pression (RP/PRV)",
+          "Adduction gravitaire",
+          "Distribution gravitaire",
+          "Refoulement / pompage",
+          "Point de comptage (compteur)",
+          "Organes de vanne",
+          "Source/captage mentionné",
+          "Réservoir mentionné"
+        ],
+        "contraintes_techniques": [
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouverteOCanalisation :Adduction - gravitaireDistribution - gravitaireCompteur RPRéducteur de pressionDistribution - refoulement24.053",
+          "370m NGF360m NGF340m NGF330m NGF",
+          "390m NGF",
+          "450m NGF440m NGF430m NGF420m NGF410m NGF400m NGF",
+          "460m NGF470m NGF480m NGF490m NGFSourceSoulagesTN: 487m NGF",
+          "40 m³Réservoir deSoulagesTN: 421m NGF",
+          "Source deLambeyranTN: 464m NGF10 m³Réservoir deLambeyranTN: 456m NGF",
+          "350m NGFSource de laVernèdeTN: 356m NGF122 m³Réservoir de laVernèdeTN: 352m NGF",
+          "150 m³Réservoir del'EsparrouTN: 320m NGFRéservoir deSéviacTN: 375m NGFEsparrou",
+          "210m NGF220m NGF230m NGF240m NGF250m NGF260m NGF270m NGF280m NGF290m NGF300m NGF310m NGF320m NGFLES PLANS",
+          "TN: 487m NGF"
+        ],
+        "potentiel_hydraulique": true
+      },
+      "description": "```\n\n**Description technique factuelle**\n\nLe document concerne trois unités de distribution d'eau potable (UDI) : UDI 7 - Soulages, UDI 9 - Lambeyran et UDI 8 - Vernède. Les UDI sont situés dans les communes de Soulages, Lambeyran et Vernède.\n\nLes sources d'eau sont situées à des altitudes comprises entre 320 et 487 mètres NGF. Les réservoirs d'eau sont situés à des altitudes comprises entre 352 et 421 mètres NGF. Les volumes des réservoirs sont compris entre 10 et 122 mètres cubes.\n\nIl existe deux réducteurs de pression (RP) dans le réseau. Les altitudes des points de pression réduite sont indiquées.\n\nLes emplacements potentiels pour la mise en place de micro-turbines hydroélectriques sont les sources d'eau, notamment la source de Soulages TN, la source de la Vernède TN et la source de l'Esparrou TN.\n\nIl n'y a pas d'informations disponibles sur les contraintes techniques ou le potentiel hydraulique du site.",
+      "debug": {
+        "text_length": 1342,
+        "line_count": 33,
+        "keyword_counts": {
+          "udi": 6,
+          "débit": 0,
+          "debit": 0,
+          "m3/j": 0,
+          "m³/j": 0,
+          "m3/h": 0,
+          "m³/h": 0,
+          "l/s": 0,
+          "l/min": 0,
+          "pression": 1,
+          "bar": 0,
+          "hauteur de chute": 0,
+          "dénivelé": 0,
+          "denivele": 0,
+          "ngf": 37,
+          "source": 5,
+          "reservoir": 0,
+          "réservoir": 6,
+          "brise-charge": 0,
+          "brise charge": 0
+        },
+        "raw_samples": [
+          "370m NGF360m NGF340m NGF330m NGF",
+          "390m NGF",
+          "450m NGF440m NGF430m NGF420m NGF410m NGF400m NGF",
+          "460m NGF470m NGF480m NGF490m NGFSourceSoulagesTN : 487m NGF",
+          "40 m³Réservoir deSoulagesTN : 421m NGF",
+          "Source deLambeyranTN : 464m NGF10 m³Réservoir deLambeyranTN : 456m NGF",
+          "350m NGFSource de laVernèdeTN : 356m NGF122 m³Réservoir de laVernèdeTN : 352m NGF",
+          "150 m³Réservoir del'EsparrouTN : 320m NGFRéservoir deSéviacTN : 375m NGFEsparrou",
+          "210m NGF220m NGF230m NGF240m NGF250m NGF260m NGF270m NGF280m NGF290m NGF300m NGF310m NGF320m NGFLES PLANS",
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouverteOCanalisation :Adduction - gravitaireDistribution - gravitaireCompteur RPRéducteur de pressionDistribution - refoulement24.053",
+          "Source",
+          "TN : 487m NGF"
+        ],
+        "rp_blue_symbol_count": 0,
+        "legend_equipment": {
+          "has_reducer": false,
+          "has_brise_charge": false,
+          "legend_reducer_count": 0,
+          "legend_brise_charge_count": 0
+        },
+        "udi_linking": {
+          "group_key": "udi-7",
+          "group_size": 1,
+          "related_files": [
+            "UDI 7 Soulages - 8 Vernède & 9 Lambeyran__UDI_7_s1.pdf"
+          ],
+          "filled_fields": []
+        }
+      },
+      "site_group_key": "udi-7"
+    },
+    {
+      "filename": "UDI 7 Soulages - 8 Vernède & 9 Lambeyran__UDI_8_s3.pdf",
+      "site_name": "UDI 8",
+      "document_type": "udi",
+      "result_json": {
+        "nom_udi": "UDI 8",
+        "communes": [
+          "Soulages"
+        ],
+        "localisation": "Vers Lodève",
+        "sites_udi": [
+          {
+            "site": "UDI 8 - Vernède",
+            "source_altitude_ngf_m": 356.0,
+            "reservoir_altitude_ngf_m": 352.0,
+            "denivele_source_reservoir_m": 4.0,
+            "source_au_dessus_reservoir": true,
+            "volume_reservoir_m3": 122.0,
+            "volume_reservoir_confidence": "medium"
+          }
+        ],
+        "reservoirs_udi": [
+          {
+            "site_udi": "UDI 8 - Vernède",
+            "reservoir": "Reservoir de la Réservoir de",
+            "source_altitude_ngf_m": 356.0,
+            "reservoir_altitude_ngf_m": 370.0,
+            "denivele_source_reservoir_m": -14.0,
+            "hauteur_chute_disponible_m": null,
+            "volume_reservoir_m3": null
+          },
+          {
+            "site_udi": "UDI 8 - Vernède",
+            "reservoir": "Reservoir de l'Esparrou Pompage en ligne",
+            "source_altitude_ngf_m": 350.0,
+            "reservoir_altitude_ngf_m": 340.0,
+            "denivele_source_reservoir_m": 10.0,
+            "hauteur_chute_disponible_m": 10.0,
+            "volume_reservoir_m3": null
+          }
+        ],
+        "description_reservoirs": [
+          "Réservoir de Soulages",
+          "Réservoir de Lambeyran",
+          "Réservoir de la Vernède",
+          "Réservoir de l'Esparrou",
+          "Réservoir de Séviac"
+        ],
+        "presence_brise_charge": true,
+        "nombre_brise_charge": 1,
+        "presence_reducteurs_pression": true,
+        "nombre_reducteurs_pression": 3,
+        "hauteur_chute_estimee_m": 4.0,
+        "denivele_source_reservoir_m": 4.0,
+        "denivele_estime_m": 4.0,
+        "altitudes_ngf_m": [
+          360,
+          340,
+          330,
+          320,
+          310,
+          300,
+          290,
+          280,
+          270,
+          260,
+          250,
+          240,
+          230,
+          220,
+          210
+        ],
+        "volume_reservoir_m3": 122.0,
+        "volume_reservoir_confidence": "low",
+        "volume_reservoir_confidence_by_site": [
+          {
+            "site": "UDI 7 - Soulages",
+            "confidence": "low"
+          },
+          {
+            "site": "UDI 9 - Lambeyran",
+            "confidence": "low"
+          },
+          {
+            "site": "UDI 8 - Vernède",
+            "confidence": "medium"
+          }
+        ],
+        "volume_reference_m3_j": null,
+        "debit_m3_j": null,
+        "points_pression_reduction": [
+          "RP",
+          "RP (symbole bleu)",
+          "RP/PRV (legende)"
+        ],
+        "emplacements_turbine_potentiels": [
+          "Source de Soulages",
+          "Source de Lambeyran",
+          "Source de la Vernède"
+        ],
+        "elements_interessants_micro_hydro": [
+          "Réduction de pression (RP/PRV)",
+          "Adduction gravitaire",
+          "Distribution gravitaire",
+          "Refoulement / pompage",
+          "Point de comptage (compteur)",
+          "Organes de vanne",
+          "Source/captage mentionné",
+          "Réservoir mentionné"
+        ],
+        "contraintes_techniques": [
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouverteOCanalisation :Adduction - gravitaireDistribution - gravitaireCompteur RPRéducteur de pressionDistribution - refoulement24.053",
+          "RP Réducteur de pression",
+          "O Vanne ouverte",
+          "370m NGF360m NGF340m NGF330m NGF",
+          "390m NGF",
+          "450m NGF440m NGF430m NGF420m NGF410m NGF400m NGF",
+          "460m NGF470m NGF480m NGF490m NGFSourceSoulagesTN: 487m NGF",
+          "40 m³Réservoir deSoulagesTN: 421m NGF",
+          "Source deLambeyranTN: 464m NGF10 m³Réservoir deLambeyranTN: 456m NGF",
+          "350m NGFSource de laVernèdeTN: 356m NGF122 m³Réservoir de laVernèdeTN: 352m NGF",
+          "150 m³Réservoir del'EsparrouTN: 320m NGFRéservoir deSéviacTN: 375m NGFEsparrou",
+          "210m NGF220m NGF230m NGF240m NGF250m NGF260m NGF270m NGF280m NGF290m NGF300m NGF310m NGF320m NGFLES PLANS"
+        ],
+        "potentiel_hydraulique": true
+      },
+      "description": "```\n\n**Description technique factuelle**\n\nLe document concerne trois unités de distribution d'eau potable (UDI) : UDI 7 - Soulages, UDI 8 - Vernède et UDI 9 - Lambeyran. Les trois UDI sont localisés dans la région de Lodève.\n\nLes UDI sont alimentés par des sources situées à différentes altitudes :\n\n- Source de Soulages : 487 mètres NGF\n- Source de Lambeyran : 464 mètres NGF\n- Source de la Vernède : 356 mètres NGF\n\nLes réservoirs sont situés à différentes altitudes :\n\n- Réservoir de Soulages : 421 mètres NGF\n- Réservoir de Lambeyran : 456 mètres NGF\n- Réservoir de la Vernède : 352 mètres NGF\n- Réservoir de l'Esparrou : 320 mètres NGF\n- Réservoir de Séviac : 375 mètres NGF\n\nLes volumes des réservoirs sont :\n\n- Réservoir de Soulages : 40 mètres cubes\n- Réservoir de Lambeyran : 10 mètres cubes\n- Réservoir de la Vernède : 122 m",
+      "debug": {
+        "text_length": 2505,
+        "line_count": 85,
+        "keyword_counts": {
+          "udi": 8,
+          "débit": 0,
+          "debit": 0,
+          "m3/j": 0,
+          "m³/j": 0,
+          "m3/h": 0,
+          "m³/h": 0,
+          "l/s": 0,
+          "l/min": 0,
+          "pression": 2,
+          "bar": 0,
+          "hauteur de chute": 0,
+          "dénivelé": 0,
+          "denivele": 0,
+          "ngf": 64,
+          "source": 6,
+          "reservoir": 0,
+          "réservoir": 11,
+          "brise-charge": 0,
+          "brise charge": 0
+        },
+        "raw_samples": [
+          "370m NGF360m NGF340m NGF330m NGF",
+          "390m NGF",
+          "450m NGF440m NGF430m NGF420m NGF410m NGF400m NGF",
+          "460m NGF470m NGF480m NGF490m NGFSourceSoulagesTN : 487m NGF",
+          "40 m³Réservoir deSoulagesTN : 421m NGF",
+          "Source deLambeyranTN : 464m NGF10 m³Réservoir deLambeyranTN : 456m NGF",
+          "350m NGFSource de laVernèdeTN : 356m NGF122 m³Réservoir de laVernèdeTN : 352m NGF",
+          "150 m³Réservoir del'EsparrouTN : 320m NGFRéservoir deSéviacTN : 375m NGFEsparrou",
+          "210m NGF220m NGF230m NGF240m NGF250m NGF260m NGF270m NGF280m NGF290m NGF300m NGF310m NGF320m NGFLES PLANS",
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouverteOCanalisation :Adduction - gravitaireDistribution - gravitaireCompteur RPRéducteur de pressionDistribution - refoulement24.053",
+          "440m NGF",
+          "Réservoir de"
+        ],
+        "rp_blue_symbol_count": 3,
+        "legend_equipment": {
+          "has_reducer": true,
+          "has_brise_charge": false,
+          "legend_reducer_count": 1,
+          "legend_brise_charge_count": 0
+        },
+        "udi_linking": {
+          "group_key": "udi-8",
+          "group_size": 1,
+          "related_files": [
+            "UDI 7 Soulages - 8 Vernède & 9 Lambeyran__UDI_8_s3.pdf"
+          ],
+          "filled_fields": []
+        }
+      },
+      "site_group_key": "udi-8"
+    },
+    {
+      "filename": "UDI 7 Soulages - 8 Vernède & 9 Lambeyran__UDI_9_s2.pdf",
+      "site_name": "UDI 9",
+      "document_type": "udi",
+      "result_json": {
+        "nom_udi": "UDI 9",
+        "communes": [
+          "Soulages"
+        ],
+        "localisation": "Vers Lodève",
+        "sites_udi": [
+          {
+            "site": "UDI 9 - Lambeyran",
+            "source_altitude_ngf_m": 456.0,
+            "reservoir_altitude_ngf_m": 456.0,
+            "denivele_source_reservoir_m": 0.0,
+            "source_au_dessus_reservoir": false,
+            "volume_reservoir_m3": 10.0,
+            "volume_reservoir_confidence": "medium"
+          }
+        ],
+        "reservoirs_udi": [
+          {
+            "site_udi": "UDI 9 - Lambeyran",
+            "reservoir": "Reservoir de Lambeyran",
+            "source_altitude_ngf_m": 456.0,
+            "reservoir_altitude_ngf_m": 456.0,
+            "denivele_source_reservoir_m": 0.0,
+            "hauteur_chute_disponible_m": null,
+            "volume_reservoir_m3": null
+          }
+        ],
+        "description_reservoirs": [
+          "Réservoir de Lambeyran"
+        ],
+        "presence_brise_charge": true,
+        "nombre_brise_charge": 1,
+        "presence_reducteurs_pression": true,
+        "nombre_reducteurs_pression": 2,
+        "hauteur_chute_estimee_m": 0.0,
+        "denivele_source_reservoir_m": 0.0,
+        "denivele_estime_m": 0.0,
+        "altitudes_ngf_m": [
+          360,
+          340,
+          330,
+          390,
+          450,
+          440,
+          430,
+          420,
+          410,
+          400,
+          460,
+          470,
+          480,
+          490
+        ],
+        "volume_reservoir_m3": 10.0,
+        "volume_reservoir_confidence": "low",
+        "volume_reservoir_confidence_by_site": [
+          {
+            "site": "UDI 7 - Soulages",
+            "confidence": "low"
+          },
+          {
+            "site": "UDI 9 - Lambeyran",
+            "confidence": "medium"
+          },
+          {
+            "site": "UDI 8 - Vernède",
+            "confidence": "medium"
+          }
+        ],
+        "volume_reference_m3_j": null,
+        "debit_m3_j": null,
+        "points_pression_reduction": [
+          "RP",
+          "RP"
+        ],
+        "emplacements_turbine_potentiels": [
+          "Source de Soulages",
+          "Source de Lambeyran",
+          "Source de la Vernède"
+        ],
+        "elements_interessants_micro_hydro": [
+          "Réduction de pression (RP/PRV)",
+          "Adduction gravitaire",
+          "Distribution gravitaire",
+          "Refoulement / pompage",
+          "Point de comptage (compteur)",
+          "Organes de vanne",
+          "Source/captage mentionné",
+          "Réservoir mentionné"
+        ],
+        "contraintes_techniques": [
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouverteOCanalisation :Adduction - gravitaireDistribution - gravitaireCompteur RPRéducteur de pressionDistribution - refoulement24.053",
+          "370m NGF360m NGF340m NGF330m NGF",
+          "390m NGF",
+          "450m NGF440m NGF430m NGF420m NGF410m NGF400m NGF",
+          "460m NGF470m NGF480m NGF490m NGFSourceSoulagesTN: 487m NGF",
+          "40 m³Réservoir deSoulagesTN: 421m NGF",
+          "Source deLambeyranTN: 464m NGF10 m³Réservoir deLambeyranTN: 456m NGF",
+          "350m NGFSource de laVernèdeTN: 356m NGF122 m³Réservoir de laVernèdeTN: 352m NGF",
+          "150 m³Réservoir del'EsparrouTN: 320m NGFRéservoir deSéviacTN: 375m NGFEsparrou",
+          "210m NGF220m NGF230m NGF240m NGF250m NGF260m NGF270m NGF280m NGF290m NGF300m NGF310m NGF320m NGFLES PLANS",
+          "490m NGF",
+          "480m NGF"
+        ],
+        "potentiel_hydraulique": false
+      },
+      "description": "```\n\n**Description technique factuelle**\n\nLe document concerne trois unités de distribution d'eau potable (UDI) : UDI 7 - Soulages, UDI 8 - Vernède et UDI 9 - Lambeyran. Les UDI sont localisés dans la région de Lodève.\n\nLes UDI sont alimentés par des sources et des réservoirs. Les sources sont :\n\n* Source de Soulages (altitude : 487 m NGF)\n* Source de Lambeyran (altitude : 464 m NGF)\n* Source de la Vernède (altitude : 356 m NGF)\n\nLes réservoirs sont :\n\n* Réservoir de Soulages (altitude : 421 m NGF, volume : 40 m³)\n* Réservoir de Lambeyran (altitude : 456 m NGF, volume : 10 m³)\n* Réservoir de la Vernède (altitude : 352 m NGF, volume : 122 m³)\n* Réservoir de l'Esparrou (altitude : 320 m NGF, volume : 150 m³)\n* Réservoir de Séviac (altitude : 375 m NGF, volume : inconnu)\n\nLes UDI disposent de réducteurs de pression et de brise-charge. Il y a deux réducteurs de pression et un brise-charge.\n\nLes altitudes des points de press",
+      "debug": {
+        "text_length": 1450,
+        "line_count": 40,
+        "keyword_counts": {
+          "udi": 6,
+          "débit": 0,
+          "debit": 0,
+          "m3/j": 0,
+          "m³/j": 0,
+          "m3/h": 0,
+          "m³/h": 0,
+          "l/s": 0,
+          "l/min": 0,
+          "pression": 1,
+          "bar": 0,
+          "hauteur de chute": 0,
+          "dénivelé": 0,
+          "denivele": 0,
+          "ngf": 44,
+          "source": 5,
+          "reservoir": 0,
+          "réservoir": 7,
+          "brise-charge": 0,
+          "brise charge": 0
+        },
+        "raw_samples": [
+          "370m NGF360m NGF340m NGF330m NGF",
+          "390m NGF",
+          "450m NGF440m NGF430m NGF420m NGF410m NGF400m NGF",
+          "460m NGF470m NGF480m NGF490m NGFSourceSoulagesTN : 487m NGF",
+          "40 m³Réservoir deSoulagesTN : 421m NGF",
+          "Source deLambeyranTN : 464m NGF10 m³Réservoir deLambeyranTN : 456m NGF",
+          "350m NGFSource de laVernèdeTN : 356m NGF122 m³Réservoir de laVernèdeTN : 352m NGF",
+          "150 m³Réservoir del'EsparrouTN : 320m NGFRéservoir deSéviacTN : 375m NGFEsparrou",
+          "210m NGF220m NGF230m NGF240m NGF250m NGF260m NGF270m NGF280m NGF290m NGF300m NGF310m NGF320m NGFLES PLANS",
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouverteOCanalisation :Adduction - gravitaireDistribution - gravitaireCompteur RPRéducteur de pressionDistribution - refoulement24.053",
+          "490m NGF",
+          "480m NGF"
+        ],
+        "rp_blue_symbol_count": 0,
+        "legend_equipment": {
+          "has_reducer": false,
+          "has_brise_charge": false,
+          "legend_reducer_count": 0,
+          "legend_brise_charge_count": 0
+        },
+        "udi_linking": {
+          "group_key": "udi-9",
+          "group_size": 1,
+          "related_files": [
+            "UDI 7 Soulages - 8 Vernède & 9 Lambeyran__UDI_9_s2.pdf"
+          ],
+          "filled_fields": []
+        }
+      },
+      "site_group_key": "udi-9"
+    }
+  ],
+  "errors": [],
+  "udi_split_done": true,
+  "udi_linking_done": true
+}

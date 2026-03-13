@@ -1,0 +1,30 @@
+{
+  "run_id": "11b6c4a957774cb4b73c9ac0e579921d",
+  "timestamp": "2026-03-10 10:04:07",
+  "model": "llama-3.1-8b-instant",
+  "api_url": "http://127.0.0.1:8010/extract",
+  "total_files": 4,
+  "success_count": 0,
+  "error_count": 4,
+  "results": [],
+  "errors": [
+    {
+      "filename": "UDI 1 Mas Neuf & 2 La Doux__UDI_2_s1.pdf",
+      "error": "Erreur API: HTTPConnectionPool(host='127.0.0.1', port=8010): Max retries exceeded with url: /extract (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=8010): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée\"))"
+    },
+    {
+      "filename": "UDI 1 Mas Neuf & 2 La Doux__UDI_1_s2.pdf",
+      "error": "Erreur API: HTTPConnectionPool(host='127.0.0.1', port=8010): Max retries exceeded with url: /extract (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=8010): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée\"))"
+    },
+    {
+      "filename": "UDI 3 Beaume Baucart & 6 Romiguières__UDI_3_s1.pdf",
+      "error": "Erreur API: HTTPConnectionPool(host='127.0.0.1', port=8010): Max retries exceeded with url: /extract (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=8010): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée\"))"
+    },
+    {
+      "filename": "UDI 3 Beaume Baucart & 6 Romiguières__UDI_6_s2.pdf",
+      "error": "Erreur API: HTTPConnectionPool(host='127.0.0.1', port=8010): Max retries exceeded with url: /extract (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=8010): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée\"))"
+    }
+  ],
+  "udi_split_done": true,
+  "udi_linking_done": true
+}

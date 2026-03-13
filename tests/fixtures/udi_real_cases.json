@@ -1,0 +1,42 @@
+[
+  {
+    "id": "udi_01_soulages",
+    "text": "Synoptique UDI 7 Soulages\nSource de Cazevieille TN 712 m NGF\nReservoir de Soulages TN 654 m NGF 250 m3\nDebit moyen 18 l/s\nBrise-charge amont"
+  },
+  {
+    "id": "udi_02_vernede_ocr",
+    "text": "S Y N O P T I Q U E  U D I 8 Vernede\nSour ce 698 m N G F\nRe servoir de Vernede 640 m NGF 300 m3\nD e b i t : 52 m 3 / h\nRegulateur de pression"
+  },
+  {
+    "id": "udi_03_lambeyran_columns",
+    "text": "UDI 9 - Lambeyran\nDonnees hydrauliques\nLibelle            Valeur\nDebit nominal      110 m3/j\nVolume reservoir   450 m3\nDenivele source-reservoir 43 m\nChambre de reduction"
+  },
+  {
+    "id": "udi_04_beaume",
+    "text": "CCLL-R3.1 Reservoir Labeil\nCommune de Lauroux\nUDI 3 Beaume Boucart\nSource captage: 838 m NGF\nReservoir de Labeil: 786 m NGF\nQmoy = 12 l/s"
+  },
+  {
+    "id": "udi_05_range_debit",
+    "text": "Schema hydraulique UDI 11 - Les Crozes\nDebit de pointe 9 a 14 l/s\nReservoir des Crozes 120 m3\nSource 544 m NGF\nReservoir 508 m NGF"
+  },
+  {
+    "id": "udi_06_pressure_head",
+    "text": "UDI 12 - Ventajou\nMesures pression\nPression amont : 8.2 bar\nPression aval : 4.6 bar\nPRV principal\nVolume reservoir 200 m3"
+  },
+  {
+    "id": "udi_07_multi_sites",
+    "text": "UDI 7 Soulages & 8 Vernede & 9 Lambeyran\nUDI 7 Soulages Source 710 m NGF Reservoir de Soulages 658 m NGF 220 m3\nUDI 8 Vernede Source 705 m NGF Reservoir de Vernede 640 m NGF 300 m3\nUDI 9 Lambeyran Source 760 m NGF Reservoir de Lambeyran 701 m NGF 430 m3\nDebit 62 m3/h"
+  },
+  {
+    "id": "udi_08_volume_reference",
+    "text": "Synoptique UDI 15 Le Bosc\nVolume de reference 950 m3/j\nDebit instantane 35 l/s\nReservoir principal 500 m3\nBrise charge aval"
+  },
+  {
+    "id": "udi_09_negative_head",
+    "text": "UDI 16 - Test Bas\nSource 402 m NGF\nReservoir de Test 430 m NGF 90 m3\nDebit 4 l/s\nAucun potentiel hydro explicite"
+  },
+  {
+    "id": "udi_10_noisy_labels",
+    "text": "S y n o p t i q u e A E P UDI 17 Puech\nV o l u m e  r e s e r v o i r : 275 m3\nD e n i v e l e : 31 m\nQ max 16 l / s\nBrise charge ; reducteur de pression"
+  }
+]

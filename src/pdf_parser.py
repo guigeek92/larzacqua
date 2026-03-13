@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 from io import BytesIO
+import logging
 from pathlib import Path
 import re
 import shutil
@@ -10,6 +11,67 @@ from pypdf import PdfReader
 
 
 MIN_TEXT_QUALITY_FOR_OCR_SKIP = 120
+logger = logging.getLogger(__name__)
+
+
+def _postprocess_extracted_text(text: str) -> str:
+	"""Normalize common OCR/text-extraction artifacts while preserving content."""
+	if not text:
+		return ""
+
+	value = text.replace("\r\n", "\n").replace("\r", "\n")
+	value = value.replace("\u00a0", " ").replace("\u202f", " ")
+
+	# Re-join words split by hard line breaks (typical OCR artifact).
+	value = re.sub(r"([A-Za-zÀ-ÖØ-öø-ÿ])[-‐]\n([A-Za-zÀ-ÖØ-öø-ÿ])", r"\1\2", value)
+
+	unit_rewrites: list[tuple[str, str]] = [
+		(r"m\s*[³3]\s*/\s*j(?:our)?", "m3/j"),
+		(r"m\s*[³3]\s*/\s*h", "m3/h"),
+		(r"m\s*[³3]\s*/\s*s", "m3/s"),
+		(r"l\s*/\s*s", "l/s"),
+		(r"l\s*/\s*min", "l/min"),
+	]
+	for pattern, replacement in unit_rewrites:
+		value = re.sub(pattern, replacement, value, flags=re.IGNORECASE)
+
+	lines: list[str] = []
+	for line in value.split("\n"):
+		clean = re.sub(r"[ \t]+", " ", line).strip()
+		if clean:
+			lines.append(clean)
+		else:
+			# Keep paragraph boundaries for downstream section parsing.
+			if lines and lines[-1] != "":
+				lines.append("")
+
+	cleaned = "\n".join(lines)
+	cleaned = re.sub(r"\n{3,}", "\n\n", cleaned)
+	return cleaned.strip()
+
+
+def _resolve_tesseract_cmd() -> str:
+	# Accept either an absolute path or a command name available in PATH.
+	env_value = os.getenv("TESSERACT_CMD", "").strip()
+	if env_value:
+		if Path(env_value).exists():
+			return env_value
+		from_path = shutil.which(env_value)
+		if from_path:
+			return from_path
+
+	from_system = shutil.which("tesseract")
+	if from_system:
+		return from_system
+
+	for candidate in [
+		r"C:\Program Files\Tesseract-OCR\tesseract.exe",
+		r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe",
+	]:
+		if Path(candidate).exists():
+			return candidate
+
+	return ""
 
 
 def _score_text_quality(text: str) -> int:
@@ -70,6 +132,7 @@ def _extract_text_with_pymupdf(pdf_bytes: bytes) -> str:
 		return ""
 
 	pages_text: list[str] = []
+	doc = None
 	try:
 		doc = fitz.open(stream=pdf_bytes, filetype="pdf")
 		for page in doc:
@@ -89,54 +152,49 @@ def _extract_text_with_ocr(pdf_bytes: bytes) -> str:
 	try:
 		import fitz  # type: ignore
 		import pytesseract  # type: ignore
-		from PIL import Image  # type: ignore
+		from PIL import Image, ImageFilter, ImageOps  # type: ignore
 	except Exception:
 		return ""
 
-	tesseract_path = os.getenv("TESSERACT_CMD", "").strip()
+	tesseract_path = _resolve_tesseract_cmd()
 	if not tesseract_path:
-		system_tesseract = shutil.which("tesseract")
-		if system_tesseract:
-			tesseract_path = system_tesseract
-	if not tesseract_path:
-		default_paths = [
-			r"C:\Program Files\Tesseract-OCR\tesseract.exe",
-			r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe",
-		]
-		for candidate in default_paths:
-			if Path(candidate).exists():
-				tesseract_path = candidate
-				break
-	if not tesseract_path or not Path(tesseract_path).exists():
 		return ""
-	if tesseract_path:
-		pytesseract.pytesseract.tesseract_cmd = tesseract_path
+	pytesseract.pytesseract.tesseract_cmd = tesseract_path
 
 	pages_text: list[str] = []
+	doc = None
 	try:
 		doc = fitz.open(stream=pdf_bytes, filetype="pdf")
 		for page in doc:
 			best_page_text = ""
+			best_page_score = 0
 			for angle in [0, 90, 180, 270]:
 				matrix = fitz.Matrix(4.0, 4.0).prerotate(angle)
 				pix = page.get_pixmap(matrix=matrix, alpha=False)
 				img = Image.open(BytesIO(pix.tobytes("png"))).convert("L")
+				img = ImageOps.autocontrast(img)
+				img = img.filter(ImageFilter.MedianFilter(size=3))
+				img = img.point(lambda x: 255 if x > 160 else 0)
 
 				text = ""
+				text_score = 0
 				for lang in ["fra+eng", "eng", None]:
-					for config in ["--oem 3 --psm 6", "--oem 3 --psm 11", "--oem 1 --psm 6"]:
+					for config in ["--oem 3 --psm 6", "--oem 3 --psm 11", "--oem 3 --psm 4"]:
 						try:
 							if lang:
-								candidate = pytesseract.image_to_string(img, lang=lang, config=config)
+								candidate = pytesseract.image_to_string(img, lang=lang, config=config, timeout=12)
 							else:
-								candidate = pytesseract.image_to_string(img, config=config)
-							if _score_text_quality(candidate) > _score_text_quality(text):
+								candidate = pytesseract.image_to_string(img, config=config, timeout=12)
+							candidate_score = _score_text_quality(candidate)
+							if candidate_score > text_score:
 								text = candidate
+								text_score = candidate_score
 						except Exception:
 							continue
 
-				if _score_text_quality(text) > _score_text_quality(best_page_text):
+				if text_score > best_page_score:
 					best_page_text = text
+					best_page_score = text_score
 			if best_page_text.strip():
 				pages_text.append(best_page_text.strip())
 	finally:
@@ -156,12 +214,23 @@ def extract_text_from_pdf(pdf_bytes: bytes) -> str:
 	pypdf_text = _extract_text_with_pypdf(pdf_bytes)
 	pymupdf_text = _extract_text_with_pymupdf(pdf_bytes)
 
-	best_non_ocr_score = max(_score_text_quality(pypdf_text), _score_text_quality(pymupdf_text))
+	pypdf_score = _score_text_quality(pypdf_text)
+	pymupdf_score = _score_text_quality(pymupdf_text)
+	best_non_ocr_score = max(pypdf_score, pymupdf_score)
 	run_ocr = os.getenv("PDF_PARSER_FORCE_OCR", "").strip().lower() in {"1", "true", "yes", "on"}
 	if not run_ocr and best_non_ocr_score < MIN_TEXT_QUALITY_FOR_OCR_SKIP:
 		run_ocr = True
+		logger.info(
+			"PDF OCR enabled due to low text quality (pypdf=%s, pymupdf=%s, threshold=%s)",
+			pypdf_score,
+			pymupdf_score,
+			MIN_TEXT_QUALITY_FOR_OCR_SKIP,
+		)
+	elif run_ocr:
+		logger.info("PDF OCR forced by configuration PDF_PARSER_FORCE_OCR")
 
 	ocr_text = _extract_text_with_ocr(pdf_bytes) if run_ocr else ""
+	ocr_score = _score_text_quality(ocr_text) if ocr_text else 0
 
 	candidates = [pypdf_text, pymupdf_text, ocr_text]
 	ranked = sorted(candidates, key=_score_text_quality, reverse=True)
@@ -174,7 +243,16 @@ def extract_text_from_pdf(pdf_bytes: bytes) -> str:
 			continue
 		merged_parts.append(candidate.strip())
 
-	return "\n\n".join(merged_parts)
+	merged_text = "\n\n".join(merged_parts)
+	final_text = _postprocess_extracted_text(merged_text)
+	logger.debug(
+		"PDF text extracted (chars=%s, pypdf_score=%s, pymupdf_score=%s, ocr_score=%s)",
+		len(final_text),
+		pypdf_score,
+		pymupdf_score,
+		ocr_score,
+	)
+	return final_text
 
 
 def extract_text_from_pdf_file(pdf_path: str | Path) -> str:

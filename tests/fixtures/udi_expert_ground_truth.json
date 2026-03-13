@@ -1,0 +1,82 @@
+[
+  {
+    "id": "udi_01_soulages",
+    "nom_udi_contains": "Soulages",
+    "debit_m3_j": 1555.2,
+    "volume_reservoir_m3": 250.0,
+    "denivele_source_reservoir_m": 58.0,
+    "presence_reducteurs_pression": false
+  },
+  {
+    "id": "udi_02_vernede_ocr",
+    "nom_udi_contains": "Vernede",
+    "debit_m3_j": 1248.0,
+    "volume_reservoir_m3": 300.0,
+    "denivele_source_reservoir_m": 58.0,
+    "presence_reducteurs_pression": true
+  },
+  {
+    "id": "udi_03_lambeyran_columns",
+    "nom_udi_contains": "Lambeyran",
+    "debit_m3_j": 110.0,
+    "volume_reservoir_m3": 450.0,
+    "denivele_source_reservoir_m": 43.0,
+    "presence_reducteurs_pression": true
+  },
+  {
+    "id": "udi_04_beaume",
+    "nom_udi_contains": "Beaume",
+    "debit_m3_j": 1036.8,
+    "volume_reservoir_m3": null,
+    "denivele_source_reservoir_m": 52.0,
+    "presence_reducteurs_pression": false
+  },
+  {
+    "id": "udi_05_range_debit",
+    "nom_udi_contains": "Crozes",
+    "debit_m3_j": 1209.6,
+    "volume_reservoir_m3": 120.0,
+    "denivele_source_reservoir_m": 36.0,
+    "presence_reducteurs_pression": false
+  },
+  {
+    "id": "udi_06_pressure_head",
+    "nom_udi_contains": "Ventajou",
+    "debit_m3_j": null,
+    "volume_reservoir_m3": 200.0,
+    "denivele_source_reservoir_m": null,
+    "presence_reducteurs_pression": true
+  },
+  {
+    "id": "udi_07_multi_sites",
+    "nom_udi_contains": "Soulages",
+    "debit_m3_j": 1488.0,
+    "volume_reservoir_m3": 430.0,
+    "denivele_source_reservoir_m": 65.0,
+    "presence_reducteurs_pression": false
+  },
+  {
+    "id": "udi_08_volume_reference",
+    "nom_udi_contains": "Le Bosc",
+    "debit_m3_j": 3024.0,
+    "volume_reservoir_m3": 500.0,
+    "denivele_source_reservoir_m": null,
+    "presence_reducteurs_pression": false
+  },
+  {
+    "id": "udi_09_negative_head",
+    "nom_udi_contains": "Test Bas",
+    "debit_m3_j": 345.6,
+    "volume_reservoir_m3": 90.0,
+    "denivele_source_reservoir_m": -28.0,
+    "presence_reducteurs_pression": false
+  },
+  {
+    "id": "udi_10_noisy_labels",
+    "nom_udi_contains": "Puech",
+    "debit_m3_j": 1382.4,
+    "volume_reservoir_m3": 275.0,
+    "denivele_source_reservoir_m": 31.0,
+    "presence_reducteurs_pression": true
+  }
+]

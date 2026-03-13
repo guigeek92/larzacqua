@@ -1,133 +1,240 @@
 # energy-ai-tool
-Projet : IA d’analyse énergétique pour station d’eau
 
-Objectif :
-Créer un outil qui lit automatiquement les documents techniques d’une station (PDF) et qui :
+Projet d'IA pour l'analyse energetique d'infrastructures d'eau (STEU/UDI) a partir de documents PDF techniques.
 
-extrait les caractéristiques techniques
+## Vue d'ensemble du site
 
-estime la consommation énergétique
+Le site permet de charger des PDF metiers (fiches station, synoptiques AEP, schemas hydrauliques), d'en extraire automatiquement les donnees utiles, puis de produire une aide a la decision energetique.
 
-propose un mix ENR pour alimenter la station
+Objectifs principaux :
+- extraire des caracteristiques techniques fiables depuis des documents heterogenes
+- estimer des potentiels energetiques (hydraulique, solaire, mix ENR)
+- comparer plusieurs sites avec des filtres metiers
+- generer un rapport synthese exploitable
 
-## Module extraction PDF (style ancien projet chatbot)
+## Infrastructure technique
 
-Le moteur détecte automatiquement le type de document :
-- **STEU** (fiche station d'épuration)
-- **UDI** (réseau/ouvrages hydrauliques, utile pour présélection micro-turbines)
-	- inclut aussi les PDF de type **synoptique AEP / schéma hydraulique / réseau eau potable**
+### Architecture applicative
 
-Puis applique un schéma d'extraction adapté à chaque type.
+- `app/streamlit_app.py` : interface web Streamlit (upload, analyse, comparaison, export)
+- `backend/main.py` : API FastAPI (endpoint `/extract`, contrat de sortie versionne)
+- `src/ai_extraction.py` : pipeline d'extraction type RAG (`RAGPipeline`) avec modele IA
+- `src/pdf_parser.py` : parsing PDF/OCR pour documents complexes
+- `src/hydro_model.py`, `src/solar_model.py`, `src/energy_mix_optimizer.py` : calculs energetiques et optimisation de mix
+- `data/runs/` : traces JSON des analyses realisees + base SQLite `history.sqlite3` pour historique persistant
 
-Architecture inspirée de ton ancien projet :
-- `src/ai_extraction.py` : pipeline type RAG (`RAGPipeline`) avec sélection de modèle Groq
-- `backend/main.py` : API FastAPI (`/extract`) pour traiter un PDF
-- `app/streamlit_app.py` : interface utilisateur Streamlit
+### Flux de traitement
 
-## Améliorations implémentées (étapes guidées)
+1. L'utilisateur depose un ou plusieurs PDF dans l'interface.
+2. Streamlit envoie les fichiers a l'API FastAPI.
+3. Le backend detecte le type de document (STEU ou UDI/synoptique AEP).
+4. Le pipeline applique l'extraction adaptee (texte natif + OCR si necessaire).
+5. Les donnees structurees sont consolidees en JSON.
+6. L'interface affiche les resultats, scores de completude, classements, et rapport.
 
-Pour ne pas te perdre, les changements de code sont balisés avec des commentaires `STEP ...`.
+### Infrastructure d'execution locale
 
-Étape 1 - Observabilité backend
-- Fichier : `backend/main.py`
-- Ajout de logs structurés (`logging`) pour tracer succès/erreurs d'extraction.
+- Environnement Python virtuel (`.venv`)
+- Serveur API local FastAPI/Uvicorn (port `8010`)
+- Interface Streamlit locale (port `8501`)
+- OCR local via Tesseract pour PDF peu lisibles ou scannes
+- Variables de configuration via fichier `.env`
 
-Étape 2 - Contrat API explicite
-- Fichier : `backend/main.py`
-- Réponse API versionnée (`schema_version`) et modèle de réponse Pydantic.
-- `result_json` devient le champ canonique, `result` reste conservé temporairement pour compatibilité.
+## Interfaces utilisateur
 
-Étape 3 - Sécurité concurrence backend
-- Fichier : `backend/main.py`
-- Suppression du pipeline global mutable.
-- Instanciation d'un `RAGPipeline` par requête pour éviter les conflits de modèle entre utilisateurs/requêtes.
+### Interface Streamlit
 
-Étape 4 - Robustesse des appels API côté interface
-- Fichier : `app/streamlit_app.py`
-- Ajout d'une fonction centralisée avec retry/backoff : `request_extract_with_retry(...)`.
-- Réduction des erreurs transitoires réseau/API lors des analyses en batch.
+L'interface est organisee autour d'un parcours d'analyse metier :
 
-### Données extraites
+- import de PDF et lancement d'analyse
+- vue **Comparaison** : tableau unifie STEU/UDI avec filtres et ponderations
+- vue **Sites > Infrastructure site** : regroupement des fichiers UDI lies
+- vue **Sites > Localisation** : geolocalisation directe ou geocodage assiste
+- vue **Rapport PDF** : export des resultats consolides
+- historique permanent des runs (charge automatiquement entre sessions)
+- edition manuelle des donnees extraites par site, avec sauvegarde persistante
 
-Le système extrait les champs suivants depuis une fiche technique STEP :
-- presence of pressure reducing valve (brise-charge)
-- estimated head height
-- flow rate
-- available roof or land surface
-- geographic location
+### API FastAPI
 
-Sortie : JSON structuré.
+- endpoint principal : `/extract`
+- reponse normalisee avec `schema_version`
+- `result_json` est le champ canonique de sortie
+- `result` est conserve pour compatibilite temporaire
+
+## Outils et technologies utilises
+
+### Stack principale
+
+- Python
+- Streamlit (frontend applicatif)
+- FastAPI + Uvicorn (backend API)
+- Pydantic (contrats de donnees)
+- PyMuPDF / pypdf (lecture PDF)
+- Tesseract + pytesseract (OCR)
+- Pillow (traitement image)
+- Groq API (composant IA du pipeline)
+- pytest (tests)
+
+### Extraction metier STEU/UDI
+
+Le moteur prend en charge :
+- documents STEU (station d'epuration)
+- documents UDI (reseau eau potable, ouvrages hydrauliques)
+- synoptiques AEP et schemas hydrauliques
+
+Exemples de champs extraits :
+- presence de reducteur/brise-charge
+- hauteur de chute estimee
+- debit
+- surfaces mobilisables (toiture/sol)
+- elements d'infrastructure (reservoir, source, forage, pompe, etc.)
+- localisation
+
+### Detection de pictogrammes sur synoptiques
+
+Pipeline hybride vision + OCR :
+1. conversion du PDF en image haute resolution
+2. detection des symboles (approche type YOLO)
+3. extraction OCR autour du symbole
+4. reconstruction d'objets techniques avec attributs
+
+Implementation actuelle (modulaire) :
+- `src/symbol_detection.py` : detecteurs OpenCV (template matching) et YOLO (inference standardisee)
+- `src/infrastructure_mapper.py` : mapping `symboles -> entites metier` + relations (`infrastructure_graph`)
+- `src/ai_extraction.py` : enrichissement UDI avec `symbol_detections` et retro-compatibilite des champs existants
+
+References de legendes utilisees pour la calibration OCR symbole :
+- `legende 1.JPG`
+- `legende 2.JPG`
+
+Mode sans dataset YOLO (template bank) :
+- Script de bootstrap : `scripts/bootstrap_symbol_templates.py`
+- Le script extrait des candidats de symboles depuis `legende 1.JPG` et `legende 2.JPG`
+- Pour `legende 1`, le bootstrap guide est limite a 1 template par ligne OCR et 15 templates max
+- Les templates valides doivent ensuite etre ranges dans `data/templates_symbols/<symbol>/`
+- Le pipeline UDI charge automatiquement ces templates et ajoute les detections dans `result_json["symbol_detections"]`
+
+Commande de bootstrap :
+
+```bash
+$env:PYTHONPATH='.'
+& ".venv/Scripts/python.exe" scripts/bootstrap_symbol_templates.py --legend1 "legende 1.JPG" --legend2 "legende 2.JPG"
+```
+
+Format de sortie standardise ajoute dans `result_json` :
+
+```json
+[
+	{
+		"symbol": "pressure_reducer",
+		"confidence": 0.92,
+		"bounding_box": [112.4, 284.1, 156.9, 321.0],
+		"page": 5,
+		"site": "Site_A",
+		"method": "yolo"
+	}
+]
+```
+
+Classes principales detectees :
+- `SOURCE`
+- `FORAGE`
+- `RESERVOIR`
+- `POMPE`
+- `VANNE`
+- `COMPTEUR`
+- `TRAITEMENT_UV`
+- `TRAITEMENT_CHLORE`
+- `FILTRATION`
+
+### Robustesse et qualite deja integrees
+
+- logs structures backend pour le suivi d'execution
+- instanciation du pipeline par requete (evite les conflits en concurrence)
+- retry/backoff cote interface pour les erreurs transitoires
+- indicateur de completude des donnees extraites
+- filtres et ponderations metier pour ajuster le classement
+
+## Installation et lancement
+
+### Prerequis
+
+- Python 3.10+
+- Tesseract OCR installe localement (recommande pour UDI/synoptiques)
 
 ### Installation
-
-Depuis la racine du projet :
 
 ```bash
 python -m venv .venv
 ```
 
-Activer l'environnement virtuel (PowerShell) :
-
 ```bash
-.\.venv\Scripts\Activate.ps1
+\.venv\Scripts\Activate.ps1
 ```
-
-Installer les dépendances :
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Alternative sans fichier requirements :
-
-```bash
-pip install streamlit fastapi uvicorn python-multipart requests pypdf groq python-dotenv pymupdf pytesseract pillow
-```
-
-Créer un fichier `.env` à la racine :
+Configurer `.env` a la racine :
 
 ```env
 GROQ_API_KEY=ta_cle_api_groq
 HYDRO_MIN_FLOW_M3_J=50
-# optionnel (Windows): chemin vers tesseract.exe
+# Optionnel (Windows)
 # TESSERACT_CMD=C:\\Program Files\\Tesseract-OCR\\tesseract.exe
 ```
 
-`HYDRO_MIN_FLOW_M3_J` est utilisé pour un premier filtrage hydro :
-- si `debit_m3_j` < seuil, alors `potentiel_hydraulique = false`
-- si `debit_m3_j` n'est pas trouvé, le potentiel reste non documenté
+### Execution
 
-Pour les PDF synoptiques/rotés (souvent UDI), le parser tente aussi une extraction OCR.
-Prérequis OCR local :
-- installer Tesseract OCR sur la machine
-- définir `TESSERACT_CMD` dans `.env` si nécessaire (Windows)
-
-Remarque UDI : certains synoptiques n'exposent pas explicitement le débit.
-Dans ce cas, l'extraction remonte les données techniques disponibles (altitudes NGF, dénivelé estimé, ouvrages/points hydrauliques).
-
-Mode multi-fichiers UDI :
-- quand plusieurs PDF UDI d'un même domaine/site sont analysés dans le même run,
-- l'application relie automatiquement les fichiers proches (nom UDI, localisation, communes, nom de fichier),
-- puis complète les champs hydro manquants avec les informations pertinentes trouvées dans les autres fichiers liés.
-
-### Lancer le backend
-
-Terminal 1 :
+Terminal 1 (API) :
 
 ```bash
 python -m uvicorn backend.main:app --reload --host 127.0.0.1 --port 8010
 ```
 
-### Lancer l'interface
-
-Terminal 2 :
+Terminal 2 (interface) :
 
 ```bash
 python -m streamlit run app/streamlit_app.py --server.port 8501
 ```
 
-Puis charger un PDF dans l'interface et cliquer sur **Analyser le PDF**.
+Limite recommandee pour eviter les erreurs de timeout : **10 fichiers PDF max par analyse**.
 
-URLs utiles :
-- API backend : `http://127.0.0.1:8010`
-- Interface Streamlit : `http://127.0.0.1:8501`
+URLs locales :
+- API : `http://127.0.0.1:8010`
+- Interface : `http://127.0.0.1:8501`
+
+## Problemes actuels et limites
+
+- Qualite variable des PDF : scans bruites, rotation, faible resolution, tableaux non structures.
+- OCR sensible a la qualite image : erreurs possibles sur abreviations techniques et unites.
+- Donnees metier parfois absentes : certains synoptiques ne donnent pas explicitement le debit.
+- Heterogeneite de vocabulaire entre territoires/exploitants (noms d'ouvrages, conventions locales).
+- Couplage fort a des heuristiques metier : necessite un recalibrage si la typologie des documents evolue.
+- Dependance a des services externes IA : latence/cout/disponibilite a surveiller.
+
+## Perspectives d'amelioration
+
+- Ajouter un systeme de score de confiance par champ extrait (pas seulement global).
+- Mettre en place une validation humaine assistee avec correction rapide des champs incertains.
+- Enrichir les jeux de tests reels UDI/STEU et automatiser des benchmarks de precision.
+- Industrialiser la detection de pictogrammes (dataset annote, versionning modele, metriques mAP/F1).
+- Ajouter une persistance base de donnees pour historiser les analyses (au-dela de `data/runs/`).
+- Exposer une API de consultation des runs et un mode batch planifiable.
+- Ajouter observabilite avancee (traces, metriques de latence, taux d'erreur par type de PDF).
+- Renforcer la gestion multi-utilisateur (authentification, quotas, journalisation d'audit).
+
+## Tests
+
+Le projet contient une base de tests dans `tests/`, notamment sur :
+- extraction UDI comparee a un referentiel expert
+- parsing PDF de cas reels
+- detection d'ouvrages et robustesse des heuristiques
+
+Execution type :
+
+```bash
+$env:PYTHONPATH='.'
+python -m pytest -q
+```

@@ -95,7 +95,7 @@ async def extract_pdf(
 
     try:
         content = await file.read()
-        extraction = await run_in_threadpool(pipeline.extract_from_pdf, content)
+        extraction = await run_in_threadpool(pipeline.extract_from_pdf, content, file.filename)
     except ValueError as err:
         raise HTTPException(status_code=400, detail=str(err))
     except Exception as err:

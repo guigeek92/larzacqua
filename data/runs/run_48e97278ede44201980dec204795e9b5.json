@@ -1,0 +1,306 @@
+{
+  "run_id": "48e97278ede44201980dec204795e9b5",
+  "timestamp": "2026-03-08 15:59:02",
+  "model": "llama-3.1-8b-instant",
+  "api_url": "http://127.0.0.1:8010/extract",
+  "total_files": 1,
+  "success_count": 2,
+  "error_count": 0,
+  "results": [
+    {
+      "filename": "UDI 3 Beaume Baucart & 6 Romiguières.pdf",
+      "site_name": "UDI 3 - Beaume-Boucart",
+      "document_type": "udi",
+      "result_json": {
+        "nom_udi": "UDI 3 - Beaume-Boucart",
+        "communes": [
+          "Beaume-Boucart",
+          "Romiguières"
+        ],
+        "localisation": "Lodévois Larzac",
+        "sites_udi": [
+          {
+            "site": "UDI 3 - Beaume-Boucart",
+            "source_altitude_ngf_m": 660.0,
+            "reservoir_altitude_ngf_m": 645.0,
+            "denivele_source_reservoir_m": 15.0,
+            "source_au_dessus_reservoir": true,
+            "volume_reservoir_m3": 5.0
+          }
+        ],
+        "reservoirs_udi": [
+          {
+            "site_udi": "UDI 3 - Beaume-Boucart",
+            "reservoir": "Reservoir de Labeil",
+            "source_altitude_ngf_m": 660.0,
+            "reservoir_altitude_ngf_m": 650.0,
+            "denivele_source_reservoir_m": 10.0,
+            "hauteur_chute_disponible_m": 10.0,
+            "volume_reservoir_m3": null
+          }
+        ],
+        "presence_brise_charge": true,
+        "nombre_brise_charge": 1,
+        "presence_reducteurs_pression": true,
+        "nombre_reducteurs_pression": 1,
+        "hauteur_chute_estimee_m": 15.0,
+        "denivele_source_reservoir_m": 15.0,
+        "denivele_estime_m": 15.0,
+        "altitudes_ngf_m": [
+          630,
+          640,
+          650,
+          660,
+          670
+        ],
+        "volume_reservoir_m3": 5.0,
+        "volume_reference_m3_j": null,
+        "debit_m3_j": null,
+        "points_pression_reduction": [
+          {
+            "nom": "Vanne ouverte",
+            "altitude": 630
+          }
+        ],
+        "emplacements_turbine_potentiels": [
+          {
+            "nom": "Source de Beaume-Boucart",
+            "altitude": 660
+          },
+          {
+            "nom": "Réservoir de Labeil",
+            "altitude": 645
+          },
+          {
+            "nom": "Réservoir de Romiguières",
+            "altitude": 660
+          },
+          {
+            "nom": "Source de Fontblanc 2",
+            "altitude": 665
+          }
+        ],
+        "contraintes_techniques": [
+          "Vanne ouverteOCanalisation :Adduction - gravitaireDistribution - gravitaireCompteur non télésurveillé PompeUVTraitement UVFiltrationF",
+          "O Vanne ouverte",
+          "630m NGF640m NGF650m NGF660m NGF",
+          "670m NGFSource deBeaume-BoucartTN : 660m NGF5 m³Réservoir deLabeilTN : 645m NGFLabeil",
+          "15 m³Réservoir deRomiguièresTN : 660m NGFSource deFontblanc 2TN : 665m NGF",
+          "OLocal de traitementUV + filtrationTN : 630m NGFUV620m NGF630m NGF640m NGF650m NGF660m NGF670m NGF",
+          "670m NGF",
+          "Labeil 660m NGF",
+          "TN : 660m NGF",
+          "Labeil 650m NGF",
+          "TN : 645m NGF",
+          "640m NGF"
+        ],
+        "potentiel_hydraulique": true
+      },
+      "description": "```\n\n**Description technique factuelle**\n\nL'UDI 3 - Beaume-Boucart et l'UDI 6 - Romiguières sont deux systèmes d'alimentation en eau potable situés dans la communauté de communes Lodévois Larzac. Les deux systèmes sont composés de sources, de réservoirs et de canalisations.\n\nLa source de Beaume-Boucart a une altitude de 660 mètres NGF et alimente le réservoir de Labeil, qui a une altitude de 645 mètres NGF et un volume de 5 mètres cubes. Le réservoir de Romiguières a une altitude de 660 mètres NGF et un volume de 15 mètres cubes.\n\nIl y a une vanne ouverte à l'altitude de 630 mètres NGF, qui peut être considérée comme un point de pression réduction.\n\nLes altitudes des points de référence NGF sont les suivantes : 630, 640, 650, 660 et 670 mètres.\n\nIl n'y a pas d'information sur la hauteur de chute estimée, la dénivelée source-réservoir, la dénivelée estimée, le volume de réservoir, le volume de référence journalier, le débit journalier ou le potentiel hydraulique.\n\nLes emplacements potentiels pour la mise en place de micro-turbines hydro sont les sources de Beaume-Boucart, de Labeil et de Romiguières, ainsi que les réservoirs de Labeil et de Romiguières.",
+      "debug": {
+        "text_length": 9709,
+        "line_count": 103,
+        "keyword_counts": {
+          "udi": 12,
+          "débit": 0,
+          "debit": 0,
+          "m3/j": 0,
+          "m³/j": 0,
+          "m3/h": 0,
+          "m³/h": 0,
+          "l/s": 0,
+          "l/min": 0,
+          "pression": 0,
+          "bar": 0,
+          "hauteur de chute": 0,
+          "dénivelé": 0,
+          "denivele": 0,
+          "ngf": 48,
+          "source": 9,
+          "reservoir": 0,
+          "réservoir": 9,
+          "brise-charge": 0,
+          "brise charge": 0
+        },
+        "raw_samples": [
+          "630m NGF640m NGF650m NGF660m NGF",
+          "670m NGFSource deBeaume-BoucartTN : 660m NGF5 m³Réservoir deLabeilTN : 645m NGFLabeil",
+          "15 m³Réservoir deRomiguièresTN : 660m NGFSource deFontblanc 2TN : 665m NGF",
+          "OLocal de traitementUV + filtrationTN : 630m NGFUV620m NGF630m NGF640m NGF650m NGF660m NGF670m NGF",
+          "LEGENDERéservoirOuvrage:Accessoire:Source",
+          "670m NGF",
+          "Labeil 660m NGF",
+          "Source de",
+          "TN : 660m NGF",
+          "Réservoir de",
+          "Labeil 650m NGF",
+          "TN : 645m NGF"
+        ],
+        "udi_site_split": {
+          "split_from_file": "UDI 3 Beaume Baucart & 6 Romiguières.pdf",
+          "site_name": "UDI 3 - Beaume-Boucart",
+          "site_index": 1,
+          "site_count": 2
+        },
+        "udi_linking": {
+          "group_key": "3 beaume boucart lodevois",
+          "group_size": 1,
+          "related_files": [
+            "UDI 3 Beaume Baucart & 6 Romiguières.pdf"
+          ],
+          "filled_fields": []
+        }
+      },
+      "site_group_key": "3 beaume boucart lodevois"
+    },
+    {
+      "filename": "UDI 3 Beaume Baucart & 6 Romiguières.pdf",
+      "site_name": "UDI 6 - Romiguières",
+      "document_type": "udi",
+      "result_json": {
+        "nom_udi": "UDI 6 - Romiguières",
+        "communes": [
+          "Beaume-Boucart",
+          "Romiguières"
+        ],
+        "localisation": "Lodévois Larzac",
+        "sites_udi": [
+          {
+            "site": "UDI 6 - Romiguières",
+            "source_altitude_ngf_m": 665.0,
+            "reservoir_altitude_ngf_m": 660.0,
+            "denivele_source_reservoir_m": 5.0,
+            "source_au_dessus_reservoir": true,
+            "volume_reservoir_m3": 15.0
+          }
+        ],
+        "reservoirs_udi": [
+          {
+            "site_udi": "UDI 6 - Romiguières",
+            "reservoir": "Reservoir de Romiguières",
+            "source_altitude_ngf_m": 660.0,
+            "reservoir_altitude_ngf_m": 665.0,
+            "denivele_source_reservoir_m": -5.0,
+            "hauteur_chute_disponible_m": null,
+            "volume_reservoir_m3": null
+          }
+        ],
+        "presence_brise_charge": true,
+        "nombre_brise_charge": 1,
+        "presence_reducteurs_pression": true,
+        "nombre_reducteurs_pression": 1,
+        "hauteur_chute_estimee_m": 5.0,
+        "denivele_source_reservoir_m": 5.0,
+        "denivele_estime_m": 5.0,
+        "altitudes_ngf_m": [
+          630,
+          640,
+          650,
+          660,
+          670
+        ],
+        "volume_reservoir_m3": 15.0,
+        "volume_reference_m3_j": null,
+        "debit_m3_j": null,
+        "points_pression_reduction": [
+          {
+            "nom": "Vanne ouverte",
+            "altitude": 630
+          }
+        ],
+        "emplacements_turbine_potentiels": [
+          {
+            "nom": "Source de Beaume-Boucart",
+            "altitude": 660
+          },
+          {
+            "nom": "Réservoir de Labeil",
+            "altitude": 645
+          },
+          {
+            "nom": "Réservoir de Romiguières",
+            "altitude": 660
+          },
+          {
+            "nom": "Source de Fontblanc 2",
+            "altitude": 665
+          }
+        ],
+        "contraintes_techniques": [
+          "Vanne ouverteOCanalisation :Adduction - gravitaireDistribution - gravitaireCompteur non télésurveillé PompeUVTraitement UVFiltrationF",
+          "O Vanne ouverte",
+          "630m NGF640m NGF650m NGF660m NGF",
+          "670m NGFSource deBeaume-BoucartTN : 660m NGF5 m³Réservoir deLabeilTN : 645m NGFLabeil",
+          "15 m³Réservoir deRomiguièresTN : 660m NGFSource deFontblanc 2TN : 665m NGF",
+          "OLocal de traitementUV + filtrationTN : 630m NGFUV620m NGF630m NGF640m NGF650m NGF660m NGF670m NGF",
+          "670m NGF",
+          "Labeil 660m NGF",
+          "TN : 660m NGF",
+          "Labeil 650m NGF",
+          "TN : 645m NGF",
+          "640m NGF"
+        ],
+        "potentiel_hydraulique": true
+      },
+      "description": "```\n\n**Description technique factuelle**\n\nL'UDI 3 - Beaume-Boucart et l'UDI 6 - Romiguières sont deux systèmes d'alimentation en eau potable situés dans la communauté de communes Lodévois Larzac. Les deux systèmes sont composés de sources, de réservoirs et de canalisations.\n\nLa source de Beaume-Boucart a une altitude de 660 mètres NGF et alimente le réservoir de Labeil, qui a une altitude de 645 mètres NGF et un volume de 5 mètres cubes. Le réservoir de Romiguières a une altitude de 660 mètres NGF et un volume de 15 mètres cubes.\n\nIl y a une vanne ouverte à l'altitude de 630 mètres NGF, qui peut être considérée comme un point de pression réduction.\n\nLes altitudes des points de référence NGF sont les suivantes : 630, 640, 650, 660 et 670 mètres.\n\nIl n'y a pas d'information sur la hauteur de chute estimée, la dénivelée source-réservoir, la dénivelée estimée, le volume de réservoir, le volume de référence journalier, le débit journalier ou le potentiel hydraulique.\n\nLes emplacements potentiels pour la mise en place de micro-turbines hydro sont les sources de Beaume-Boucart, de Labeil et de Romiguières, ainsi que les réservoirs de Labeil et de Romiguières.",
+      "debug": {
+        "text_length": 9709,
+        "line_count": 103,
+        "keyword_counts": {
+          "udi": 12,
+          "débit": 0,
+          "debit": 0,
+          "m3/j": 0,
+          "m³/j": 0,
+          "m3/h": 0,
+          "m³/h": 0,
+          "l/s": 0,
+          "l/min": 0,
+          "pression": 0,
+          "bar": 0,
+          "hauteur de chute": 0,
+          "dénivelé": 0,
+          "denivele": 0,
+          "ngf": 48,
+          "source": 9,
+          "reservoir": 0,
+          "réservoir": 9,
+          "brise-charge": 0,
+          "brise charge": 0
+        },
+        "raw_samples": [
+          "630m NGF640m NGF650m NGF660m NGF",
+          "670m NGFSource deBeaume-BoucartTN : 660m NGF5 m³Réservoir deLabeilTN : 645m NGFLabeil",
+          "15 m³Réservoir deRomiguièresTN : 660m NGFSource deFontblanc 2TN : 665m NGF",
+          "OLocal de traitementUV + filtrationTN : 630m NGFUV620m NGF630m NGF640m NGF650m NGF660m NGF670m NGF",
+          "LEGENDERéservoirOuvrage:Accessoire:Source",
+          "670m NGF",
+          "Labeil 660m NGF",
+          "Source de",
+          "TN : 660m NGF",
+          "Réservoir de",
+          "Labeil 650m NGF",
+          "TN : 645m NGF"
+        ],
+        "udi_site_split": {
+          "split_from_file": "UDI 3 Beaume Baucart & 6 Romiguières.pdf",
+          "site_name": "UDI 6 - Romiguières",
+          "site_index": 2,
+          "site_count": 2
+        },
+        "udi_linking": {
+          "group_key": "6 romiguieres lodevois larzac",
+          "group_size": 1,
+          "related_files": [
+            "UDI 3 Beaume Baucart & 6 Romiguières.pdf"
+          ],
+          "filled_fields": []
+        }
+      },
+      "site_group_key": "6 romiguieres lodevois larzac"
+    }
+  ],
+  "errors": [],
+  "udi_split_done": true,
+  "udi_linking_done": true
+}

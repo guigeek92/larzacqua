@@ -1,0 +1,2212 @@
+[
+  {
+    "file": "cand_000.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      250,
+      486,
+      268,
+      506
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_001.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      168,
+      486,
+      186,
+      506
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_002.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      225,
+      486,
+      243,
+      506
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_003.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      129,
+      484,
+      147,
+      506
+    ],
+    "width": 18,
+    "height": 22,
+    "area": 140
+  },
+  {
+    "file": "cand_004.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      107,
+      484,
+      127,
+      505
+    ],
+    "width": 20,
+    "height": 21,
+    "area": 156
+  },
+  {
+    "file": "cand_005.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      107,
+      484,
+      147,
+      506
+    ],
+    "width": 40,
+    "height": 22,
+    "area": 448
+  },
+  {
+    "file": "cand_006.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      211,
+      483,
+      234,
+      506
+    ],
+    "width": 23,
+    "height": 23,
+    "area": 225
+  },
+  {
+    "file": "cand_007.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      150,
+      483,
+      186,
+      506
+    ],
+    "width": 36,
+    "height": 23,
+    "area": 420
+  },
+  {
+    "file": "cand_008.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      271,
+      465,
+      293,
+      484
+    ],
+    "width": 22,
+    "height": 19,
+    "area": 154
+  },
+  {
+    "file": "cand_009.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      236,
+      464,
+      254,
+      484
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_010.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      236,
+      464,
+      263,
+      484
+    ],
+    "width": 27,
+    "height": 20,
+    "area": 228
+  },
+  {
+    "file": "cand_011.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      215,
+      464,
+      238,
+      484
+    ],
+    "width": 23,
+    "height": 20,
+    "area": 180
+  },
+  {
+    "file": "cand_012.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      178,
+      464,
+      206,
+      484
+    ],
+    "width": 28,
+    "height": 20,
+    "area": 240
+  },
+  {
+    "file": "cand_013.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      256,
+      462,
+      278,
+      484
+    ],
+    "width": 22,
+    "height": 22,
+    "area": 196
+  },
+  {
+    "file": "cand_014.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      107,
+      461,
+      128,
+      484
+    ],
+    "width": 21,
+    "height": 23,
+    "area": 195
+  },
+  {
+    "file": "cand_015.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      134,
+      461,
+      166,
+      484
+    ],
+    "width": 32,
+    "height": 23,
+    "area": 360
+  },
+  {
+    "file": "cand_016.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      121,
+      461,
+      141,
+      484
+    ],
+    "width": 20,
+    "height": 23,
+    "area": 180
+  },
+  {
+    "file": "cand_017.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      214,
+      441,
+      232,
+      464
+    ],
+    "width": 18,
+    "height": 23,
+    "area": 150
+  },
+  {
+    "file": "cand_018.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      279,
+      440,
+      297,
+      460
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_019.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      259,
+      440,
+      277,
+      460
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_020.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      241,
+      440,
+      262,
+      459
+    ],
+    "width": 21,
+    "height": 19,
+    "area": 143
+  },
+  {
+    "file": "cand_021.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      214,
+      440,
+      248,
+      464
+    ],
+    "width": 34,
+    "height": 24,
+    "area": 416
+  },
+  {
+    "file": "cand_022.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      178,
+      440,
+      206,
+      460
+    ],
+    "width": 28,
+    "height": 20,
+    "area": 240
+  },
+  {
+    "file": "cand_023.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      254,
+      438,
+      277,
+      460
+    ],
+    "width": 23,
+    "height": 22,
+    "area": 210
+  },
+  {
+    "file": "cand_024.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      107,
+      437,
+      128,
+      460
+    ],
+    "width": 21,
+    "height": 23,
+    "area": 195
+  },
+  {
+    "file": "cand_025.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      134,
+      437,
+      166,
+      460
+    ],
+    "width": 32,
+    "height": 23,
+    "area": 360
+  },
+  {
+    "file": "cand_026.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      121,
+      437,
+      141,
+      460
+    ],
+    "width": 20,
+    "height": 23,
+    "area": 180
+  },
+  {
+    "file": "cand_027.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      204,
+      417,
+      222,
+      440
+    ],
+    "width": 18,
+    "height": 23,
+    "area": 150
+  },
+  {
+    "file": "cand_028.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      269,
+      416,
+      287,
+      436
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_029.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      168,
+      416,
+      186,
+      436
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_030.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      263,
+      416,
+      287,
+      436
+    ],
+    "width": 24,
+    "height": 20,
+    "area": 192
+  },
+  {
+    "file": "cand_031.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      214,
+      416,
+      238,
+      436
+    ],
+    "width": 24,
+    "height": 20,
+    "area": 192
+  },
+  {
+    "file": "cand_032.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      150,
+      415,
+      172,
+      436
+    ],
+    "width": 22,
+    "height": 21,
+    "area": 182
+  },
+  {
+    "file": "cand_033.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      107,
+      414,
+      127,
+      435
+    ],
+    "width": 20,
+    "height": 21,
+    "area": 156
+  },
+  {
+    "file": "cand_034.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      231,
+      413,
+      251,
+      435
+    ],
+    "width": 20,
+    "height": 22,
+    "area": 168
+  },
+  {
+    "file": "cand_035.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      164,
+      413,
+      186,
+      436
+    ],
+    "width": 22,
+    "height": 23,
+    "area": 210
+  },
+  {
+    "file": "cand_036.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      232,
+      362,
+      250,
+      382
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_037.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      216,
+      362,
+      234,
+      385
+    ],
+    "width": 18,
+    "height": 23,
+    "area": 150
+  },
+  {
+    "file": "cand_038.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      159,
+      362,
+      177,
+      382
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_039.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      190,
+      359,
+      208,
+      382
+    ],
+    "width": 18,
+    "height": 23,
+    "area": 150
+  },
+  {
+    "file": "cand_040.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      145,
+      360,
+      167,
+      382
+    ],
+    "width": 22,
+    "height": 22,
+    "area": 196
+  },
+  {
+    "file": "cand_041.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      102,
+      359,
+      122,
+      382
+    ],
+    "width": 20,
+    "height": 23,
+    "area": 180
+  },
+  {
+    "file": "cand_042.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      115,
+      359,
+      142,
+      382
+    ],
+    "width": 27,
+    "height": 23,
+    "area": 285
+  },
+  {
+    "file": "cand_043.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      65,
+      356,
+      95,
+      386
+    ],
+    "width": 30,
+    "height": 30,
+    "area": 484
+  },
+  {
+    "file": "cand_044.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      61,
+      352,
+      98,
+      390
+    ],
+    "width": 37,
+    "height": 38,
+    "area": 870
+  },
+  {
+    "file": "cand_045.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      125,
+      334,
+      148,
+      353
+    ],
+    "width": 23,
+    "height": 19,
+    "area": 165
+  },
+  {
+    "file": "cand_046.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      114,
+      333,
+      133,
+      353
+    ],
+    "width": 19,
+    "height": 20,
+    "area": 132
+  },
+  {
+    "file": "cand_047.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      140,
+      333,
+      158,
+      356
+    ],
+    "width": 18,
+    "height": 23,
+    "area": 150
+  },
+  {
+    "file": "cand_048.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      103,
+      330,
+      123,
+      352
+    ],
+    "width": 20,
+    "height": 22,
+    "area": 168
+  },
+  {
+    "file": "cand_049.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      103,
+      330,
+      133,
+      353
+    ],
+    "width": 30,
+    "height": 23,
+    "area": 330
+  },
+  {
+    "file": "cand_050.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      71,
+      327,
+      95,
+      355
+    ],
+    "width": 24,
+    "height": 28,
+    "area": 320
+  },
+  {
+    "file": "cand_051.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      64,
+      324,
+      88,
+      352
+    ],
+    "width": 24,
+    "height": 28,
+    "area": 320
+  },
+  {
+    "file": "cand_052.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      61,
+      321,
+      98,
+      358
+    ],
+    "width": 37,
+    "height": 37,
+    "area": 841
+  },
+  {
+    "file": "cand_053.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      115,
+      303,
+      133,
+      323
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_054.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      103,
+      300,
+      123,
+      322
+    ],
+    "width": 20,
+    "height": 22,
+    "area": 168
+  },
+  {
+    "file": "cand_055.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      83,
+      300,
+      101,
+      322
+    ],
+    "width": 18,
+    "height": 22,
+    "area": 140
+  },
+  {
+    "file": "cand_056.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      64,
+      293,
+      91,
+      328
+    ],
+    "width": 27,
+    "height": 35,
+    "area": 513
+  },
+  {
+    "file": "cand_057.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      170,
+      275,
+      189,
+      294
+    ],
+    "width": 19,
+    "height": 19,
+    "area": 121
+  },
+  {
+    "file": "cand_058.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      211,
+      274,
+      229,
+      294
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_059.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      190,
+      274,
+      208,
+      294
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_060.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      161,
+      274,
+      179,
+      294
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_061.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      161,
+      274,
+      198,
+      294
+    ],
+    "width": 37,
+    "height": 20,
+    "area": 348
+  },
+  {
+    "file": "cand_062.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      103,
+      271,
+      123,
+      293
+    ],
+    "width": 20,
+    "height": 22,
+    "area": 168
+  },
+  {
+    "file": "cand_063.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      80,
+      270,
+      102,
+      293
+    ],
+    "width": 22,
+    "height": 23,
+    "area": 210
+  },
+  {
+    "file": "cand_064.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      63,
+      264,
+      90,
+      299
+    ],
+    "width": 27,
+    "height": 35,
+    "area": 513
+  },
+  {
+    "file": "cand_065.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      274,
+      242,
+      292,
+      262
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_066.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      127,
+      243,
+      149,
+      262
+    ],
+    "width": 22,
+    "height": 19,
+    "area": 154
+  },
+  {
+    "file": "cand_067.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      116,
+      242,
+      134,
+      262
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_068.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      103,
+      239,
+      123,
+      262
+    ],
+    "width": 20,
+    "height": 23,
+    "area": 180
+  },
+  {
+    "file": "cand_069.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      68,
+      240,
+      90,
+      262
+    ],
+    "width": 22,
+    "height": 22,
+    "area": 196
+  },
+  {
+    "file": "cand_070.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      270,
+      239,
+      292,
+      262
+    ],
+    "width": 22,
+    "height": 23,
+    "area": 210
+  },
+  {
+    "file": "cand_071.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      193,
+      239,
+      215,
+      262
+    ],
+    "width": 22,
+    "height": 23,
+    "area": 210
+  },
+  {
+    "file": "cand_072.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      64,
+      237,
+      93,
+      265
+    ],
+    "width": 29,
+    "height": 28,
+    "area": 420
+  },
+  {
+    "file": "cand_073.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      64,
+      232,
+      97,
+      266
+    ],
+    "width": 33,
+    "height": 34,
+    "area": 650
+  },
+  {
+    "file": "cand_074.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      127,
+      216,
+      148,
+      234
+    ],
+    "width": 21,
+    "height": 18,
+    "area": 130
+  },
+  {
+    "file": "cand_075.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      61,
+      213,
+      105,
+      234
+    ],
+    "width": 44,
+    "height": 21,
+    "area": 468
+  },
+  {
+    "file": "cand_076.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      97,
+      212,
+      139,
+      234
+    ],
+    "width": 42,
+    "height": 22,
+    "area": 476
+  },
+  {
+    "file": "cand_077.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      171,
+      196,
+      189,
+      218
+    ],
+    "width": 18,
+    "height": 22,
+    "area": 140
+  },
+  {
+    "file": "cand_078.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      148,
+      195,
+      166,
+      215
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_079.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      142,
+      195,
+      166,
+      215
+    ],
+    "width": 24,
+    "height": 20,
+    "area": 192
+  },
+  {
+    "file": "cand_080.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      104,
+      192,
+      125,
+      215
+    ],
+    "width": 21,
+    "height": 23,
+    "area": 195
+  },
+  {
+    "file": "cand_081.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      120,
+      192,
+      139,
+      215
+    ],
+    "width": 19,
+    "height": 23,
+    "area": 165
+  },
+  {
+    "file": "cand_082.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      59,
+      189,
+      84,
+      214
+    ],
+    "width": 25,
+    "height": 25,
+    "area": 289
+  },
+  {
+    "file": "cand_083.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      166,
+      172,
+      184,
+      192
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_084.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      197,
+      170,
+      217,
+      192
+    ],
+    "width": 20,
+    "height": 22,
+    "area": 168
+  },
+  {
+    "file": "cand_085.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      210,
+      169,
+      228,
+      191
+    ],
+    "width": 18,
+    "height": 22,
+    "area": 140
+  },
+  {
+    "file": "cand_086.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      104,
+      169,
+      123,
+      191
+    ],
+    "width": 19,
+    "height": 22,
+    "area": 154
+  },
+  {
+    "file": "cand_087.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      63,
+      170,
+      86,
+      189
+    ],
+    "width": 23,
+    "height": 19,
+    "area": 165
+  },
+  {
+    "file": "cand_088.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      56,
+      170,
+      77,
+      189
+    ],
+    "width": 21,
+    "height": 19,
+    "area": 143
+  },
+  {
+    "file": "cand_089.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      197,
+      169,
+      228,
+      192
+    ],
+    "width": 31,
+    "height": 23,
+    "area": 345
+  },
+  {
+    "file": "cand_090.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      121,
+      169,
+      143,
+      192
+    ],
+    "width": 22,
+    "height": 23,
+    "area": 210
+  },
+  {
+    "file": "cand_091.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      48,
+      167,
+      93,
+      192
+    ],
+    "width": 45,
+    "height": 25,
+    "area": 629
+  },
+  {
+    "file": "cand_092.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      56,
+      147,
+      86,
+      169
+    ],
+    "width": 30,
+    "height": 22,
+    "area": 308
+  },
+  {
+    "file": "cand_093.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      102,
+      145,
+      122,
+      168
+    ],
+    "width": 20,
+    "height": 23,
+    "area": 180
+  },
+  {
+    "file": "cand_094.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      102,
+      145,
+      148,
+      171
+    ],
+    "width": 46,
+    "height": 26,
+    "area": 684
+  },
+  {
+    "file": "cand_095.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      52,
+      142,
+      90,
+      171
+    ],
+    "width": 38,
+    "height": 29,
+    "area": 630
+  },
+  {
+    "file": "cand_096.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      147,
+      122,
+      168,
+      141
+    ],
+    "width": 21,
+    "height": 19,
+    "area": 143
+  },
+  {
+    "file": "cand_097.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      136,
+      121,
+      154,
+      141
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_098.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      117,
+      121,
+      135,
+      141
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_099.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      158,
+      121,
+      179,
+      141
+    ],
+    "width": 21,
+    "height": 20,
+    "area": 156
+  },
+  {
+    "file": "cand_100.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      128,
+      121,
+      154,
+      141
+    ],
+    "width": 26,
+    "height": 20,
+    "area": 216
+  },
+  {
+    "file": "cand_101.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      104,
+      118,
+      125,
+      140
+    ],
+    "width": 21,
+    "height": 22,
+    "area": 182
+  },
+  {
+    "file": "cand_102.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      48,
+      110,
+      93,
+      145
+    ],
+    "width": 45,
+    "height": 35,
+    "area": 999
+  },
+  {
+    "file": "cand_103.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      152,
+      89,
+      170,
+      109
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_104.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      117,
+      89,
+      135,
+      109
+    ],
+    "width": 18,
+    "height": 20,
+    "area": 120
+  },
+  {
+    "file": "cand_105.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      138,
+      89,
+      170,
+      109
+    ],
+    "width": 32,
+    "height": 20,
+    "area": 288
+  },
+  {
+    "file": "cand_106.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      105,
+      86,
+      124,
+      109
+    ],
+    "width": 19,
+    "height": 23,
+    "area": 165
+  },
+  {
+    "file": "cand_107.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      116,
+      60,
+      135,
+      80
+    ],
+    "width": 19,
+    "height": 20,
+    "area": 132
+  },
+  {
+    "file": "cand_108.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      116,
+      60,
+      150,
+      80
+    ],
+    "width": 34,
+    "height": 20,
+    "area": 312
+  },
+  {
+    "file": "cand_109.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      106,
+      57,
+      124,
+      79
+    ],
+    "width": 18,
+    "height": 22,
+    "area": 140
+  },
+  {
+    "file": "cand_110.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      49,
+      50,
+      92,
+      117
+    ],
+    "width": 43,
+    "height": 67,
+    "area": 2065
+  },
+  {
+    "file": "cand_111.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      49,
+      45,
+      92,
+      117
+    ],
+    "width": 43,
+    "height": 72,
+    "area": 2240
+  },
+  {
+    "file": "cand_112.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      77,
+      6,
+      95,
+      28
+    ],
+    "width": 18,
+    "height": 22,
+    "area": 140
+  },
+  {
+    "file": "cand_113.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      65,
+      6,
+      84,
+      28
+    ],
+    "width": 19,
+    "height": 22,
+    "area": 154
+  },
+  {
+    "file": "cand_114.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      53,
+      7,
+      72,
+      27
+    ],
+    "width": 19,
+    "height": 20,
+    "area": 132
+  },
+  {
+    "file": "cand_115.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      30,
+      6,
+      50,
+      28
+    ],
+    "width": 20,
+    "height": 22,
+    "area": 168
+  },
+  {
+    "file": "cand_116.png",
+    "legend": "legende 1.JPG",
+    "bbox": [
+      19,
+      6,
+      37,
+      28
+    ],
+    "width": 18,
+    "height": 22,
+    "area": 140
+  },
+  {
+    "file": "cand_000.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      299,
+      387,
+      324,
+      405
+    ],
+    "width": 25,
+    "height": 18,
+    "area": 170
+  },
+  {
+    "file": "cand_001.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      278,
+      387,
+      312,
+      405
+    ],
+    "width": 34,
+    "height": 18,
+    "area": 260
+  },
+  {
+    "file": "cand_002.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      83,
+      387,
+      116,
+      405
+    ],
+    "width": 33,
+    "height": 18,
+    "area": 250
+  },
+  {
+    "file": "cand_003.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      263,
+      375,
+      295,
+      393
+    ],
+    "width": 32,
+    "height": 18,
+    "area": 240
+  },
+  {
+    "file": "cand_004.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      113,
+      375,
+      134,
+      393
+    ],
+    "width": 21,
+    "height": 18,
+    "area": 130
+  },
+  {
+    "file": "cand_005.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      70,
+      375,
+      93,
+      393
+    ],
+    "width": 23,
+    "height": 18,
+    "area": 150
+  },
+  {
+    "file": "cand_006.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      297,
+      356,
+      325,
+      375
+    ],
+    "width": 28,
+    "height": 19,
+    "area": 220
+  },
+  {
+    "file": "cand_007.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      287,
+      355,
+      325,
+      375
+    ],
+    "width": 38,
+    "height": 20,
+    "area": 360
+  },
+  {
+    "file": "cand_008.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      83,
+      351,
+      111,
+      375
+    ],
+    "width": 28,
+    "height": 24,
+    "area": 320
+  },
+  {
+    "file": "cand_009.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      68,
+      347,
+      93,
+      365
+    ],
+    "width": 25,
+    "height": 18,
+    "area": 170
+  },
+  {
+    "file": "cand_010.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      264,
+      343,
+      289,
+      361
+    ],
+    "width": 25,
+    "height": 18,
+    "area": 170
+  },
+  {
+    "file": "cand_011.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      155,
+      329,
+      188,
+      347
+    ],
+    "width": 33,
+    "height": 18,
+    "area": 250
+  },
+  {
+    "file": "cand_012.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      113,
+      318,
+      134,
+      336
+    ],
+    "width": 21,
+    "height": 18,
+    "area": 130
+  },
+  {
+    "file": "cand_013.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      70,
+      318,
+      93,
+      336
+    ],
+    "width": 23,
+    "height": 18,
+    "area": 150
+  },
+  {
+    "file": "cand_014.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      264,
+      317,
+      289,
+      335
+    ],
+    "width": 25,
+    "height": 18,
+    "area": 170
+  },
+  {
+    "file": "cand_015.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      85,
+      304,
+      119,
+      322
+    ],
+    "width": 34,
+    "height": 18,
+    "area": 260
+  },
+  {
+    "file": "cand_016.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      67,
+      304,
+      90,
+      322
+    ],
+    "width": 23,
+    "height": 18,
+    "area": 150
+  },
+  {
+    "file": "cand_017.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      67,
+      293,
+      99,
+      311
+    ],
+    "width": 32,
+    "height": 18,
+    "area": 240
+  },
+  {
+    "file": "cand_018.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      264,
+      290,
+      289,
+      308
+    ],
+    "width": 25,
+    "height": 18,
+    "area": 170
+  },
+  {
+    "file": "cand_019.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      74,
+      244,
+      102,
+      262
+    ],
+    "width": 28,
+    "height": 18,
+    "area": 200
+  },
+  {
+    "file": "cand_020.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      55,
+      244,
+      80,
+      262
+    ],
+    "width": 25,
+    "height": 18,
+    "area": 170
+  },
+  {
+    "file": "cand_021.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      71,
+      230,
+      102,
+      248
+    ],
+    "width": 31,
+    "height": 18,
+    "area": 230
+  },
+  {
+    "file": "cand_022.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      55,
+      230,
+      80,
+      248
+    ],
+    "width": 25,
+    "height": 18,
+    "area": 170
+  },
+  {
+    "file": "cand_023.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      144,
+      230,
+      177,
+      248
+    ],
+    "width": 33,
+    "height": 18,
+    "area": 250
+  },
+  {
+    "file": "cand_024.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      122,
+      230,
+      160,
+      250
+    ],
+    "width": 38,
+    "height": 20,
+    "area": 360
+  },
+  {
+    "file": "cand_025.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      116,
+      217,
+      141,
+      235
+    ],
+    "width": 25,
+    "height": 18,
+    "area": 170
+  },
+  {
+    "file": "cand_026.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      55,
+      215,
+      84,
+      233
+    ],
+    "width": 29,
+    "height": 18,
+    "area": 210
+  },
+  {
+    "file": "cand_027.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      301,
+      168,
+      333,
+      186
+    ],
+    "width": 32,
+    "height": 18,
+    "area": 240
+  },
+  {
+    "file": "cand_028.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      327,
+      168,
+      359,
+      186
+    ],
+    "width": 32,
+    "height": 18,
+    "area": 240
+  },
+  {
+    "file": "cand_029.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      225,
+      167,
+      245,
+      189
+    ],
+    "width": 20,
+    "height": 22,
+    "area": 168
+  },
+  {
+    "file": "cand_030.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      233,
+      166,
+      251,
+      189
+    ],
+    "width": 18,
+    "height": 23,
+    "area": 150
+  },
+  {
+    "file": "cand_031.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      225,
+      166,
+      251,
+      189
+    ],
+    "width": 26,
+    "height": 23,
+    "area": 270
+  },
+  {
+    "file": "cand_032.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      311,
+      145,
+      332,
+      163
+    ],
+    "width": 21,
+    "height": 18,
+    "area": 130
+  },
+  {
+    "file": "cand_033.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      230,
+      141,
+      254,
+      171
+    ],
+    "width": 24,
+    "height": 30,
+    "area": 352
+  },
+  {
+    "file": "cand_034.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      117,
+      141,
+      137,
+      159
+    ],
+    "width": 20,
+    "height": 18,
+    "area": 120
+  },
+  {
+    "file": "cand_035.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      29,
+      141,
+      56,
+      159
+    ],
+    "width": 27,
+    "height": 18,
+    "area": 190
+  },
+  {
+    "file": "cand_036.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      23,
+      138,
+      63,
+      162
+    ],
+    "width": 40,
+    "height": 24,
+    "area": 512
+  },
+  {
+    "file": "cand_037.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      256,
+      124,
+      281,
+      142
+    ],
+    "width": 25,
+    "height": 18,
+    "area": 170
+  },
+  {
+    "file": "cand_038.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      231,
+      124,
+      253,
+      146
+    ],
+    "width": 22,
+    "height": 22,
+    "area": 196
+  },
+  {
+    "file": "cand_039.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      160,
+      121,
+      191,
+      139
+    ],
+    "width": 31,
+    "height": 18,
+    "area": 230
+  },
+  {
+    "file": "cand_040.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      150,
+      120,
+      183,
+      139
+    ],
+    "width": 33,
+    "height": 19,
+    "area": 275
+  },
+  {
+    "file": "cand_041.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      23,
+      116,
+      64,
+      140
+    ],
+    "width": 41,
+    "height": 24,
+    "area": 528
+  },
+  {
+    "file": "cand_042.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      292,
+      105,
+      326,
+      123
+    ],
+    "width": 34,
+    "height": 18,
+    "area": 260
+  },
+  {
+    "file": "cand_043.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      232,
+      100,
+      252,
+      126
+    ],
+    "width": 20,
+    "height": 26,
+    "area": 216
+  },
+  {
+    "file": "cand_044.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      232,
+      100,
+      258,
+      126
+    ],
+    "width": 26,
+    "height": 26,
+    "area": 324
+  },
+  {
+    "file": "cand_045.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      124,
+      97,
+      155,
+      115
+    ],
+    "width": 31,
+    "height": 18,
+    "area": 230
+  },
+  {
+    "file": "cand_046.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      30,
+      95,
+      52,
+      115
+    ],
+    "width": 22,
+    "height": 20,
+    "area": 168
+  },
+  {
+    "file": "cand_047.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      22,
+      93,
+      66,
+      117
+    ],
+    "width": 44,
+    "height": 24,
+    "area": 576
+  },
+  {
+    "file": "cand_048.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      231,
+      81,
+      251,
+      107
+    ],
+    "width": 20,
+    "height": 26,
+    "area": 216
+  },
+  {
+    "file": "cand_049.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      28,
+      67,
+      59,
+      93
+    ],
+    "width": 31,
+    "height": 26,
+    "area": 414
+  },
+  {
+    "file": "cand_050.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      230,
+      61,
+      255,
+      87
+    ],
+    "width": 25,
+    "height": 26,
+    "area": 306
+  },
+  {
+    "file": "cand_051.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      232,
+      42,
+      256,
+      69
+    ],
+    "width": 24,
+    "height": 27,
+    "area": 304
+  },
+  {
+    "file": "cand_052.png",
+    "legend": "legende 2.JPG",
+    "bbox": [
+      28,
+      40,
+      57,
+      68
+    ],
+    "width": 29,
+    "height": 28,
+    "area": 420
+  }
+]

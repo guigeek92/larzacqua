@@ -1,0 +1,876 @@
+{
+  "run_id": "eb5aeab22a9643c5a41bf69a7a1709fe",
+  "timestamp": "2026-03-10 00:02:37",
+  "model": "openai/gpt-oss-120b",
+  "api_url": "http://127.0.0.1:8010/extract",
+  "total_files": 8,
+  "success_count": 6,
+  "error_count": 2,
+  "results": [
+    {
+      "filename": "UDI 1 Mas Neuf & 2 La Doux__UDI_1_s2.pdf",
+      "site_name": "UDI 1",
+      "document_type": "udi",
+      "result_json": {
+        "nom_udi": "UDI 1",
+        "communes": [],
+        "localisation": "Lodévois LarzacSchéma Directeur d'Alimentation en Eau PotableSynoptique des UDI 1 Mas Neuf et 2 La DouxChef de projet",
+        "sites_udi": [
+          {
+            "site": "UDI 1 - Mas Neuf",
+            "source_altitude_ngf_m": 457.0,
+            "reservoir_altitude_ngf_m": 479.0,
+            "denivele_source_reservoir_m": -22.0,
+            "source_au_dessus_reservoir": false,
+            "volume_reservoir_m3": 15.0,
+            "volume_reservoir_confidence": "high"
+          }
+        ],
+        "reservoirs_udi": [
+          {
+            "site_udi": "UDI 1 - Mas Neuf",
+            "reservoir": "UDI 1 - Mas Neuf",
+            "source_altitude_ngf_m": 457.0,
+            "reservoir_altitude_ngf_m": 479.0,
+            "denivele_source_reservoir_m": -22.0,
+            "hauteur_chute_disponible_m": null,
+            "volume_reservoir_m3": 15.0
+          }
+        ],
+        "description_reservoirs": [
+          "UDI 1 - Mas Neuf ; volume 15.0 m3 ; alt réservoir 479.0 m NGF ; alt source 457.0 m NGF ; Δ source->réservoir -22.0 m"
+        ],
+        "presence_brise_charge": null,
+        "nombre_brise_charge": null,
+        "presence_reducteurs_pression": false,
+        "nombre_reducteurs_pression": null,
+        "hauteur_chute_estimee_m": -22.0,
+        "denivele_source_reservoir_m": -22.0,
+        "denivele_estime_m": 22.0,
+        "altitudes_ngf_m": [
+          479.0,
+          450.0
+        ],
+        "volume_reservoir_m3": 15.0,
+        "volume_reservoir_confidence": "low",
+        "volume_reservoir_confidence_by_site": [
+          {
+            "site": "UDI 2 - La Doux",
+            "confidence": "low"
+          },
+          {
+            "site": "UDI 1 - Mas Neuf",
+            "confidence": "high"
+          }
+        ],
+        "volume_reference_m3_j": null,
+        "debit_m3_j": null,
+        "points_pression_reduction": [],
+        "emplacements_turbine_potentiels": [],
+        "elements_interessants_micro_hydro": [
+          "Distribution gravitaire",
+          "Point de comptage (compteur)",
+          "Organes de vanne",
+          "Source/captage mentionné",
+          "Réservoir mentionné"
+        ],
+        "contraintes_techniques": [
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouvertePompeOClliq",
+          "ueredonde150 m³TN: 705m NGF",
+          "Source deLa DouxTN: 636m NGFAutignaguet",
+          "490m NGF",
+          "TN: 479m NGF",
+          "O 15 m³ 480m NGF",
+          "470m NGF",
+          "460m NGF",
+          "450m NGF",
+          "TN: 457m NGF"
+        ],
+        "potentiel_hydraulique": false
+      },
+      "description": "",
+      "debug": {
+        "text_length": 1198,
+        "line_count": 33,
+        "keyword_counts": {
+          "udi": 5,
+          "débit": 0,
+          "debit": 0,
+          "m3/j": 0,
+          "m³/j": 0,
+          "m3/h": 0,
+          "m³/h": 0,
+          "l/s": 0,
+          "l/min": 0,
+          "pression": 0,
+          "bar": 0,
+          "hauteur de chute": 0,
+          "dénivelé": 0,
+          "denivele": 0,
+          "ngf": 9,
+          "source": 3,
+          "reservoir": 0,
+          "réservoir": 2,
+          "brise-charge": 0,
+          "brise charge": 0
+        },
+        "raw_samples": [
+          "ueredonde150 m³TN : 705m NGF",
+          "Source deLa DouxTN : 636m NGFAutignaguet",
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouvertePompeOClliq",
+          "490m NGF",
+          "Réservoir du Mas Neuf",
+          "TN : 479m NGF",
+          "O 15 m³ 480m NGF",
+          "470m NGF",
+          "460m NGF",
+          "Source du",
+          "450m NGF",
+          "TN : 457m NGF"
+        ],
+        "forced_udi_number": "1",
+        "forced_udi_text_trimmed": true,
+        "rp_blue_symbol_count": 0,
+        "legend_equipment": {
+          "has_reducer": false,
+          "has_brise_charge": false,
+          "legend_reducer_count": 0,
+          "legend_brise_charge_count": 0
+        },
+        "udi_linking": {
+          "group_key": "udi-1",
+          "group_size": 1,
+          "related_files": [
+            "UDI 1 Mas Neuf & 2 La Doux__UDI_1_s2.pdf"
+          ],
+          "filled_fields": []
+        }
+      },
+      "site_group_key": "udi-1"
+    },
+    {
+      "filename": "UDI 1 Mas Neuf & 2 La Doux__UDI_2_s1.pdf",
+      "site_name": "UDI 2",
+      "document_type": "udi",
+      "result_json": {
+        "nom_udi": "UDI 2",
+        "communes": [],
+        "localisation": "",
+        "sites_udi": [
+          {
+            "site": "UDI 2 - La Doux",
+            "source_altitude_ngf_m": null,
+            "reservoir_altitude_ngf_m": null,
+            "denivele_source_reservoir_m": null,
+            "source_au_dessus_reservoir": null,
+            "volume_reservoir_m3": null,
+            "volume_reservoir_confidence": "low"
+          }
+        ],
+        "reservoirs_udi": [
+          {
+            "site_udi": "UDI 2 - La Doux",
+            "reservoir": "UDI 2 - La Doux",
+            "source_altitude_ngf_m": null,
+            "reservoir_altitude_ngf_m": null,
+            "denivele_source_reservoir_m": null,
+            "hauteur_chute_disponible_m": null,
+            "volume_reservoir_m3": null
+          }
+        ],
+        "description_reservoirs": [
+          "UDI 2 - La Doux"
+        ],
+        "presence_brise_charge": null,
+        "nombre_brise_charge": null,
+        "presence_reducteurs_pression": false,
+        "nombre_reducteurs_pression": null,
+        "hauteur_chute_estimee_m": null,
+        "denivele_source_reservoir_m": null,
+        "denivele_estime_m": null,
+        "altitudes_ngf_m": [],
+        "volume_reservoir_m3": null,
+        "volume_reservoir_confidence": "low",
+        "volume_reservoir_confidence_by_site": [
+          {
+            "site": "UDI 2 - La Doux",
+            "confidence": "low"
+          }
+        ],
+        "volume_reference_m3_j": null,
+        "debit_m3_j": null,
+        "points_pression_reduction": [],
+        "emplacements_turbine_potentiels": [],
+        "elements_interessants_micro_hydro": [
+          "Source/captage mentionné"
+        ],
+        "contraintes_techniques": [
+          "ir de LaDoux/Roqueredonde150 m³TN: 705m NGF",
+          "Source deLa DouxTN: 636m NGFAutignaguet"
+        ],
+        "potentiel_hydraulique": null
+      },
+      "description": "",
+      "debug": {
+        "text_length": 135,
+        "line_count": 7,
+        "keyword_counts": {
+          "udi": 1,
+          "débit": 0,
+          "debit": 0,
+          "m3/j": 0,
+          "m³/j": 0,
+          "m3/h": 0,
+          "m³/h": 0,
+          "l/s": 0,
+          "l/min": 0,
+          "pression": 0,
+          "bar": 0,
+          "hauteur de chute": 0,
+          "dénivelé": 0,
+          "denivele": 0,
+          "ngf": 2,
+          "source": 1,
+          "reservoir": 0,
+          "réservoir": 0,
+          "brise-charge": 0,
+          "brise charge": 0
+        },
+        "raw_samples": [
+          "ir de LaDoux/Roqueredonde150 m³TN : 705m NGF",
+          "Source deLa DouxTN : 636m NGFAutignaguet"
+        ],
+        "forced_udi_number": "2",
+        "forced_udi_text_trimmed": true,
+        "rp_blue_symbol_count": 0,
+        "legend_equipment": {
+          "has_reducer": false,
+          "has_brise_charge": false,
+          "legend_reducer_count": 0,
+          "legend_brise_charge_count": 0
+        },
+        "udi_linking": {
+          "group_key": "udi-2",
+          "group_size": 1,
+          "related_files": [
+            "UDI 1 Mas Neuf & 2 La Doux__UDI_2_s1.pdf"
+          ],
+          "filled_fields": []
+        }
+      },
+      "site_group_key": "udi-2"
+    },
+    {
+      "filename": "UDI 4 Bouquelaure - 5 Navacelles et 23 Juncas -24 Sièges__UDI_23_s2.pdf",
+      "site_name": "UDI 23",
+      "document_type": "udi",
+      "result_json": {
+        "nom_udi": "UDI 23",
+        "communes": [],
+        "localisation": "",
+        "sites_udi": [
+          {
+            "site": "UDI 23 - Juncas",
+            "source_altitude_ngf_m": null,
+            "reservoir_altitude_ngf_m": null,
+            "denivele_source_reservoir_m": null,
+            "source_au_dessus_reservoir": null,
+            "volume_reservoir_m3": 140.0,
+            "volume_reservoir_confidence": "high"
+          }
+        ],
+        "reservoirs_udi": [
+          {
+            "site_udi": "UDI 23 - Juncas",
+            "reservoir": "Reservoir de Navacelles",
+            "source_altitude_ngf_m": null,
+            "reservoir_altitude_ngf_m": 380.0,
+            "denivele_source_reservoir_m": null,
+            "hauteur_chute_disponible_m": null,
+            "volume_reservoir_m3": 140.0
+          }
+        ],
+        "description_reservoirs": [
+          "Reservoir de Navacelles ; volume 140.0 m3 ; alt réservoir 380.0 m NGF"
+        ],
+        "presence_brise_charge": null,
+        "nombre_brise_charge": null,
+        "presence_reducteurs_pression": false,
+        "nombre_reducteurs_pression": null,
+        "hauteur_chute_estimee_m": null,
+        "denivele_source_reservoir_m": null,
+        "denivele_estime_m": null,
+        "altitudes_ngf_m": [],
+        "volume_reservoir_m3": 140.0,
+        "volume_reservoir_confidence": "low",
+        "volume_reservoir_confidence_by_site": [
+          {
+            "site": "UDI 23 - Juncas",
+            "confidence": "high"
+          }
+        ],
+        "volume_reference_m3_j": null,
+        "debit_m3_j": null,
+        "points_pression_reduction": [],
+        "emplacements_turbine_potentiels": [],
+        "elements_interessants_micro_hydro": [
+          "Réservoir mentionné"
+        ],
+        "contraintes_techniques": [
+          "presseurTN: 590m NGF",
+          "Réservoir deNavacellesTN: 380m NGFForages de NavacellesTN: 330m NGF"
+        ],
+        "potentiel_hydraulique": null
+      },
+      "description": "",
+      "debug": {
+        "text_length": 135,
+        "line_count": 7,
+        "keyword_counts": {
+          "udi": 1,
+          "débit": 0,
+          "debit": 0,
+          "m3/j": 0,
+          "m³/j": 0,
+          "m3/h": 0,
+          "m³/h": 0,
+          "l/s": 0,
+          "l/min": 0,
+          "pression": 0,
+          "bar": 0,
+          "hauteur de chute": 0,
+          "dénivelé": 0,
+          "denivele": 0,
+          "ngf": 3,
+          "source": 0,
+          "reservoir": 0,
+          "réservoir": 1,
+          "brise-charge": 0,
+          "brise charge": 0
+        },
+        "raw_samples": [
+          "presseurTN : 590m NGF",
+          "Réservoir deNavacellesTN : 380m NGFForages de NavacellesTN : 330m NGF"
+        ],
+        "forced_udi_number": "23",
+        "forced_udi_text_trimmed": true,
+        "rp_blue_symbol_count": 0,
+        "legend_equipment": {
+          "has_reducer": false,
+          "has_brise_charge": false,
+          "legend_reducer_count": 0,
+          "legend_brise_charge_count": 0
+        },
+        "udi_linking": {
+          "group_key": "udi-23",
+          "group_size": 1,
+          "related_files": [
+            "UDI 4 Bouquelaure - 5 Navacelles et 23 Juncas -24 Sièges__UDI_23_s2.pdf"
+          ],
+          "filled_fields": []
+        }
+      },
+      "site_group_key": "udi-23"
+    },
+    {
+      "filename": "UDI 4 Bouquelaure - 5 Navacelles et 23 Juncas -24 Sièges__UDI_24_s1.pdf",
+      "site_name": "UDI 24",
+      "document_type": "udi",
+      "result_json": {
+        "nom_udi": "UDI 24",
+        "communes": [
+          "Parlatges",
+          "La Roque",
+          "Saut du lièvre",
+          "La Prade",
+          "Camp Rouch",
+          "La Cave",
+          "Soulagets",
+          "La Sablière",
+          "La Vernède",
+          "Les Gamboulles"
+        ],
+        "localisation": null,
+        "sites_udi": [
+          {
+            "site": "UDI 24 - Les Sièges",
+            "source_altitude_ngf_m": null,
+            "reservoir_altitude_ngf_m": null,
+            "denivele_source_reservoir_m": null,
+            "source_au_dessus_reservoir": null,
+            "volume_reservoir_m3": null,
+            "volume_reservoir_confidence": "low"
+          }
+        ],
+        "reservoirs_udi": [
+          {
+            "site_udi": "UDI 24 - Les Sièges",
+            "reservoir": "UDI 24 - Les Sièges",
+            "source_altitude_ngf_m": null,
+            "reservoir_altitude_ngf_m": null,
+            "denivele_source_reservoir_m": null,
+            "hauteur_chute_disponible_m": null,
+            "volume_reservoir_m3": null
+          }
+        ],
+        "description_reservoirs": [
+          "UDI 24 - Les Sièges"
+        ],
+        "presence_brise_charge": null,
+        "nombre_brise_charge": null,
+        "presence_reducteurs_pression": false,
+        "nombre_reducteurs_pression": null,
+        "hauteur_chute_estimee_m": null,
+        "denivele_source_reservoir_m": null,
+        "denivele_estime_m": null,
+        "altitudes_ngf_m": [
+          620
+        ],
+        "volume_reservoir_m3": null,
+        "volume_reservoir_confidence": "low",
+        "volume_reservoir_confidence_by_site": [
+          {
+            "site": "UDI 24 - Les Sièges",
+            "confidence": "low"
+          }
+        ],
+        "volume_reference_m3_j": null,
+        "debit_m3_j": null,
+        "points_pression_reduction": [],
+        "emplacements_turbine_potentiels": [],
+        "elements_interessants_micro_hydro": [],
+        "contraintes_techniques": [
+          "620m NGF"
+        ],
+        "potentiel_hydraulique": null
+      },
+      "description": "```\n\n**2) Description technique factuelle**\n\nLe document fourni ne comporte que des mentions de noms de lieux et une altitude de référence : « 620 m NGF ». Aucun réservoir, brise‑charge, réducteur de pression, hauteur",
+      "debug": {
+        "text_length": 158,
+        "line_count": 10,
+        "keyword_counts": {
+          "udi": 1,
+          "débit": 0,
+          "debit": 0,
+          "m3/j": 0,
+          "m³/j": 0,
+          "m3/h": 0,
+          "m³/h": 0,
+          "l/s": 0,
+          "l/min": 0,
+          "pression": 0,
+          "bar": 0,
+          "hauteur de chute": 0,
+          "dénivelé": 0,
+          "denivele": 0,
+          "ngf": 1,
+          "source": 0,
+          "reservoir": 0,
+          "réservoir": 0,
+          "brise-charge": 0,
+          "brise charge": 0
+        },
+        "raw_samples": [
+          "620m NGF"
+        ],
+        "forced_udi_number": "24",
+        "forced_udi_text_trimmed": true,
+        "rp_blue_symbol_count": 0,
+        "legend_equipment": {
+          "has_reducer": false,
+          "has_brise_charge": false,
+          "legend_reducer_count": 0,
+          "legend_brise_charge_count": 0
+        },
+        "udi_linking": {
+          "group_key": "udi-24",
+          "group_size": 1,
+          "related_files": [
+            "UDI 4 Bouquelaure - 5 Navacelles et 23 Juncas -24 Sièges__UDI_24_s1.pdf"
+          ],
+          "filled_fields": []
+        }
+      },
+      "site_group_key": "udi-24"
+    },
+    {
+      "filename": "UDI 7 Soulages - 8 Vernède & 9 Lambeyran__UDI_7_s1.pdf",
+      "site_name": "UDI 7",
+      "document_type": "udi",
+      "result_json": {
+        "nom_udi": "UDI 7",
+        "communes": [],
+        "localisation": "",
+        "sites_udi": [
+          {
+            "site": "UDI 7 - Soulages",
+            "source_altitude_ngf_m": null,
+            "reservoir_altitude_ngf_m": null,
+            "denivele_source_reservoir_m": null,
+            "source_au_dessus_reservoir": null,
+            "volume_reservoir_m3": null,
+            "volume_reservoir_confidence": "low"
+          }
+        ],
+        "reservoirs_udi": [
+          {
+            "site_udi": "UDI 7 - Soulages",
+            "reservoir": "UDI 7 - Soulages",
+            "source_altitude_ngf_m": null,
+            "reservoir_altitude_ngf_m": null,
+            "denivele_source_reservoir_m": null,
+            "hauteur_chute_disponible_m": null,
+            "volume_reservoir_m3": null
+          }
+        ],
+        "description_reservoirs": [
+          "UDI 7 - Soulages"
+        ],
+        "presence_brise_charge": null,
+        "nombre_brise_charge": null,
+        "presence_reducteurs_pression": false,
+        "nombre_reducteurs_pression": null,
+        "hauteur_chute_estimee_m": 8.0,
+        "denivele_source_reservoir_m": 8.0,
+        "denivele_estime_m": 8.0,
+        "altitudes_ngf_m": [
+          464.0,
+          456.0
+        ],
+        "volume_reservoir_m3": 464.0,
+        "volume_reservoir_confidence": "low",
+        "volume_reservoir_confidence_by_site": [
+          {
+            "site": "UDI 7 - Soulages",
+            "confidence": "low"
+          },
+          {
+            "site": "UDI 9 - Lambeyran",
+            "confidence": "low"
+          }
+        ],
+        "volume_reference_m3_j": null,
+        "debit_m3_j": null,
+        "points_pression_reduction": [],
+        "emplacements_turbine_potentiels": [],
+        "elements_interessants_micro_hydro": [
+          "Source/captage mentionné",
+          "Réservoir mentionné"
+        ],
+        "contraintes_techniques": [
+          "deSoulagesTN: 421m NGF",
+          "Source deLambeyranTN: 464m NGF10 m³Réservoir deLambeyranTN: 456m NGF"
+        ],
+        "potentiel_hydraulique": true,
+        "symbol_detections": [],
+        "infrastructure_graph": {
+          "nodes": [],
+          "edges": []
+        }
+      },
+      "description": "",
+      "debug": {
+        "text_length": 153,
+        "line_count": 8,
+        "keyword_counts": {
+          "udi": 2,
+          "débit": 0,
+          "debit": 0,
+          "m3/j": 0,
+          "m³/j": 0,
+          "m3/h": 0,
+          "m³/h": 0,
+          "l/s": 0,
+          "l/min": 0,
+          "pression": 0,
+          "bar": 0,
+          "hauteur de chute": 0,
+          "dénivelé": 0,
+          "denivele": 0,
+          "ngf": 3,
+          "source": 1,
+          "reservoir": 0,
+          "réservoir": 1,
+          "brise-charge": 0,
+          "brise charge": 0
+        },
+        "raw_samples": [
+          "deSoulagesTN : 421m NGF",
+          "Source deLambeyranTN : 464m NGF10 m³Réservoir deLambeyranTN : 456m NGF"
+        ],
+        "head_source": "ngf_source_reservoir_local_positive",
+        "forced_udi_number": "7",
+        "forced_udi_text_trimmed": true,
+        "rp_blue_symbol_count": 0,
+        "legend_equipment": {
+          "has_reducer": false,
+          "has_brise_charge": false,
+          "legend_reducer_count": 0,
+          "legend_brise_charge_count": 0,
+          "legend_zones": []
+        },
+        "symbol_detection_count": 0,
+        "udi_linking": {
+          "group_key": "udi-7",
+          "group_size": 1,
+          "related_files": [
+            "UDI 7 Soulages - 8 Vernède & 9 Lambeyran__UDI_7_s1.pdf"
+          ],
+          "filled_fields": []
+        }
+      },
+      "site_group_key": "udi-7"
+    },
+    {
+      "filename": "UDI 7 Soulages - 8 Vernède & 9 Lambeyran__UDI_8_s3.pdf",
+      "site_name": "UDI 8",
+      "document_type": "udi",
+      "result_json": {
+        "nom_udi": "UDI 8",
+        "communes": [],
+        "localisation": "Lodévois LarzacSchéma Directeur d'Alimentation en Eau PotableSynoptique des",
+        "sites_udi": [
+          {
+            "site": "UDI 8 - Vernède",
+            "source_altitude_ngf_m": 356.0,
+            "reservoir_altitude_ngf_m": 352.0,
+            "denivele_source_reservoir_m": 4.0,
+            "source_au_dessus_reservoir": true,
+            "volume_reservoir_m3": 122.0,
+            "volume_reservoir_confidence": "high"
+          }
+        ],
+        "reservoirs_udi": [
+          {
+            "site_udi": "UDI 8 - Vernède",
+            "reservoir": "UDI 8 - Vernède",
+            "source_altitude_ngf_m": 356.0,
+            "reservoir_altitude_ngf_m": 352.0,
+            "denivele_source_reservoir_m": 4.0,
+            "hauteur_chute_disponible_m": 4.0,
+            "volume_reservoir_m3": 122.0
+          }
+        ],
+        "description_reservoirs": [
+          "UDI 8 - Vernède ; volume 122.0 m3 ; alt réservoir 352.0 m NGF ; alt source 356.0 m NGF ; Δ source->réservoir 4.0 m"
+        ],
+        "presence_brise_charge": null,
+        "nombre_brise_charge": null,
+        "presence_reducteurs_pression": true,
+        "nombre_reducteurs_pression": 3,
+        "hauteur_chute_estimee_m": 4.0,
+        "denivele_source_reservoir_m": 4.0,
+        "denivele_estime_m": 4.0,
+        "altitudes_ngf_m": [
+          456.0,
+          356.0,
+          352.0
+        ],
+        "volume_reservoir_m3": 122.0,
+        "volume_reservoir_confidence": "low",
+        "volume_reservoir_confidence_by_site": [
+          {
+            "site": "UDI 7 - Soulages",
+            "confidence": "low"
+          },
+          {
+            "site": "UDI 9 - Lambeyran",
+            "confidence": "low"
+          },
+          {
+            "site": "UDI 8 - Vernède",
+            "confidence": "high"
+          }
+        ],
+        "volume_reference_m3_j": null,
+        "debit_m3_j": null,
+        "points_pression_reduction": [
+          "RP detecte page 1 bbox=[302.05999755859375, 202.42889404296875, 307.33282470703125, 206.22503662109375]",
+          "RP detecte page 1 bbox=[30.55999755859375, 286.6064147949219, 37.0184326171875, 291.2561340332031]",
+          "RP detecte page 1 bbox=[0.0, 147.78005981445312, 563.0, 462.8523864746094]",
+          "RP (symbole bleu)",
+          "RP/PRV (legende)"
+        ],
+        "emplacements_turbine_potentiels": [],
+        "elements_interessants_micro_hydro": [
+          "Réduction de pression (RP/PRV)",
+          "Refoulement / pompage",
+          "Source/captage mentionné",
+          "Réservoir mentionné"
+        ],
+        "contraintes_techniques": [
+          "ource deLambeyranTN: 464m NGF10 m³Réservoir deLambeyranTN: 456m NGF",
+          "350m NGFSource de laVernèdeTN: 356m NGF122 m³Réservoir de laVernèdeTN: 352m NGF",
+          "150 m³Réservoir del'EsparrouTN: 320m NGFRéservoir deSéviacTN: 375m NGFEsparrou",
+          "210m NGF220m NGF230m NGF240m NGF250m NGF260m NGF270m NGF280m NGF290m NGF300m NGF310m NGF320m NGFLES PLANS"
+        ],
+        "potentiel_hydraulique": true,
+        "symbol_detections": [
+          {
+            "symbol": "pressure_reducer",
+            "confidence": 0.88,
+            "bounding_box": [
+              302.05999755859375,
+              202.42889404296875,
+              307.33282470703125,
+              206.22503662109375
+            ],
+            "page": 1,
+            "site": "UDI 7 - Soulages",
+            "method": "pdf_vector_blue_rp"
+          },
+          {
+            "symbol": "pressure_reducer",
+            "confidence": 0.88,
+            "bounding_box": [
+              30.55999755859375,
+              286.6064147949219,
+              37.0184326171875,
+              291.2561340332031
+            ],
+            "page": 1,
+            "site": "UDI 7 - Soulages",
+            "method": "pdf_vector_blue_rp"
+          },
+          {
+            "symbol": "pressure_reducer",
+            "confidence": 0.7,
+            "bounding_box": [
+              0.0,
+              147.78005981445312,
+              563.0,
+              462.8523864746094
+            ],
+            "page": 1,
+            "site": "UDI 7 - Soulages",
+            "method": "legend_zone_ocr"
+          }
+        ],
+        "infrastructure_graph": {
+          "nodes": [
+            {
+              "id": "n1",
+              "type": "PressureReducer",
+              "symbol": "pressure_reducer",
+              "page": 1,
+              "site": "UDI 7 - Soulages",
+              "bbox": [
+                302.05999755859375,
+                202.42889404296875,
+                307.33282470703125,
+                206.22503662109375
+              ],
+              "confidence": 0.88
+            },
+            {
+              "id": "n2",
+              "type": "PressureReducer",
+              "symbol": "pressure_reducer",
+              "page": 1,
+              "site": "UDI 7 - Soulages",
+              "bbox": [
+                30.55999755859375,
+                286.6064147949219,
+                37.0184326171875,
+                291.2561340332031
+              ],
+              "confidence": 0.88
+            },
+            {
+              "id": "n3",
+              "type": "PressureReducer",
+              "symbol": "pressure_reducer",
+              "page": 1,
+              "site": "UDI 7 - Soulages",
+              "bbox": [
+                0.0,
+                147.78005981445312,
+                563.0,
+                462.8523864746094
+              ],
+              "confidence": 0.7
+            }
+          ],
+          "edges": []
+        }
+      },
+      "description": "",
+      "debug": {
+        "text_length": 727,
+        "line_count": 21,
+        "keyword_counts": {
+          "udi": 3,
+          "débit": 0,
+          "debit": 0,
+          "m3/j": 0,
+          "m³/j": 0,
+          "m3/h": 0,
+          "m³/h": 0,
+          "l/s": 0,
+          "l/min": 0,
+          "pression": 0,
+          "bar": 0,
+          "hauteur de chute": 0,
+          "dénivelé": 0,
+          "denivele": 0,
+          "ngf": 19,
+          "source": 1,
+          "reservoir": 0,
+          "réservoir": 4,
+          "brise-charge": 0,
+          "brise charge": 0
+        },
+        "raw_samples": [
+          "ource deLambeyranTN : 464m NGF10 m³Réservoir deLambeyranTN : 456m NGF",
+          "350m NGFSource de laVernèdeTN : 356m NGF122 m³Réservoir de laVernèdeTN : 352m NGF",
+          "150 m³Réservoir del'EsparrouTN : 320m NGFRéservoir deSéviacTN : 375m NGFEsparrou",
+          "210m NGF220m NGF230m NGF240m NGF250m NGF260m NGF270m NGF280m NGF290m NGF300m NGF310m NGF320m NGFLES PLANS"
+        ],
+        "forced_udi_number": "8",
+        "forced_udi_text_trimmed": true,
+        "rp_blue_symbol_count": 2,
+        "legend_equipment": {
+          "has_reducer": true,
+          "has_brise_charge": false,
+          "legend_reducer_count": 1,
+          "legend_brise_charge_count": 0,
+          "legend_zones": [
+            {
+              "page": 1,
+              "bounding_box": [
+                0.0,
+                147.78005981445312,
+                563.0,
+                462.8523864746094
+              ],
+              "symbol": "pressure_reducer",
+              "confidence": 0.7
+            }
+          ]
+        },
+        "symbol_detection_count": 3,
+        "udi_linking": {
+          "group_key": "udi-8",
+          "group_size": 1,
+          "related_files": [
+            "UDI 7 Soulages - 8 Vernède & 9 Lambeyran__UDI_8_s3.pdf"
+          ],
+          "filled_fields": []
+        }
+      },
+      "site_group_key": "udi-8"
+    }
+  ],
+  "errors": [
+    {
+      "filename": "UDI 4 Bouquelaure - 5 Navacelles et 23 Juncas -24 Sièges__UDI_4_s3.pdf",
+      "error": "Erreur API 400: Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "filename": "UDI 7 Soulages - 8 Vernède & 9 Lambeyran__UDI_9_s2.pdf",
+      "error": "Erreur API 400: Expecting ',' delimiter: line 9 column 6 (char 168)"
+    }
+  ],
+  "udi_split_done": true,
+  "udi_linking_done": true
+}

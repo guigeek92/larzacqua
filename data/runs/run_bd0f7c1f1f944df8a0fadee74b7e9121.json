@@ -1,0 +1,932 @@
+{
+  "run_id": "bd0f7c1f1f944df8a0fadee74b7e9121",
+  "timestamp": "2026-03-08 23:21:21",
+  "model": "llama-3.1-8b-instant",
+  "api_url": "http://127.0.0.1:8010/extract",
+  "total_files": 5,
+  "success_count": 6,
+  "error_count": 1,
+  "results": [
+    {
+      "filename": "UDI 1 Mas Neuf & 2 La Doux__UDI_1_s2.pdf",
+      "site_name": "UDI 1",
+      "document_type": "udi",
+      "result_json": {
+        "nom_udi": "UDI 1",
+        "communes": [
+          "Mas Neuf"
+        ],
+        "localisation": "Mas Neuf",
+        "sites_udi": [
+          {
+            "site": "UDI 1 - Mas Neuf",
+            "source_altitude_ngf_m": 457.0,
+            "reservoir_altitude_ngf_m": 479.0,
+            "denivele_source_reservoir_m": -22.0,
+            "source_au_dessus_reservoir": false,
+            "volume_reservoir_m3": 15.0
+          }
+        ],
+        "reservoirs_udi": [
+          {
+            "site_udi": "UDI 1 - Mas Neuf",
+            "reservoir": "UDI 1 - Mas Neuf",
+            "source_altitude_ngf_m": 457.0,
+            "reservoir_altitude_ngf_m": 479.0,
+            "denivele_source_reservoir_m": -22.0,
+            "hauteur_chute_disponible_m": null,
+            "volume_reservoir_m3": 15.0
+          }
+        ],
+        "description_reservoirs": [
+          "Réservoir du Mas Neuf (ou de la Gare)"
+        ],
+        "presence_brise_charge": true,
+        "nombre_brise_charge": 1,
+        "presence_reducteurs_pression": true,
+        "nombre_reducteurs_pression": 1,
+        "hauteur_chute_estimee_m": -22.0,
+        "denivele_source_reservoir_m": -22.0,
+        "denivele_estime_m": 22.0,
+        "altitudes_ngf_m": [
+          450,
+          460,
+          470,
+          480,
+          490,
+          640,
+          650,
+          660,
+          670,
+          690,
+          700,
+          705,
+          710,
+          720
+        ],
+        "volume_reservoir_m3": 15.0,
+        "volume_reference_m3_j": null,
+        "debit_m3_j": null,
+        "points_pression_reduction": [
+          "TN : 457m NGF",
+          "TN : 479m NGF",
+          "TN : 636m NGF"
+        ],
+        "emplacements_turbine_potentiels": [
+          "TN : 457m NGF",
+          "TN : 479m NGF",
+          "TN : 636m NGF"
+        ],
+        "elements_interessants_micro_hydro": [
+          "Distribution gravitaire",
+          "Point de comptage (compteur)",
+          "Organes de vanne",
+          "Source/captage mentionné",
+          "Réservoir mentionné"
+        ],
+        "contraintes_techniques": [
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouvertePompeOClliq",
+          "460m NGF470m NGF",
+          "450m NGF",
+          "490m NGF480m NGF",
+          "640m NGF650m NGF630m NGF",
+          "670m NGF680m NGF660m NGF",
+          "TN: 457m NGFMas Neuf",
+          "TN: 479m NGFO",
+          "690m NGF700m NGF710m NGF720m NGFRéservoir de LaDoux/Roqueredonde150 m³TN: 705m NGF",
+          "Source deLa DouxTN: 636m NGFAutignaguet",
+          "O 670m NGF",
+          "660m NGF"
+        ],
+        "potentiel_hydraulique": false
+      },
+      "description": "```\n\n**Description technique factuelle**\n\nL'UDI 1 - Mas Neuf est situé à Mas Neuf et comprend deux sites : Mas Neuf et La Doux. Le réservoir du Mas Neuf a une altitude de 480 mètres et un volume de 15 mètres cubes. Le réservoir de La Doux/Roqueredonde a une altitude de 705 mètres et un volume de 150 mètres cubes.\n\nIl y a une brise-charge et un réducteur de pression sur le réseau. La hauteur de chute estimée n'est pas mentionnée. Les dénivelés entre les sources et les réservoirs sont :\n\n- Source du Mas Neuf : -10 mètres\n- Source de La Doux : 4 mètres\n\nLes altitudes NGF sont : 450, 460, 470, 480, 490, 640, 650, 660, 670, 690, 700, 705, 710, 720.\n\nLes points de pression réduction sont : TN : 457m NGF, TN : 479m NGF, TN : 636m NGF.\n\nLes emplacements potentiels pour les micro-turbines sont : TN : 457m NGF, TN : 479m NGF, TN : 636m NGF.\n\nIl n'y a pas d'éléments intéressants pour la micro-hydro ni de contraintes techniques mentionnées. Le potentiel hydraulique n'est pas mentionné.",
+      "debug": {
+        "text_length": 1564,
+        "line_count": 53,
+        "keyword_counts": {
+          "udi": 5,
+          "débit": 0,
+          "debit": 0,
+          "m3/j": 0,
+          "m³/j": 0,
+          "m3/h": 0,
+          "m³/h": 0,
+          "l/s": 0,
+          "l/min": 0,
+          "pression": 0,
+          "bar": 0,
+          "hauteur de chute": 0,
+          "dénivelé": 0,
+          "denivele": 0,
+          "ngf": 32,
+          "source": 5,
+          "reservoir": 0,
+          "réservoir": 4,
+          "brise-charge": 0,
+          "brise charge": 0
+        },
+        "raw_samples": [
+          "460m NGF470m NGF",
+          "450m NGF",
+          "490m NGF480m NGF",
+          "640m NGF650m NGF630m NGF",
+          "670m NGF680m NGF660m NGF",
+          "Source duMas Neuf",
+          "Réservoir du Mas Neuf(ou de la Gare)15 m³",
+          "TN : 457m NGFMas Neuf",
+          "TN : 479m NGFO",
+          "690m NGF700m NGF710m NGF720m NGFRéservoir de LaDoux/Roqueredonde150 m³TN : 705m NGF",
+          "Source deLa DouxTN : 636m NGFAutignaguet",
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouvertePompeOClliq"
+        ],
+        "rp_blue_symbol_count": 0,
+        "udi_linking": {
+          "group_key": "udi-1",
+          "group_size": 1,
+          "related_files": [
+            "UDI 1 Mas Neuf & 2 La Doux__UDI_1_s2.pdf"
+          ],
+          "filled_fields": []
+        }
+      },
+      "site_group_key": "udi-1"
+    },
+    {
+      "filename": "UDI 1 Mas Neuf & 2 La Doux__UDI_2_s1.pdf",
+      "site_name": "UDI 2",
+      "document_type": "udi",
+      "result_json": {
+        "nom_udi": "UDI 2",
+        "communes": [],
+        "localisation": "Mas Neuf",
+        "sites_udi": [
+          {
+            "site": "UDI 2 - La Doux",
+            "source_altitude_ngf_m": 705.0,
+            "reservoir_altitude_ngf_m": 705.0,
+            "denivele_source_reservoir_m": 0.0,
+            "source_au_dessus_reservoir": false,
+            "volume_reservoir_m3": 150.0
+          }
+        ],
+        "reservoirs_udi": [
+          {
+            "site_udi": "UDI 2 - La Doux",
+            "reservoir": "Réservoir de La",
+            "source_altitude_ngf_m": 705.0,
+            "reservoir_altitude_ngf_m": 705.0,
+            "denivele_source_reservoir_m": 0.0,
+            "hauteur_chute_disponible_m": null,
+            "volume_reservoir_m3": null
+          }
+        ],
+        "description_reservoirs": [
+          "Réservoir de La ; alt réservoir 705.0 m NGF ; alt source 705.0 m NGF ; Δ source->réservoir 0.0 m",
+          "Réservoir du Mas Neuf(ou de la Gare)15 m³",
+          "Réservoir de La",
+          "Réservoir Doux/Roqueredonde"
+        ],
+        "presence_brise_charge": true,
+        "nombre_brise_charge": 1,
+        "presence_reducteurs_pression": true,
+        "nombre_reducteurs_pression": 1,
+        "hauteur_chute_estimee_m": 0.0,
+        "denivele_source_reservoir_m": 0.0,
+        "denivele_estime_m": 0.0,
+        "altitudes_ngf_m": [
+          457,
+          479,
+          490,
+          640,
+          650,
+          630,
+          670,
+          680,
+          690,
+          700,
+          710,
+          720
+        ],
+        "volume_reservoir_m3": 150.0,
+        "volume_reference_m3_j": null,
+        "debit_m3_j": null,
+        "points_pression_reduction": [],
+        "emplacements_turbine_potentiels": [
+          "Source du Mas Neuf",
+          "Réservoir du Mas Neuf (ou de la Gare)",
+          "Réservoir de La Doux/Roqueredonde"
+        ],
+        "elements_interessants_micro_hydro": [
+          "Distribution gravitaire",
+          "Refoulement / pompage",
+          "Point de comptage (compteur)",
+          "Organes de vanne",
+          "Source/captage mentionné",
+          "Réservoir mentionné"
+        ],
+        "contraintes_techniques": [
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouvertePompeOClliq",
+          "O Vanne ouverte",
+          "460m NGF470m NGF",
+          "450m NGF",
+          "490m NGF480m NGF",
+          "640m NGF650m NGF630m NGF",
+          "670m NGF680m NGF660m NGF",
+          "TN: 457m NGFMas Neuf",
+          "TN: 479m NGFO",
+          "690m NGF700m NGF710m NGF720m NGFRéservoir de LaDoux/Roqueredonde150 m³TN: 705m NGF",
+          "Source deLa DouxTN: 636m NGFAutignaguet",
+          "Ouvrage: 720m NGF"
+        ],
+        "potentiel_hydraulique": false
+      },
+      "description": "```\n\n**Description technique factuelle**\n\nL'UDI 1 - Mas Neuf est situé à Mas Neuf. Le réservoir du Mas Neuf (ou de la Gare) a une altitude de 470 mètres NGF et un volume de 15 m³. Il y a une brise-charge présente et un réducteur de pression.\n\nLa source du Mas Neuf a une altitude de 457 mètres NGF. Le réservoir de La Doux/Roqueredonde a une altitude de 705 mètres NGF et un volume de 150 m³.\n\nLes emplacements potentiels pour la mise en place de micro-turbines hydro sont la source du Mas Neuf, le réservoir du Mas Neuf (ou de la Gare) et le réservoir de La Doux/Roqueredonde.\n\nIl n'y a pas d'informations disponibles sur les contraintes techniques ou le potentiel hydraulique.",
+      "debug": {
+        "text_length": 1288,
+        "line_count": 45,
+        "keyword_counts": {
+          "udi": 4,
+          "débit": 0,
+          "debit": 0,
+          "m3/j": 0,
+          "m³/j": 0,
+          "m3/h": 0,
+          "m³/h": 0,
+          "l/s": 0,
+          "l/min": 0,
+          "pression": 0,
+          "bar": 0,
+          "hauteur de chute": 0,
+          "dénivelé": 0,
+          "denivele": 0,
+          "ngf": 26,
+          "source": 4,
+          "reservoir": 0,
+          "réservoir": 5,
+          "brise-charge": 0,
+          "brise charge": 0
+        },
+        "raw_samples": [
+          "460m NGF470m NGF",
+          "450m NGF",
+          "490m NGF480m NGF",
+          "640m NGF650m NGF630m NGF",
+          "670m NGF680m NGF660m NGF",
+          "Source duMas Neuf",
+          "Réservoir du Mas Neuf(ou de la Gare)15 m³",
+          "TN : 457m NGFMas Neuf",
+          "TN : 479m NGFO",
+          "690m NGF700m NGF710m NGF720m NGFRéservoir de LaDoux/Roqueredonde150 m³TN : 705m NGF",
+          "Source deLa DouxTN : 636m NGFAutignaguet",
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouvertePompeOClliq"
+        ],
+        "rp_blue_symbol_count": 0,
+        "udi_linking": {
+          "group_key": "udi-2",
+          "group_size": 1,
+          "related_files": [
+            "UDI 1 Mas Neuf & 2 La Doux__UDI_2_s1.pdf"
+          ],
+          "filled_fields": []
+        }
+      },
+      "site_group_key": "udi-2"
+    },
+    {
+      "filename": "CCLL-R3.1 Réservoir Labeil.pdf",
+      "site_name": "UDI 3 - Commune de Lauroux",
+      "document_type": "udi",
+      "result_json": {
+        "nom_udi": "UDI 3 - Commune de Lauroux",
+        "communes": [
+          "Lauroux"
+        ],
+        "localisation": "Département de l'Hérault",
+        "sites_udi": [
+          {
+            "site": "UDI 3 - Commune de Lauroux Ingénieur chargée d'affaire : Naïs DUSSART-MEZIERES",
+            "source_altitude_ngf_m": null,
+            "reservoir_altitude_ngf_m": null,
+            "denivele_source_reservoir_m": null,
+            "source_au_dessus_reservoir": null,
+            "volume_reservoir_m3": 5.0
+          }
+        ],
+        "reservoirs_udi": [
+          {
+            "site_udi": "UDI 3 - Commune de Lauroux Ingénieur chargée d'affaire : Naïs DUSSART-MEZIERES",
+            "reservoir": "UDI 3 - Commune de Lauroux Ingénieur chargée d'affaire : Naïs DUSSART-MEZIERES",
+            "source_altitude_ngf_m": null,
+            "reservoir_altitude_ngf_m": null,
+            "denivele_source_reservoir_m": null,
+            "hauteur_chute_disponible_m": null,
+            "volume_reservoir_m3": 5.0
+          }
+        ],
+        "description_reservoirs": [
+          "Réservoir Labeil"
+        ],
+        "presence_brise_charge": true,
+        "nombre_brise_charge": 1,
+        "presence_reducteurs_pression": false,
+        "nombre_reducteurs_pression": 0,
+        "hauteur_chute_estimee_m": null,
+        "denivele_source_reservoir_m": -1.75,
+        "denivele_estime_m": null,
+        "altitudes_ngf_m": [
+          null
+        ],
+        "volume_reservoir_m3": 5.0,
+        "volume_reference_m3_j": null,
+        "debit_m3_j": null,
+        "points_pression_reduction": [
+          "Regard de visite"
+        ],
+        "emplacements_turbine_potentiels": [
+          "Accès",
+          "Regard de visite"
+        ],
+        "elements_interessants_micro_hydro": [
+          "Adduction gravitaire",
+          "Refoulement / pompage",
+          "Mesure pression (manomètre)",
+          "Point de comptage (compteur)",
+          "Organes de vanne",
+          "Source/captage mentionné",
+          "Réservoir mentionné"
+        ],
+        "contraintes_techniques": [
+          "5 m3PEHDø40",
+          "PVCø50 Labeil",
+          "Vanne ouverteOFVanne ferméeCompteurBallon anti-bélierManomètrePompePiquage de chloreCl",
+          "Vanne ouverte",
+          "1.75 Vanne fermée"
+        ],
+        "potentiel_hydraulique": null
+      },
+      "description": "```\n\n**Description technique factuelle**\n\nLe document concerne l'unité de distribution d'eau potable (UDI) 3 de la commune de Lauroux, située dans le département de l'Hérault. Le schéma directeur d'alimentation en eau potable est réalisé par ENTECH Ingénieurs Conseils.\n\nLe réservoir Labeil est mentionné comme site UDI. Le document ne fournit pas d'informations sur la capacité du réservoir.\n\nIl est possible d'implanter des micro-turbines hydroélectriques à l'Accès et au Regard de visite, qui sont des points de pression réduite.\n\nLe document ne fournit pas d'informations sur les contraintes techniques ou les éléments intéressants pour la micro-hydroélectricité.",
+      "debug": {
+        "text_length": 2001,
+        "line_count": 75,
+        "keyword_counts": {
+          "udi": 3,
+          "débit": 0,
+          "debit": 0,
+          "m3/j": 0,
+          "m³/j": 0,
+          "m3/h": 0,
+          "m³/h": 0,
+          "l/s": 0,
+          "l/min": 0,
+          "pression": 0,
+          "bar": 0,
+          "hauteur de chute": 0,
+          "dénivelé": 0,
+          "denivele": 0,
+          "ngf": 0,
+          "source": 3,
+          "reservoir": 0,
+          "réservoir": 3,
+          "brise-charge": 0,
+          "brise charge": 0
+        },
+        "raw_samples": [
+          "Arrivée dela source",
+          "UDI 3 - Commune de LaurouxRéservoir LabeilSchéma Directeur d'Alimentation en Eau PotableDépartement de l'HéraultCommunauté de CommunesLodévois et LarzacFlorence ENJALBERTChef de projet :Ingénieur chargée d'affaire :ENTECH Ingénieurs ConseilsParc Scientifique et EnvironnementalBP118 34140 Mèze - FranceDessinatrice :",
+          "la source Cl Piquage de chlore",
+          "BP118 34140 Mèze - France Lodévois et Larzac Réservoir Labeil Dessinatrice : Camille AUBERT",
+          "la source Cl Piquage de chlore",
+          "BP118 34140 Mèze - France Lodévois et Larzac Réservoir Labeil Dessinatrice : Camille AUBERT"
+        ],
+        "rp_blue_symbol_count": 0,
+        "udi_linking": {
+          "group_key": "udi-3",
+          "group_size": 1,
+          "related_files": [
+            "CCLL-R3.1 Réservoir Labeil.pdf"
+          ],
+          "filled_fields": []
+        }
+      },
+      "site_group_key": "udi-3"
+    },
+    {
+      "filename": "UDI 7 Soulages - 8 Vernède & 9 Lambeyran.pdf",
+      "site_name": "UDI 7 - Soulages",
+      "document_type": "udi",
+      "result_json": {
+        "nom_udi": "UDI 7 - Soulages",
+        "communes": [
+          "Soulages"
+        ],
+        "localisation": "Soulages",
+        "sites_udi": [
+          {
+            "site": "UDI 7 - Soulages",
+            "source_altitude_ngf_m": 490.0,
+            "reservoir_altitude_ngf_m": null,
+            "denivele_source_reservoir_m": null,
+            "source_au_dessus_reservoir": null,
+            "volume_reservoir_m3": null
+          }
+        ],
+        "reservoirs_udi": [
+          {
+            "site_udi": "UDI 7 - Soulages",
+            "reservoir": "Reservoir de Source de Lambeyran",
+            "source_altitude_ngf_m": 480.0,
+            "reservoir_altitude_ngf_m": 456.0,
+            "denivele_source_reservoir_m": 24.0,
+            "hauteur_chute_disponible_m": 24.0,
+            "volume_reservoir_m3": null
+          },
+          {
+            "site_udi": "UDI 7 - Soulages",
+            "reservoir": "Reservoir de Soulages",
+            "source_altitude_ngf_m": 456.0,
+            "reservoir_altitude_ngf_m": 430.0,
+            "denivele_source_reservoir_m": 26.0,
+            "hauteur_chute_disponible_m": 26.0,
+            "volume_reservoir_m3": null
+          },
+          {
+            "site_udi": "UDI 7 - Soulages",
+            "reservoir": "Reservoir de Lambeyran",
+            "source_altitude_ngf_m": 480.0,
+            "reservoir_altitude_ngf_m": 456.0,
+            "denivele_source_reservoir_m": 24.0,
+            "hauteur_chute_disponible_m": 24.0,
+            "volume_reservoir_m3": null
+          }
+        ],
+        "description_reservoirs": [
+          "Reservoir de Source de Lambeyran ; alt réservoir 456.0 m NGF ; alt source 480.0 m NGF ; Δ source->réservoir 24.0 m",
+          "Reservoir de Soulages ; alt réservoir 430.0 m NGF ; alt source 456.0 m NGF ; Δ source->réservoir 26.0 m",
+          "Reservoir de la Réservoir de Vernède Séviac ; alt réservoir 352.0 m NGF ; alt source 356.0 m NGF ; Δ source->réservoir 4.0 m",
+          "Reservoir de l'Esparrou Pompage en ligne ; alt réservoir 340.0 m NGF ; alt source 350.0 m NGF ; Δ source->réservoir 10.0 m",
+          "Reservoir de Lambeyran ; alt réservoir 456.0 m NGF ; alt source 480.0 m NGF ; Δ source->réservoir 24.0 m",
+          "Reservoir de la Réservoir de ; alt réservoir 370.0 m NGF ; alt source 356.0 m NGF ; Δ source->réservoir -14.0 m",
+          "Réservoir de",
+          "Réservoir de la Réservoir de",
+          "Réservoir de 340m NGF",
+          "Réservoir"
+        ],
+        "presence_brise_charge": true,
+        "nombre_brise_charge": 1,
+        "presence_reducteurs_pression": true,
+        "nombre_reducteurs_pression": 3,
+        "hauteur_chute_estimee_m": 26.0,
+        "denivele_source_reservoir_m": 26.0,
+        "denivele_estime_m": 26.0,
+        "altitudes_ngf_m": [
+          360,
+          370,
+          390,
+          400,
+          410,
+          420,
+          430,
+          440,
+          450,
+          460,
+          470,
+          480,
+          490
+        ],
+        "volume_reservoir_m3": 40.0,
+        "volume_reference_m3_j": 122.0,
+        "debit_m3_j": null,
+        "points_pression_reduction": [
+          "RP",
+          "RP (symbole bleu)"
+        ],
+        "emplacements_turbine_potentiels": [
+          "Source de Soulages",
+          "Source de Lambeyran",
+          "Source de la Vernède"
+        ],
+        "elements_interessants_micro_hydro": [
+          "Réduction de pression (RP/PRV)",
+          "Adduction gravitaire",
+          "Distribution gravitaire",
+          "Refoulement / pompage",
+          "Point de comptage (compteur)",
+          "Organes de vanne",
+          "Source/captage mentionné",
+          "Réservoir mentionné"
+        ],
+        "contraintes_techniques": [
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouverteOCanalisation :Adduction - gravitaireDistribution - gravitaireCompteur RPRéducteur de pressionDistribution - refoulement24.053",
+          "RP Réducteur de pression 240m NGF",
+          "O Vanne ouverte",
+          "RP Réducteur de pression",
+          "370m NGF360m NGF340m NGF330m NGF",
+          "390m NGF",
+          "450m NGF440m NGF430m NGF420m NGF410m NGF400m NGF",
+          "460m NGF470m NGF480m NGF490m NGFSourceSoulagesTN: 487m NGF",
+          "40 m³Réservoir deSoulagesTN: 421m NGF",
+          "Source deLambeyranTN: 464m NGF10 m³Réservoir deLambeyranTN: 456m NGF",
+          "350m NGFSource de laVernèdeTN: 356m NGF122 m³Réservoir de laVernèdeTN: 352m NGF",
+          "150 m³Réservoir del'EsparrouTN: 320m NGFRéservoir deSéviacTN: 375m NGFEsparrou"
+        ],
+        "potentiel_hydraulique": true
+      },
+      "description": "```\n\n**Description technique factuelle**\n\nLe document présente un schéma directeur d'alimentation en eau potable pour les UDI 7 - Soulages, UDI 8 - Vernède et UDI 9 - Lambeyran. Les informations suivantes sont mentionnées :\n\n* Les UDI sont situés dans les communes de Soulages, Lambeyran et Vernède.\n* Les sites UDI sont situés à Soulages, Lambeyran et Vernède.\n* Les réservoirs UDI sont :\n + Réservoir de Soulages (altitude : 421 m, volume : 40 m³)\n + Réservoir de Lambeyran (altitude : 456 m, volume : 10 m³)\n + Réservoir de Vernède (altitude : 352 m, volume : 122 m³)\n + Réservoir de Séviac (altitude : 375 m, volume : 150 m³)\n + Réservoir de l'Esparrou (altitude : 320 m, volume : 150 m³)\n* Il y a une brise-charge et un réducteur de pression.\n* Les altitudes des sources et des réservoirs sont mentionnées.\n* Les déniveles des sources et des réservoirs sont calculés.\n* Les altitudes NGF sont mentionnées.\n* Le volume de réservoir est de 40 m³.\n* Le volume de référence est de 122 m³/jour.\n* Le débit n'est pas mentionné.\n* Les points de",
+      "debug": {
+        "text_length": 4078,
+        "line_count": 158,
+        "keyword_counts": {
+          "udi": 15,
+          "débit": 0,
+          "debit": 0,
+          "m3/j": 0,
+          "m³/j": 0,
+          "m3/h": 0,
+          "m³/h": 0,
+          "l/s": 0,
+          "l/min": 0,
+          "pression": 3,
+          "bar": 0,
+          "hauteur de chute": 0,
+          "dénivelé": 0,
+          "denivele": 0,
+          "ngf": 108,
+          "source": 12,
+          "reservoir": 0,
+          "réservoir": 18,
+          "brise-charge": 0,
+          "brise charge": 0
+        },
+        "raw_samples": [
+          "370m NGF360m NGF340m NGF330m NGF",
+          "390m NGF",
+          "450m NGF440m NGF430m NGF420m NGF410m NGF400m NGF",
+          "460m NGF470m NGF480m NGF490m NGFSourceSoulagesTN : 487m NGF",
+          "40 m³Réservoir deSoulagesTN : 421m NGF",
+          "Source deLambeyranTN : 464m NGF10 m³Réservoir deLambeyranTN : 456m NGF",
+          "350m NGFSource de laVernèdeTN : 356m NGF122 m³Réservoir de laVernèdeTN : 352m NGF",
+          "150 m³Réservoir del'EsparrouTN : 320m NGFRéservoir deSéviacTN : 375m NGFEsparrou",
+          "210m NGF220m NGF230m NGF240m NGF250m NGF260m NGF270m NGF280m NGF290m NGF300m NGF310m NGF320m NGFLES PLANS",
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouverteOCanalisation :Adduction - gravitaireDistribution - gravitaireCompteur RPRéducteur de pressionDistribution - refoulement24.053",
+          "490m NGF",
+          "Source 480m NGF"
+        ],
+        "rp_blue_symbol_count": 3,
+        "udi_site_split": {
+          "split_from_file": "UDI 7 Soulages - 8 Vernède & 9 Lambeyran.pdf",
+          "site_name": "UDI 7 - Soulages",
+          "site_index": 1,
+          "site_count": 3
+        },
+        "udi_linking": {
+          "group_key": "udi-7",
+          "group_size": 1,
+          "related_files": [
+            "UDI 7 Soulages - 8 Vernède & 9 Lambeyran.pdf"
+          ],
+          "filled_fields": []
+        }
+      },
+      "site_group_key": "udi-7"
+    },
+    {
+      "filename": "UDI 7 Soulages - 8 Vernède & 9 Lambeyran.pdf",
+      "site_name": "UDI 9 - Lambeyran",
+      "document_type": "udi",
+      "result_json": {
+        "nom_udi": "UDI 9 - Lambeyran",
+        "communes": [
+          "Soulages"
+        ],
+        "localisation": "Soulages",
+        "sites_udi": [
+          {
+            "site": "UDI 9 - Lambeyran",
+            "source_altitude_ngf_m": 456.0,
+            "reservoir_altitude_ngf_m": 456.0,
+            "denivele_source_reservoir_m": 0.0,
+            "source_au_dessus_reservoir": false,
+            "volume_reservoir_m3": 10.0
+          }
+        ],
+        "reservoirs_udi": [],
+        "description_reservoirs": [
+          "Reservoir de Source de Lambeyran ; alt réservoir 456.0 m NGF ; alt source 480.0 m NGF ; Δ source->réservoir 24.0 m",
+          "Reservoir de Soulages ; alt réservoir 430.0 m NGF ; alt source 456.0 m NGF ; Δ source->réservoir 26.0 m",
+          "Reservoir de la Réservoir de Vernède Séviac ; alt réservoir 352.0 m NGF ; alt source 356.0 m NGF ; Δ source->réservoir 4.0 m",
+          "Reservoir de l'Esparrou Pompage en ligne ; alt réservoir 340.0 m NGF ; alt source 350.0 m NGF ; Δ source->réservoir 10.0 m",
+          "Reservoir de Lambeyran ; alt réservoir 456.0 m NGF ; alt source 480.0 m NGF ; Δ source->réservoir 24.0 m",
+          "Reservoir de la Réservoir de ; alt réservoir 370.0 m NGF ; alt source 356.0 m NGF ; Δ source->réservoir -14.0 m",
+          "Réservoir de",
+          "Réservoir de la Réservoir de",
+          "Réservoir de 340m NGF",
+          "Réservoir"
+        ],
+        "presence_brise_charge": true,
+        "nombre_brise_charge": 1,
+        "presence_reducteurs_pression": true,
+        "nombre_reducteurs_pression": 3,
+        "hauteur_chute_estimee_m": 0.0,
+        "denivele_source_reservoir_m": 0.0,
+        "denivele_estime_m": 0.0,
+        "altitudes_ngf_m": [
+          360,
+          370,
+          390,
+          400,
+          410,
+          420,
+          430,
+          440,
+          450,
+          460,
+          470,
+          480,
+          490
+        ],
+        "volume_reservoir_m3": 10.0,
+        "volume_reference_m3_j": 122.0,
+        "debit_m3_j": null,
+        "points_pression_reduction": [
+          "RP",
+          "RP (symbole bleu)"
+        ],
+        "emplacements_turbine_potentiels": [
+          "Source de Soulages",
+          "Source de Lambeyran",
+          "Source de la Vernède"
+        ],
+        "elements_interessants_micro_hydro": [
+          "Réduction de pression (RP/PRV)",
+          "Adduction gravitaire",
+          "Distribution gravitaire",
+          "Refoulement / pompage",
+          "Point de comptage (compteur)",
+          "Organes de vanne",
+          "Source/captage mentionné",
+          "Réservoir mentionné"
+        ],
+        "contraintes_techniques": [
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouverteOCanalisation :Adduction - gravitaireDistribution - gravitaireCompteur RPRéducteur de pressionDistribution - refoulement24.053",
+          "RP Réducteur de pression 240m NGF",
+          "O Vanne ouverte",
+          "RP Réducteur de pression",
+          "370m NGF360m NGF340m NGF330m NGF",
+          "390m NGF",
+          "450m NGF440m NGF430m NGF420m NGF410m NGF400m NGF",
+          "460m NGF470m NGF480m NGF490m NGFSourceSoulagesTN: 487m NGF",
+          "40 m³Réservoir deSoulagesTN: 421m NGF",
+          "Source deLambeyranTN: 464m NGF10 m³Réservoir deLambeyranTN: 456m NGF",
+          "350m NGFSource de laVernèdeTN: 356m NGF122 m³Réservoir de laVernèdeTN: 352m NGF",
+          "150 m³Réservoir del'EsparrouTN: 320m NGFRéservoir deSéviacTN: 375m NGFEsparrou"
+        ],
+        "potentiel_hydraulique": false
+      },
+      "description": "```\n\n**Description technique factuelle**\n\nLe document présente un schéma directeur d'alimentation en eau potable pour les UDI 7 - Soulages, UDI 8 - Vernède et UDI 9 - Lambeyran. Les informations suivantes sont mentionnées :\n\n* Les UDI sont situés dans les communes de Soulages, Lambeyran et Vernède.\n* Les sites UDI sont situés à Soulages, Lambeyran et Vernède.\n* Les réservoirs UDI sont :\n + Réservoir de Soulages (altitude : 421 m, volume : 40 m³)\n + Réservoir de Lambeyran (altitude : 456 m, volume : 10 m³)\n + Réservoir de Vernède (altitude : 352 m, volume : 122 m³)\n + Réservoir de Séviac (altitude : 375 m, volume : 150 m³)\n + Réservoir de l'Esparrou (altitude : 320 m, volume : 150 m³)\n* Il y a une brise-charge et un réducteur de pression.\n* Les altitudes des sources et des réservoirs sont mentionnées.\n* Les déniveles des sources et des réservoirs sont calculés.\n* Les altitudes NGF sont mentionnées.\n* Le volume de réservoir est de 40 m³.\n* Le volume de référence est de 122 m³/jour.\n* Le débit n'est pas mentionné.\n* Les points de",
+      "debug": {
+        "text_length": 4078,
+        "line_count": 158,
+        "keyword_counts": {
+          "udi": 15,
+          "débit": 0,
+          "debit": 0,
+          "m3/j": 0,
+          "m³/j": 0,
+          "m3/h": 0,
+          "m³/h": 0,
+          "l/s": 0,
+          "l/min": 0,
+          "pression": 3,
+          "bar": 0,
+          "hauteur de chute": 0,
+          "dénivelé": 0,
+          "denivele": 0,
+          "ngf": 108,
+          "source": 12,
+          "reservoir": 0,
+          "réservoir": 18,
+          "brise-charge": 0,
+          "brise charge": 0
+        },
+        "raw_samples": [
+          "370m NGF360m NGF340m NGF330m NGF",
+          "390m NGF",
+          "450m NGF440m NGF430m NGF420m NGF410m NGF400m NGF",
+          "460m NGF470m NGF480m NGF490m NGFSourceSoulagesTN : 487m NGF",
+          "40 m³Réservoir deSoulagesTN : 421m NGF",
+          "Source deLambeyranTN : 464m NGF10 m³Réservoir deLambeyranTN : 456m NGF",
+          "350m NGFSource de laVernèdeTN : 356m NGF122 m³Réservoir de laVernèdeTN : 352m NGF",
+          "150 m³Réservoir del'EsparrouTN : 320m NGFRéservoir deSéviacTN : 375m NGFEsparrou",
+          "210m NGF220m NGF230m NGF240m NGF250m NGF260m NGF270m NGF280m NGF290m NGF300m NGF310m NGF320m NGFLES PLANS",
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouverteOCanalisation :Adduction - gravitaireDistribution - gravitaireCompteur RPRéducteur de pressionDistribution - refoulement24.053",
+          "490m NGF",
+          "Source 480m NGF"
+        ],
+        "rp_blue_symbol_count": 3,
+        "udi_site_split": {
+          "split_from_file": "UDI 7 Soulages - 8 Vernède & 9 Lambeyran.pdf",
+          "site_name": "UDI 9 - Lambeyran",
+          "site_index": 2,
+          "site_count": 3
+        },
+        "udi_linking": {
+          "group_key": "udi-9",
+          "group_size": 1,
+          "related_files": [
+            "UDI 7 Soulages - 8 Vernède & 9 Lambeyran.pdf"
+          ],
+          "filled_fields": []
+        }
+      },
+      "site_group_key": "udi-9"
+    },
+    {
+      "filename": "UDI 7 Soulages - 8 Vernède & 9 Lambeyran.pdf",
+      "site_name": "UDI 8 - Vernède",
+      "document_type": "udi",
+      "result_json": {
+        "nom_udi": "UDI 8 - Vernède",
+        "communes": [
+          "Soulages"
+        ],
+        "localisation": "Soulages",
+        "sites_udi": [
+          {
+            "site": "UDI 8 - Vernède",
+            "source_altitude_ngf_m": 356.0,
+            "reservoir_altitude_ngf_m": 352.0,
+            "denivele_source_reservoir_m": 4.0,
+            "source_au_dessus_reservoir": true,
+            "volume_reservoir_m3": 122.0
+          }
+        ],
+        "reservoirs_udi": [
+          {
+            "site_udi": "UDI 8 - Vernède",
+            "reservoir": "Reservoir de la Réservoir de Vernède Séviac",
+            "source_altitude_ngf_m": 356.0,
+            "reservoir_altitude_ngf_m": 352.0,
+            "denivele_source_reservoir_m": 4.0,
+            "hauteur_chute_disponible_m": 4.0,
+            "volume_reservoir_m3": null
+          },
+          {
+            "site_udi": "UDI 8 - Vernède",
+            "reservoir": "Reservoir de l'Esparrou Pompage en ligne",
+            "source_altitude_ngf_m": 350.0,
+            "reservoir_altitude_ngf_m": 340.0,
+            "denivele_source_reservoir_m": 10.0,
+            "hauteur_chute_disponible_m": 10.0,
+            "volume_reservoir_m3": null
+          },
+          {
+            "site_udi": "UDI 8 - Vernède",
+            "reservoir": "Reservoir de la Réservoir de",
+            "source_altitude_ngf_m": 356.0,
+            "reservoir_altitude_ngf_m": 370.0,
+            "denivele_source_reservoir_m": -14.0,
+            "hauteur_chute_disponible_m": null,
+            "volume_reservoir_m3": null
+          }
+        ],
+        "description_reservoirs": [
+          "Reservoir de Source de Lambeyran ; alt réservoir 456.0 m NGF ; alt source 480.0 m NGF ; Δ source->réservoir 24.0 m",
+          "Reservoir de Soulages ; alt réservoir 430.0 m NGF ; alt source 456.0 m NGF ; Δ source->réservoir 26.0 m",
+          "Reservoir de la Réservoir de Vernède Séviac ; alt réservoir 352.0 m NGF ; alt source 356.0 m NGF ; Δ source->réservoir 4.0 m",
+          "Reservoir de l'Esparrou Pompage en ligne ; alt réservoir 340.0 m NGF ; alt source 350.0 m NGF ; Δ source->réservoir 10.0 m",
+          "Reservoir de Lambeyran ; alt réservoir 456.0 m NGF ; alt source 480.0 m NGF ; Δ source->réservoir 24.0 m",
+          "Reservoir de la Réservoir de ; alt réservoir 370.0 m NGF ; alt source 356.0 m NGF ; Δ source->réservoir -14.0 m",
+          "Réservoir de",
+          "Réservoir de la Réservoir de",
+          "Réservoir de 340m NGF",
+          "Réservoir"
+        ],
+        "presence_brise_charge": true,
+        "nombre_brise_charge": 1,
+        "presence_reducteurs_pression": true,
+        "nombre_reducteurs_pression": 3,
+        "hauteur_chute_estimee_m": 4.0,
+        "denivele_source_reservoir_m": 4.0,
+        "denivele_estime_m": 4.0,
+        "altitudes_ngf_m": [
+          360,
+          370,
+          390,
+          400,
+          410,
+          420,
+          430,
+          440,
+          450,
+          460,
+          470,
+          480,
+          490
+        ],
+        "volume_reservoir_m3": 122.0,
+        "volume_reference_m3_j": 122.0,
+        "debit_m3_j": null,
+        "points_pression_reduction": [
+          "RP",
+          "RP (symbole bleu)"
+        ],
+        "emplacements_turbine_potentiels": [
+          "Source de Soulages",
+          "Source de Lambeyran",
+          "Source de la Vernède"
+        ],
+        "elements_interessants_micro_hydro": [
+          "Réduction de pression (RP/PRV)",
+          "Adduction gravitaire",
+          "Distribution gravitaire",
+          "Refoulement / pompage",
+          "Point de comptage (compteur)",
+          "Organes de vanne",
+          "Source/captage mentionné",
+          "Réservoir mentionné"
+        ],
+        "contraintes_techniques": [
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouverteOCanalisation :Adduction - gravitaireDistribution - gravitaireCompteur RPRéducteur de pressionDistribution - refoulement24.053",
+          "RP Réducteur de pression 240m NGF",
+          "O Vanne ouverte",
+          "RP Réducteur de pression",
+          "370m NGF360m NGF340m NGF330m NGF",
+          "390m NGF",
+          "450m NGF440m NGF430m NGF420m NGF410m NGF400m NGF",
+          "460m NGF470m NGF480m NGF490m NGFSourceSoulagesTN: 487m NGF",
+          "40 m³Réservoir deSoulagesTN: 421m NGF",
+          "Source deLambeyranTN: 464m NGF10 m³Réservoir deLambeyranTN: 456m NGF",
+          "350m NGFSource de laVernèdeTN: 356m NGF122 m³Réservoir de laVernèdeTN: 352m NGF",
+          "150 m³Réservoir del'EsparrouTN: 320m NGFRéservoir deSéviacTN: 375m NGFEsparrou"
+        ],
+        "potentiel_hydraulique": true
+      },
+      "description": "```\n\n**Description technique factuelle**\n\nLe document présente un schéma directeur d'alimentation en eau potable pour les UDI 7 - Soulages, UDI 8 - Vernède et UDI 9 - Lambeyran. Les informations suivantes sont mentionnées :\n\n* Les UDI sont situés dans les communes de Soulages, Lambeyran et Vernède.\n* Les sites UDI sont situés à Soulages, Lambeyran et Vernède.\n* Les réservoirs UDI sont :\n + Réservoir de Soulages (altitude : 421 m, volume : 40 m³)\n + Réservoir de Lambeyran (altitude : 456 m, volume : 10 m³)\n + Réservoir de Vernède (altitude : 352 m, volume : 122 m³)\n + Réservoir de Séviac (altitude : 375 m, volume : 150 m³)\n + Réservoir de l'Esparrou (altitude : 320 m, volume : 150 m³)\n* Il y a une brise-charge et un réducteur de pression.\n* Les altitudes des sources et des réservoirs sont mentionnées.\n* Les déniveles des sources et des réservoirs sont calculés.\n* Les altitudes NGF sont mentionnées.\n* Le volume de réservoir est de 40 m³.\n* Le volume de référence est de 122 m³/jour.\n* Le débit n'est pas mentionné.\n* Les points de",
+      "debug": {
+        "text_length": 4078,
+        "line_count": 158,
+        "keyword_counts": {
+          "udi": 15,
+          "débit": 0,
+          "debit": 0,
+          "m3/j": 0,
+          "m³/j": 0,
+          "m3/h": 0,
+          "m³/h": 0,
+          "l/s": 0,
+          "l/min": 0,
+          "pression": 3,
+          "bar": 0,
+          "hauteur de chute": 0,
+          "dénivelé": 0,
+          "denivele": 0,
+          "ngf": 108,
+          "source": 12,
+          "reservoir": 0,
+          "réservoir": 18,
+          "brise-charge": 0,
+          "brise charge": 0
+        },
+        "raw_samples": [
+          "370m NGF360m NGF340m NGF330m NGF",
+          "390m NGF",
+          "450m NGF440m NGF430m NGF420m NGF410m NGF400m NGF",
+          "460m NGF470m NGF480m NGF490m NGFSourceSoulagesTN : 487m NGF",
+          "40 m³Réservoir deSoulagesTN : 421m NGF",
+          "Source deLambeyranTN : 464m NGF10 m³Réservoir deLambeyranTN : 456m NGF",
+          "350m NGFSource de laVernèdeTN : 356m NGF122 m³Réservoir de laVernèdeTN : 352m NGF",
+          "150 m³Réservoir del'EsparrouTN : 320m NGFRéservoir deSéviacTN : 375m NGFEsparrou",
+          "210m NGF220m NGF230m NGF240m NGF250m NGF260m NGF270m NGF280m NGF290m NGF300m NGF310m NGF320m NGFLES PLANS",
+          "LEGENDERéservoirOuvrage:Accessoire:SourceVanne ouverteOCanalisation :Adduction - gravitaireDistribution - gravitaireCompteur RPRéducteur de pressionDistribution - refoulement24.053",
+          "490m NGF",
+          "Source 480m NGF"
+        ],
+        "rp_blue_symbol_count": 3,
+        "udi_site_split": {
+          "split_from_file": "UDI 7 Soulages - 8 Vernède & 9 Lambeyran.pdf",
+          "site_name": "UDI 8 - Vernède",
+          "site_index": 3,
+          "site_count": 3
+        },
+        "udi_linking": {
+          "group_key": "udi-8",
+          "group_size": 1,
+          "related_files": [
+            "UDI 7 Soulages - 8 Vernède & 9 Lambeyran.pdf"
+          ],
+          "filled_fields": []
+        }
+      },
+      "site_group_key": "udi-8"
+    }
+  ],
+  "errors": [
+    {
+      "filename": "Fiche_STEU_Celles_Les_Vailhes.pdf",
+      "error": "Erreur API 400: Erreur Groq: Error code: 413 - {'error': {'message': 'Request too large for model `llama-3.1-8b-instant` in organization `org_01jxfgx4m4e2vty7g5r2hj28ba` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Requested 9668, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    }
+  ],
+  "udi_split_done": true,
+  "udi_linking_done": true
+}
