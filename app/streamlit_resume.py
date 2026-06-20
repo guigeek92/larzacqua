@@ -113,6 +113,23 @@ generate_site_simulation_report = getattr(pdf_report, "generate_site_simulation_
 load_dotenv()
 
 
+def get_groq_api_key():
+    """Return the Groq API key from Streamlit secrets or environment variables."""
+    try:
+        if "GROQ_API_KEY" in st.secrets:
+            secret_value = st.secrets["GROQ_API_KEY"]
+            if secret_value:
+                return str(secret_value).strip()
+    except Exception:
+        pass
+
+    env_value = os.getenv("GROQ_API_KEY") or os.getenv("OPENAI_API_KEY")
+    if env_value:
+        return env_value.strip()
+
+    return None
+
+
 @st.cache_data(show_spinner=False)
 def load_pressure_reducers(csv_path):
     df = pd.read_csv(csv_path)
@@ -189,8 +206,13 @@ def render_site_ai_generation(prompt, allow_call, cache_key, title="Generation I
                 st.session_state.pop(error_key, None)
         if allow_call and result_key not in st.session_state and error_key not in st.session_state:
             try:
+                groq_api_key = get_groq_api_key()
+                if not groq_api_key:
+                    raise RuntimeError(
+                        "Missing GROQ_API_KEY. Add it in Streamlit Cloud secrets or in your local environment."
+                    )
                 client = openai.OpenAI(
-                    api_key=os.getenv("GROQ_API_KEY"),
+                    api_key=groq_api_key,
                     base_url="https://api.groq.com/openai/v1"
                 )
                 with st.spinner("Appel a l'IA Groq en cours..."):
@@ -538,8 +560,13 @@ def render_chatbot_panel():
                 st.session_state["chat_history"] = chat_history
                 st.rerun()
             try:
+                groq_api_key = get_groq_api_key()
+                if not groq_api_key:
+                    raise RuntimeError(
+                        "Missing GROQ_API_KEY. Add it in Streamlit Cloud secrets or in your local environment."
+                    )
                 client = openai.OpenAI(
-                    api_key=os.getenv("GROQ_API_KEY"),
+                    api_key=groq_api_key,
                     base_url="https://api.groq.com/openai/v1",
                 )
                 with st.spinner("Appel a l'IA Groq en cours..."):
