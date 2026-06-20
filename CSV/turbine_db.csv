@@ -5,6 +5,6 @@ pat_micro,40,1.0,15.0,2.0,12.0,0.20,1.00,0.65,4200,"PAT compacte pour petits res
 pat_pump_as_turbine,50,1.0,12.0,3.0,20.0,0.50,2.00,0.68,5500,"PAT basse puissance pour faibles debits.",literature
 pat_pump_as_turbine,65,1.0,12.0,5.0,40.0,1.00,5.00,0.70,7500,"PAT standard pour petits reseaux AEP.",fallback
 pat_pump_as_turbine,80,1.0,12.0,10.0,80.0,2.0,15.0,0.72,9800,"PAT pour petits reseaux AEP, faible a moyen debit.",fallback
-pat_pump_as_turbine,100,1.0,12.0,20.0,100.0,5.0,30.0,0.74,12400,"PAT polyvalente pour reseaux AEP standards.",fallback
+pat_pump_as_turbine,100,1.0,12.0,20.0,100.0,5.0,30.0,0.75,12400,"PAT polyvalente pour reseaux AEP standards.",fallback
 pat_pico,20,0.5,15.0,0.2,2.0,0.02,0.20,0.50,1800,"Pico PAT derivee d'une petite pompe centrifuge.",literature
 pat_pico,25,0.5,15.0,0.5,4.0,0.05,0.30,0.55,2200,"Pico PAT pour tres faibles debits.",literature

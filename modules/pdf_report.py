@@ -1260,235 +1260,465 @@ def generate_site_pdf(
     internal_pdf = pdf is None
     if pdf is None:
         pdf = SimuWatterPDF()
-    # Defer building cover/toc until after we compute site-level KPIs
 
     site_name = str(site_row.get("site_name", "Site"))
-
-    puissance_kw = float(productible_result.get("puissance_kw", 0))
-    energie_kwh = float(productible_result.get("energie_kwh", 0))
+    puissance_kw = float(productible_result.get("puissance_kw", 0)) if isinstance(productible_result, dict) else 0
+    energie_kwh = float(productible_result.get("energie_kwh", 0)) if isinstance(productible_result, dict) else 0
     debit_m3h = float(site_row.get("estimated_flow", 0))
     pression_bar = float(site_row.get("delta_p", 0))
 
-    # If this is a single-site PDF (no external pdf passed), build the
-    # branded cover, TOC and executive synthesis pages first.
+    # Build cover and TOC for single-site PDFs
     if internal_pdf:
         try:
-            build_cover(pdf, site_name)
-            build_toc(pdf)
-            # small executive summary assembled from key values
-            summary = (
-                f"Recommandation générale : voir détails. KPI clés - Puissance estimée: {puissance_kw:.2f} kW; "
-                f"Énergie annuelle: {energie_kwh:.0f} kWh; VAN: {van if van is not None else '-'}; "
-                f"Temps de retour: {payback if payback is not None else '-'} ans."
+            # Couverture améliorée
+            pdf.add_page()
+            pdf.set_font('Arial', 'B', 20)
+            pdf.set_text_color(13, 43, 74)
+            pdf.cell(0, 15, '', 0, 1, 'C')
+            pdf.cell(0, 12, 'Plateforme Larzacqua', 0, 1, 'C')
+            pdf.set_font('Arial', '', 12)
+            pdf.set_text_color(46, 117, 207)
+            pdf.cell(0, 8, 'Estimation du potentiel hydroélectrique et photovoltaïque', 0, 1, 'C')
+            pdf.cell(0, 8, 'du réseau d\'eau pour le Lodévois et Larzac', 0, 1, 'C')
+            
+            pdf.ln(8)
+            pdf.set_font('Arial', 'B', 14)
+            pdf.set_text_color(13, 43, 74)
+            pdf.cell(0, 10, f'Rapport de site : {sanitize_for_latin1(site_name)}', 0, 1, 'C')
+            
+            if rank is not None and total_sites is not None:
+                pdf.ln(4)
+                pdf.set_font('Arial', '', 11)
+                pdf.set_text_color(80, 80, 80)
+                pdf.cell(0, 8, f'Classement: {rank} sur {total_sites} sites analysés', 0, 1, 'C')
+            
+            pdf.ln(12)
+            pdf.set_font('Arial', '', 10)
+            pdf.set_text_color(100, 100, 100)
+            pdf.cell(0, 6, f'Date: {datetime.utcnow().strftime("%d/%m/%Y")}', 0, 1, 'C')
+            pdf.cell(0, 6, 'Auteur: SimuWatter - Plateforme d\'analyse énergétique', 0, 1, 'C')
+            
+            # Table des matières
+            pdf.add_page()
+            pdf.set_font('Arial', 'B', 14)
+            pdf.set_text_color(13, 43, 74)
+            pdf.cell(0, 10, 'Table des matières', 0, 1)
+            pdf.ln(6)
+            
+            pdf.set_font('Arial', '', 11)
+            toc_items = [
+                ('1. Synthèse exécutive', 3),
+                ('2. Présentation du site', 4),
+                ('3. Données hydrauliques', 5),
+                ('4. Sélection de la turbine', 6),
+                ('5. Dimensionnement technique', 7),
+                ('6. Analyse économique détaillée', 8),
+                ('7. Recommandations et prochaines étapes', 10),
+                ('8. Annexes techniques', 11),
+            ]
+            for title, page in toc_items:
+                pdf.cell(5, 7, '', 0)
+                pdf.cell(0, 7, sanitize_for_latin1(title), 0, 1)
+            
+            # Synthèse exécutive
+            pdf.add_page()
+            pdf.set_font('Arial', 'B', 13)
+            pdf.set_text_color(13, 43, 74)
+            pdf.cell(0, 10, '1. Synthèse exécutive', 0, 1)
+            pdf.ln(3)
+            
+            pdf.set_font('Arial', '', 11)
+            pdf.set_text_color(0)
+            
+            # KPIs principaux
+            pdf.set_font('Arial', 'B', 11)
+            pdf.cell(0, 8, 'Indicateurs clés (KPI)', 0, 1)
+            pdf.ln(2)
+            
+            kpi_data = [
+                ['Puissance estimée', f'{puissance_kw:.2f} kW'],
+                ['Énergie annuelle', f'{energie_kwh:.0f} kWh/an'],
+                ['Débit moyen', f'{debit_m3h:.1f} m³/h'],
+                ['Pression amont', f'{pression_bar:.2f} bar'],
+            ]
+            
+            if payback is not None:
+                kpi_data.append(['Temps de retour', f'{payback:.1f} ans'])
+            if van is not None:
+                kpi_data.append(['VAN (20 ans)', f'{van:.0f} EUR'])
+            if tri is not None:
+                kpi_data.append(['TRI', f'{tri*100:.1f}%'])
+            
+            pdf.set_font('Arial', '', 10)
+            for item, value in kpi_data:
+                pdf.cell(80, 6, item, border=1)
+                pdf.cell(0, 6, value, border=1, ln=1, align='R')
+            
+            pdf.ln(4)
+            
+            # Résumé textuel
+            pdf.set_font('Arial', '', 11)
+            summary_text = (
+                f"Ce rapport analyse le potentiel hydroélectrique du site '{sanitize_for_latin1(site_name)}'. "
+                f"Le site présente une puissance estimée de {puissance_kw:.2f} kW, correspondant à une production "
+                f"annuelle d'environ {energie_kwh:.0f} kWh/an. "
+                f"Les paramètres hydrauliques (débit: {debit_m3h:.1f} m³/h, pression: {pression_bar:.2f} bar) "
+                f"permettent l'installation d'une turbine compatible avec un bon rendement."
             )
-            kpis = {
-                'Puissance (kW)': f"{puissance_kw:.2f}",
-                'Énergie (kWh/an)': f"{energie_kwh:.0f}",
-                'VAN (EUR)': f"{van:.0f}" if van is not None else '-',
-                'Payback (ans)': f"{payback:.1f}" if payback is not None else '-',
-            }
-            build_synthesis(pdf, summary, kpis)
-            # After synthesis page, start a fresh content page
-            try:
-                pdf.add_page()
-            except Exception:
-                pass
-        except Exception:
-            # if any template build fails, create a default page
-            try:
-                pdf.add_page()
-            except Exception:
-                pass
+            pdf.multi_cell(0, 5, sanitize_for_latin1(summary_text))
+            
+        except Exception as e:
+            pdf.add_page()
+            pdf.set_font('Arial', '', 10)
+            pdf.multi_cell(0, 5, f"Erreur lors de la construction du sommaire : {str(e)}")
     else:
         try:
             pdf.add_page()
         except Exception:
             pass
 
-    # 1. Caractéristiques du site
-    pdf.section_title("1. Caractéristiques du site")
-    pdf.section_body(
-        "Ce rapport présente une estimation du productible hydroélectrique pour un site du réseau.\n"
-        "L'objectif est de qualifier le potentiel, les turbines compatibles, et les impacts économiques."
+    # ===== SECTION 2: Présentation du site =====
+    pdf.add_page()
+    pdf.section_title('2. Présentation du site')
+    
+    pdf.set_font('Arial', '', 11)
+    site_info_text = (
+        f"Nom du site: {sanitize_for_latin1(site_name)}\n"
+        f"Localisation: Réseau d'eau Lodévois & Larzac\n"
+        f"Région: Occitanie (France)\n"
+        f"Type de projet: Production hydroélectrique sur point de raccordement réseau\n"
+        f"\nContexte: Ce site fait partie de l'analyse globale menée par Plateforme Larzacqua "
+        f"pour évaluer le potentiel énergétique du réseau d'eau du territoire."
     )
+    pdf.multi_cell(0, 6, sanitize_for_latin1(site_info_text))
+    
+    # Carte si disponible
     if lat is not None and lon is not None:
+        pdf.ln(4)
+        pdf.set_font('Arial', 'B', 11)
+        pdf.cell(0, 7, 'Localisation géographique', 0, 1)
+        pdf.ln(2)
         try:
-            map_path = fetch_osm_static_map(lat, lon, zoom=16)
-            pdf.image(map_path, w=170)
+            map_path = fetch_osm_static_map(lat, lon, zoom=14)
+            if os.path.exists(map_path):
+                pdf.image(map_path, w=160)
         except Exception:
-            pass
-    classement = ""
-    if rank is not None and total_sites is not None:
-        classement = f"Classement: {rank}/{total_sites}\n"
-    tarif_oa_text = f"- Tarif injection OA: {tarif_oa:.3f} EUR/kWh\n" if tarif_oa is not None else ""
-    prix_evite_text = f"- Prix évité: {prix_evite:.3f} EUR/kWh\n" if prix_evite is not None else ""
-    pdf.section_body(
-        classement +
-        "Paramètres du site\n"
-        f"- Débit moyen: {debit_m3h:.1f} m3/h\n"
-        f"- Pression amont: {pression_bar:.2f} bar\n"
-        f"- Heures de fonctionnement/an: {heures_fonctionnement}\n"
-        f"- Mode: {mode}\n"
-        f"- Consommation site: {conso_site} kWh/an\n"
-        f"- Prix électricité: {prix_elec} EUR/kWh\n"
-        f"{tarif_oa_text}"
-        f"{prix_evite_text}"
-        f"- Puissance estimée: {puissance_kw:.2f} kW\n"
-        f"- Énergie annuelle: {energie_kwh:.0f} kWh/an\n"
-    )
-    if streamlit_url:
-        streamlit_views = capture_streamlit_views(streamlit_url, site_tab_label)
-        if streamlit_views:
-            for step_name, image_path in streamlit_views.items():
-                if image_path:
-                    add_screenshot_page(pdf, f"Capture - {step_name}", image_path)
+            pdf.set_font('Arial', '', 10)
+            pdf.cell(0, 5, f'Coordonnées: {lat:.4f}°N, {lon:.4f}°E', 0, 1)
 
+    # ===== SECTION 3: Données hydrauliques =====
+    pdf.add_page()
+    pdf.section_title('3. Données hydrauliques')
+    
+    pdf.set_font('Arial', '', 11)
+    pdf.multi_cell(0, 5, sanitize_for_latin1(
+        "Cette section détaille les caractéristiques hydrauliques du site, essentielles pour dimensionner "
+        "la turbine et estimer la production énergétique."
+    ))
+    
+    pdf.ln(4)
+    pdf.set_font('Arial', 'B', 11)
+    pdf.cell(0, 7, 'Paramètres mesurés / estimés', 0, 1)
+    pdf.ln(2)
+    
+    hydro_params = [
+        ['Débit moyen', f'{debit_m3h:.1f}', 'm³/h'],
+        ['Pression amont', f'{pression_bar:.2f}', 'bar'],
+        ['Heures de fonctionnement/an', f'{int(heures_fonctionnement)}', 'h'],
+    ]
+    
+    if 'estimated_flow_obs' in site_row.index:
+        debit_obs = float(site_row.get('estimated_flow_obs', 0))
+        if not pd.isna(debit_obs) and debit_obs > 0:
+            hydro_params.append(['Débit observé', f'{debit_obs:.1f}', 'm³/h'])
+    
+    pdf.set_font('Arial', '', 10)
+    for param, value, unit in hydro_params:
+        pdf.cell(70, 6, param, border=1)
+        pdf.cell(50, 6, value, border=1, align='R')
+        pdf.cell(0, 6, unit, border=1, ln=1)
+    
+    pdf.ln(4)
+    
+    # Calculs dérivés
+    pdf.set_font('Arial', 'B', 11)
+    pdf.cell(0, 7, 'Calculs d\'énergie', 0, 1)
+    pdf.ln(2)
+    
+    energy_calcs = [
+        ['Puissance brute théorique', f'{puissance_kw:.2f} kW'],
+        ['Énergie annuelle brute', f'{energie_kwh:.0f} kWh/an'],
+        ['Facteur de charge annuel', f'{(energie_kwh / (puissance_kw * 8760 * 100) if puissance_kw > 0 else 0):.1f}%'],
+    ]
+    
+    pdf.set_font('Arial', '', 10)
+    for calc, value in energy_calcs:
+        pdf.cell(100, 6, calc, border=1)
+        pdf.cell(0, 6, value, border=1, ln=1, align='R')
 
-    # 2. Sélection de la turbine (version enrichie)
-    pdf.section_title("2. Sélection de la turbine")
-    # Tableau détaillé de la turbine sélectionnée
-    turbine_df = pd.DataFrame([{
-        "Type": selected_turbine.get("type_turbine"),
-        "Diamètre (mm)": selected_turbine.get("diametre_mm"),
-        "Puissance min (kW)": selected_turbine.get("puissance_min_kw"),
-        "Puissance max (kW)": selected_turbine.get("puissance_max_kw"),
-        "Rendement typique": selected_turbine.get("rendement_typique"),
-        "Source": selected_turbine.get("source"),
-    }])
-    pdf.add_table(turbine_df, title="Turbine sélectionnée", max_col_width=40, truncate=24)
-
-    # Tableau complet des turbines compatibles
-    if turbines_df is not None and not turbines_df.empty:
-        display_cols = [
-            'type_turbine', 'diametre_mm', 'pression_min_bar', 'pression_max_bar',
-            'debit_min_m3h', 'debit_max_m3h', 'puissance_min_kw', 'puissance_max_kw',
-            'rendement_typique', 'prix_estime_eur', 'description', 'source'
+    # ===== SECTION 4: Sélection de la turbine =====
+    pdf.add_page()
+    pdf.section_title('4. Sélection de la turbine')
+    
+    pdf.set_font('Arial', '', 11)
+    pdf.multi_cell(0, 5, sanitize_for_latin1(
+        "La turbine est sélectionnée en fonction de la compatibilité avec les paramètres hydrauliques du site "
+        "(pression, débit). Seules les turbines physiquement compatibles sont proposées."
+    ))
+    
+    pdf.ln(4)
+    
+    # Turbine sélectionnée
+    if selected_turbine:
+        pdf.set_font('Arial', 'B', 11)
+        pdf.cell(0, 7, 'Turbine recommandée', 0, 1)
+        pdf.ln(2)
+        
+        turbine_selected_data = [
+            ['Type', str(selected_turbine.get('type_turbine', 'N/D'))],
+            ['Diamètre', f'{selected_turbine.get("diametre_mm", 0):.0f} mm'],
+            ['Puissance min', f'{selected_turbine.get("puissance_min_kw", 0):.2f} kW'],
+            ['Puissance max', f'{selected_turbine.get("puissance_max_kw", 0):.2f} kW'],
+            ['Pression min/max', f'{selected_turbine.get("pression_min_bar", 0):.2f} / {selected_turbine.get("pression_max_bar", 0):.2f} bar'],
+            ['Débit min/max', f'{selected_turbine.get("debit_min_m3h", 0):.0f} / {selected_turbine.get("debit_max_m3h", 0):.0f} m³/h'],
+            ['Rendement typique', f'{selected_turbine.get("rendement_typique", 0):.1f}%'],
         ]
-        cols = [c for c in display_cols if c in turbines_df.columns]
-        if cols:
-            pdf.add_table(turbines_df[cols], title="Tableau complet des turbines compatibles", max_col_width=40, truncate=24)
+        
+        pdf.set_font('Arial', '', 10)
+        for label, value in turbine_selected_data:
+            pdf.cell(60, 6, label, border=1)
+            pdf.cell(0, 6, sanitize_for_latin1(str(value)), border=1, ln=1)
+        
+        pdf.ln(3)
+        
+        # Note sur la sélection
+        pdf.set_font('Arial', '', 10)
+        pdf.set_text_color(80, 80, 80)
+        rendement = float(selected_turbine.get('rendement_typique', 0))
+        if rendement > 80:
+            note = "Cette turbine offre un excellent rendement pour ce site."
+        elif rendement > 70:
+            note = "Cette turbine offre un bon rendement pour ce site."
+        else:
+            note = "Cette turbine est compatible mais avec un rendement modéré."
+        pdf.multi_cell(0, 5, sanitize_for_latin1(note))
+        pdf.set_text_color(0)
+    
+    # Alternatives compatibles
+    if turbines_df is not None and not turbines_df.empty and len(turbines_df) > 1:
+        pdf.ln(6)
+        pdf.set_font('Arial', 'B', 11)
+        pdf.set_text_color(13, 43, 74)
+        pdf.cell(0, 7, 'Turbines alternatives compatibles', 0, 1)
+        pdf.ln(2)
+        
+        alt_df = turbines_df[['type_turbine', 'diametre_mm', 'puissance_min_kw', 'puissance_max_kw', 'rendement_typique']].iloc[1:].copy()
+        alt_df.columns = ['Type', 'Ø (mm)', 'P.min (kW)', 'P.max (kW)', 'Rdt %']
+        pdf.add_table(alt_df, max_col_width=35, truncate=20)
+        pdf.set_text_color(0)
 
-        # Explications pédagogiques pour chaque turbine
-        descriptions = []
-        for _, t in turbines_df.iterrows():
-            desc = str(t.get("description", "")).strip()
-            source = str(t.get("source", "")).strip()
-            if desc:
-                line = f"- {t.get('type_turbine', 'Turbine')} {t.get('diametre_mm', '')}mm: {desc}"
-                if source:
-                    line += f" (src: {source})"
-                descriptions.append(line)
-        if descriptions:
-            pdf.section_body("Explications pédagogiques sur les turbines compatibles :\n" + "\n".join(descriptions))
+    # ===== SECTION 5: Dimensionnement technique =====
+    pdf.add_page()
+    pdf.section_title('5. Dimensionnement technique')
+    
+    pdf.set_font('Arial', '', 11)
+    pdf.multi_cell(0, 5, sanitize_for_latin1(
+        "Le dimensionnement technique combine les caractéristiques hydrauliques avec la turbine sélectionnée "
+        "pour calculer la production énergétique réelle du site."
+    ))
+    
+    pdf.ln(4)
+    
+    # Résumé production
+    pdf.set_font('Arial', 'B', 11)
+    pdf.cell(0, 7, 'Production estimée', 0, 1)
+    pdf.ln(2)
+    
+    production_data = [
+        ['Puissance turbine (conditions optimales)', f'{puissance_kw:.2f} kW'],
+        ['Énergie annuelle brute', f'{energie_kwh:.0f} kWh/an'],
+        ['Heures équivalentes de fonctionnement', f'{(energie_kwh / puissance_kw if puissance_kw > 0 else 0):.0f} h/an'],
+    ]
+    
+    if autoconsommation > 0 or revenus > 0:
+        production_data.append(['Mode d\'exploitation', sanitize_for_latin1(mode.replace('_', ' ').title())])
+        if autoconsommation > 0:
+            production_data.append(['Énergie autoconsommée', f'{autoconsommation:.0f} kWh/an ({taux_auto:.1f}%)'])
+        if revenus > 0:
+            production_data.append(['Énergie injectée', f'{revenus:.0f} kWh/an'])
+    
+    pdf.set_font('Arial', '', 10)
+    for label, value in production_data:
+        pdf.cell(100, 6, sanitize_for_latin1(label), border=1)
+        pdf.cell(0, 6, sanitize_for_latin1(str(value)), border=1, ln=1, align='R')
 
-    # Synthèse IA/recommandation (si disponible)
-    # (IA recommendation will be shown in synthesis section later)
-
-    # Graphique de puissance (si productible_result contient une courbe)
-    if productible_result is not None and hasattr(productible_result, 'get'):
-        power_curve = productible_result.get('power_curve')
-        if power_curve is not None and isinstance(power_curve, pd.DataFrame):
-            fig, ax = plt.subplots(figsize=(5,3))
-            ax.plot(power_curve['flow'], power_curve['power'], label='Courbe Puissance')
-            ax.set_xlabel('Débit (m³/h)')
-            ax.set_ylabel('Puissance (kW)')
-            ax.set_title('Courbe de puissance de la turbine sélectionnée')
-            ax.legend()
-            add_plot_image(pdf, fig, "Courbe de puissance de la turbine sélectionnée")
-
-
-    # 3. Estimation du Capex/Opex (version enrichie)
-    pdf.section_title("3. Estimation du Capex/Opex")
+    # ===== SECTION 6: Analyse économique =====
+    pdf.add_page()
+    pdf.section_title('6. Analyse économique détaillée')
+    
+    pdf.set_font('Arial', '', 11)
+    pdf.multi_cell(0, 5, sanitize_for_latin1(
+        "L'analyse économique évalue la viabilité financière du projet en considérant les coûts (CAPEX, OPEX) "
+        "et les revenus (vente d'électricité, économies d'autoproduction)."
+    ))
+    
+    pdf.ln(4)
+    
+    # Coûts (CAPEX/OPEX)
+    pdf.set_font('Arial', 'B', 11)
+    pdf.cell(0, 7, 'Structure des coûts', 0, 1)
+    pdf.ln(2)
+    
     capex_net_value = capex_net if capex_net is not None else capex - subvention_eur
-    pdf.section_body(
-        "**Structure du CAPEX**\n"
-        "- CAPEX fixe (projet) : études, cadrage, ingénierie, démarches, coordination.\n"
-        "- CAPEX de base : équipements hydrauliques + électriques (inclut la turbine).\n"
-        "- Intégration hydraulique : complexité d'installation sur site.\n"
-        "- Raccordement électrique : distance au point de connexion et complexité réseau.\n"
-        "\n**Paramètres utilisés**\n"
-        f"- Distance à l'installation : voir données site.\n"
-        f"- Type d'installation électrique + distance poste : voir données site.\n"
-        f"- Prix turbine : inclus dans le tableau turbine.\n"
-        "\n**OPEX (ordre de grandeur)**\n"
-        "- Micro-inline / pico-inline : 1.5% à 3% de C_equip (≈ 200 à 600 EUR/an).\n"
-        "- PAT (Pump As Turbine) : 2% à 4% de C_equip (≈ 300 à 900 EUR/an).\n"
-        "\n**Synthèse valeurs**\n"
-        f"- CAPEX: {capex:.0f} EUR\n"
-        f"- Subventions (taux): {subsidy_rate:.1f} %\n"
-        f"- Subventions (montant): {subvention_eur:.0f} EUR\n"
-        f"- CAPEX net: {capex_net_value:.0f} EUR\n"
-        f"- OPEX: {opex:.0f} EUR/an\n"
-    )
+    costs_data = [
+        ['CAPEX brut (équipements + installation)', f'{capex:.0f} EUR'],
+        ['Taux de subvention', f'{subsidy_rate:.1f}%'],
+        ['Montant subvention', f'{subvention_eur:.0f} EUR'],
+        ['CAPEX net (après subvention)', f'{capex_net_value:.0f} EUR'],
+        ['OPEX annuel (maintenance)', f'{opex:.0f} EUR/an'],
+    ]
+    
+    pdf.set_font('Arial', '', 10)
+    for label, value in costs_data:
+        pdf.cell(95, 6, sanitize_for_latin1(label), border=1)
+        pdf.cell(0, 6, sanitize_for_latin1(str(value)), border=1, ln=1, align='R')
+    
+    pdf.ln(4)
+    
+    # Revenus
+    pdf.set_font('Arial', 'B', 11)
+    pdf.cell(0, 7, 'Revenus annuels', 0, 1)
+    pdf.ln(2)
+    
+    revenues_data = [
+        ['Économies d\'autoproduction', f'{economie:.0f} EUR/an'],
+        ['Revenus vente injection', f'{revenus:.0f} EUR/an'],
+        ['Total revenus annuels', f'{economie + revenus:.0f} EUR/an'],
+    ]
+    
+    if prix_elec > 0:
+        revenues_data.append(['Prix électricité moyen', f'{prix_elec:.3f} EUR/kWh'])
+    if tarif_oa is not None:
+        revenues_data.append(['Tarif d\'achat (injection)', f'{tarif_oa:.3f} EUR/kWh'])
+    
+    pdf.set_font('Arial', '', 10)
+    for label, value in revenues_data:
+        pdf.cell(95, 6, sanitize_for_latin1(label), border=1)
+        pdf.cell(0, 6, sanitize_for_latin1(str(value)), border=1, ln=1, align='R')
+    
+    pdf.ln(4)
+    
+    # Indicateurs de rentabilité
+    pdf.set_font('Arial', 'B', 11)
+    pdf.cell(0, 7, 'Indicateurs de rentabilité', 0, 1)
+    pdf.ln(2)
+    
+    roi_data = [
+        ['Temps de retour sur investissement (Payback)', f'{payback:.1f} ans' if payback else 'N/D'],
+        ['VAN (20 ans @ 5%)', f'{van:.0f} EUR' if van else 'N/D'],
+        ['Taux de rendement interne (TRI)', f'{tri*100:.1f}%' if tri else 'N/D'],
+        ['Taux d\'actualisation', f'{discount_rate*100:.1f}%' if discount_rate else '5%'],
+        ['Durée de vie du projet', f'{int(project_life_years)} ans' if project_life_years else '20 ans'],
+    ]
+    
+    pdf.set_font('Arial', '', 10)
+    for label, value in roi_data:
+        pdf.cell(95, 6, sanitize_for_latin1(label), border=1)
+        pdf.cell(0, 6, sanitize_for_latin1(str(value)), border=1, ln=1, align='R')
 
-    # Graphique de productible (si disponible)
-    if productible_result is not None and hasattr(productible_result, 'get'):
-        productible_curve = productible_result.get('productible_curve')
-        if productible_curve is not None and isinstance(productible_curve, pd.DataFrame):
-            fig, ax = plt.subplots(figsize=(5,3))
-            ax.plot(productible_curve['x'], productible_curve['y'], label='Courbe Productible')
-            ax.set_xlabel('Temps ou débit')
-            ax.set_ylabel('Productible (kWh/an)')
-            ax.set_title('Courbe de productible estimé')
-            ax.legend()
-            add_plot_image(pdf, fig, "Courbe de productible estimé")
-
-
-    # 4. Analyse économique (version enrichie)
-    pdf.section_title("4. Analyse économique")
-    payback_text = f"{payback:.1f} ans" if payback is not None else "-"
-    tri_text = f"{tri * 100:.1f} %" if tri is not None else "-"
-    van_text = f"{van:.0f} EUR" if van is not None else "-"
-    discount_text = f"{discount_rate:.1f} %" if discount_rate is not None else "-"
-    life_text = f"{int(project_life_years)} ans" if project_life_years is not None else "-"
-    pdf.section_body(
-        "**Synthèse économique**\n"
-        f"- Économies estimées: {economie:.0f} EUR/an\n"
-        f"- Revenus injection: {revenus:.0f} EUR/an\n"
-        f"- Énergie autoconsommée: {autoconsommation:.0f} kWh/an\n"
-        f"- Taux autoconsommation: {taux_auto:.1f} %\n"
-        f"- Temps de retour: {payback_text}\n"
-        f"- VAN: {van_text}\n"
-        f"- TRI: {tri_text}\n"
-        f"- Taux d'actualisation: {discount_text}\n"
-        f"- Durée de vie projet: {life_text}\n"
-    )
-
-    # Synthèse IA et recommandation pédagogique (si disponible)
+    # ===== SECTION 7: Recommandations =====
+    pdf.add_page()
+    pdf.section_title('7. Recommandations et prochaines étapes')
+    
+    pdf.set_font('Arial', '', 11)
+    
+    # Viabilité générale
+    if payback is not None and payback < 10:
+        verdict = "RECOMMANDÉ"
+        verdict_color = (34, 177, 76)
+        text = "Ce site présente une excellente viabilité économique avec un temps de retour rapide."
+    elif payback is not None and payback < 15:
+        verdict = "À APPROFONDIR"
+        verdict_color = (255, 192, 0)
+        text = "Ce site présente un potentiel satisfaisant et mérite une étude plus détaillée."
+    else:
+        verdict = "À ÉVALUER"
+        verdict_color = (237, 125, 49)
+        text = "Ce site présente des défis économiques; une étude supplémentaire est recommandée."
+    
+    pdf.colored_box(15, pdf.get_y(), 180, 12, verdict_color, verdict)
+    pdf.ln(16)
+    
+    pdf.set_font('Arial', '', 11)
+    pdf.multi_cell(0, 5, sanitize_for_latin1(text))
+    
+    pdf.ln(4)
+    
+    # Recommandations spécifiques
+    pdf.set_font('Arial', 'B', 11)
+    pdf.cell(0, 7, 'Actions recommandées', 0, 1)
+    pdf.ln(2)
+    
+    recommendations = [
+        "1. Validation terrain des paramètres hydrauliques (débit, pression) sur une année complète.",
+        "2. Étude génie civil : évaluation précise des travaux de génie civil et raccordement hydraulique.",
+        "3. Raccordement électrique : vérifier la distance au poste et les conditions d'injection réseau.",
+        "4. Démarches administratives : permis, conventions, autorisation d'installation.",
+        "5. Appel d'offres turbines : lancer la demande auprès des fournisseurs certifiés.",
+        "6. Financement : constituer le dossier de demande de subventions et partenariats.",
+        "7. Gouvernance : impliquer les acteurs locaux (collectivités, gestionnaire réseau).",
+    ]
+    
+    pdf.set_font('Arial', '', 10)
+    for rec in recommendations:
+        pdf.multi_cell(0, 5, sanitize_for_latin1(rec))
+        pdf.ln(1)
+    
+    # IA Recommendation si disponible
     if ai_recommendation:
-        pdf.section_title("Synthèse IA et recommandation pédagogique")
-        pdf.section_body(str(ai_recommendation))
+        pdf.ln(4)
+        pdf.set_font('Arial', 'B', 11)
+        pdf.cell(0, 7, 'Analyse et observations complémentaires', 0, 1)
+        pdf.ln(2)
+        pdf.set_font('Arial', '', 10)
+        pdf.multi_cell(0, 5, sanitize_for_latin1(str(ai_recommendation)))
 
-    pdf.section_title("5. Conclusion")
-    pdf.section_body(
-        "Le site présente un potentiel exploitable si les contraintes hydrauliques et d'exploitation sont confirmées. "
-        "La turbine sélectionnée est recommandée à titre indicatif, sous réserve de vérification terrain."
+    # ===== SECTION 8: Annexes =====
+    pdf.add_page()
+    pdf.section_title('8. Annexes techniques')
+    
+    pdf.set_font('Arial', 'B', 11)
+    pdf.cell(0, 7, 'Hypothèses et méthodologie', 0, 1)
+    pdf.ln(2)
+    
+    pdf.set_font('Arial', '', 10)
+    methodology_text = (
+        "Puissance: calculée par P = ρ × g × Q × ΔH × η, "
+        "où ρ=1000 kg/m³, g=9.81 m/s², Q=débit, ΔH=hauteur chute (calculée de la pression), η=rendement turbine.\n\n"
+        "Énergie annuelle: P × heures_fonctionnement_an.\n\n"
+        "VAN et TRI: calculés sur la durée de vie du projet avec taux d'actualisation standard (5%).\n\n"
+        "Payback: temps nécessaire pour récupérer l'investissement initial avec les revenus annuels nets.\n\n"
+        "Mode d'exploitation: autoconsommation (priorité à l'usage local) ou injection réseau (vente aux distributeurs)."
     )
-
-    # Force sanitize all pages to latin-1 to avoid encoding errors in FPDF
-    for idx, page in enumerate(list(pdf.pages)):
-        try:
-            if isinstance(page, (bytes, bytearray)):
-                s = page.decode('latin-1', 'replace')
-            else:
-                s = str(page)
-            # report any non-latin1 chars for diagnosis
-            nonlatin = [(i, ord(ch), ch) for i, ch in enumerate(s) if ord(ch) > 255]
-            if nonlatin:
-                print(f"[DEBUG] page {idx} has {len(nonlatin)} non-latin chars; sample={nonlatin[:3]}")
-                start = max(0, nonlatin[0][0] - 40)
-                print(s[start:start+120])
-            # replace unencodable chars
-            replaced = s.encode('latin-1', 'replace').decode('latin-1')
-            pdf.pages[idx] = replaced
-        except Exception as exc:
-            print(f"[DEBUG] sanitization failed for page {idx}: {exc}")
-            try:
-                pdf.pages[idx] = str(page).encode('latin-1', 'replace').decode('latin-1')
-            except Exception:
-                pdf.pages[idx] = ''
-
-    pdf.output(output_path)
+    pdf.multi_cell(0, 5, sanitize_for_latin1(methodology_text))
+    
+    pdf.ln(6)
+    
+    pdf.set_font('Arial', 'B', 11)
+    pdf.cell(0, 7, 'Limitations et disclaimers', 0, 1)
+    pdf.ln(2)
+    
+    pdf.set_font('Arial', '', 9)
+    pdf.set_text_color(120, 120, 120)
+    limitations = (
+        "Ce rapport constitue une première évaluation basée sur des données estimées. "
+        "Les chiffres présentés doivent être validés par une étude d'ingénierie complète avant tout engagement financier. "
+        "Les conditions réelles du terrain, les variations saisonnières, les coûts réels et les subventions disponibles "
+        "peuvent différer significativement des estimations. Ce rapport ne constitue pas une offre ou un engagement contractuel."
+    )
+    pdf.multi_cell(0, 4, sanitize_for_latin1(limitations))
+    
+    pdf.set_text_color(0)
 
 def generate_pdf(output_path, csv_path='data/prv.csv', turbine_db_path=None):
     # Génération multi-sites : une page complète par site

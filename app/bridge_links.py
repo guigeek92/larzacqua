@@ -120,7 +120,6 @@ def get_dashboard_mode_from_query():
 
 def render_bridge_banner(active_label, other_label, active_mode):
     st.markdown(HERO_STYLE, unsafe_allow_html=True)
-    target_mode = "pv" if active_mode == "hydro" else "hydro"
     logo_data_uri = ""
     if os.path.exists(LOGO_PATH):
         with open(LOGO_PATH, "rb") as logo_file:
@@ -141,15 +140,22 @@ def render_bridge_banner(active_label, other_label, active_mode):
                         </div>
                     </div>
                 </div>
-                <div class="enr-nav-links">
-                    <a class="enr-nav-link {'active' if active_mode == 'hydro' else 'inactive'}" href="?mode=hydro">Hydro</a>
-                    <a class="enr-nav-link {'active' if active_mode == 'pv' else 'inactive'}" href="?mode=pv">PV</a>
-                </div>
             </div>
             """
         ),
         unsafe_allow_html=True,
     )
+    
+    # Navigation buttons using st.query_params (no page reload)
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("Hydro", key="nav_hydro", use_container_width=True, type="primary" if active_mode == "hydro" else "secondary"):
+            st.query_params.mode = "hydro"
+            st.rerun()
+    with col2:
+        if st.button("PV", key="nav_pv", use_container_width=True, type="primary" if active_mode == "pv" else "secondary"):
+            st.query_params.mode = "pv"
+            st.rerun()
 
 
 def render_dashboard_switcher(active_mode):

@@ -260,6 +260,7 @@ def select_turbine(prv_df, turbine_db, top_n=2):
         "turbine_diameter_mm_2": [],
         "turbine_type_3": [],
         "turbine_diameter_mm_3": [],
+        "rendement_typique": [],
     }
 
     for _, row in prv_df.iterrows():
@@ -281,9 +282,17 @@ def select_turbine(prv_df, turbine_db, top_n=2):
                 "turbine_diameter_mm_3",
             ]:
                 results[key].append(None if "diameter" in key else "None")
+            results["rendement_typique"].append(0.75)  # Default rendement
             continue
 
         selected_rows = [ranked.iloc[i] if i < len(ranked) else None for i in range(min(len(ranked), 2))]
+
+        # Récupérer le rendement de la première turbine sélectionnée
+        first_turbine = selected_rows[0] if len(selected_rows) > 0 and selected_rows[0] is not None else None
+        if first_turbine is not None and pd.notna(first_turbine.get("rendement_typique")):
+            results["rendement_typique"].append(float(first_turbine.get("rendement_typique")))
+        else:
+            results["rendement_typique"].append(0.75)
 
         for idx, tkey, dkey in [
             (0, "turbine_type_1", "turbine_diameter_mm_1"),
