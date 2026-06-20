@@ -52,6 +52,19 @@ Clé API obligatoire :
 
 Voir [.env.example](.env.example)
 
+## ☁️ Déploiement sur Streamlit Community Cloud avec GitHub
+
+1. Poussez le projet sur un dépôt GitHub public ou privé accessible à votre compte Streamlit.
+2. Connectez ce dépôt dans Streamlit Community Cloud et choisissez `streamlit_app.py` comme fichier principal.
+3. Ajoutez `GROQ_API_KEY` dans les secrets de l'application Streamlit, pas dans le dépôt.
+4. Vérifiez que `requirements.txt` et `runtime.txt` sont bien présents à la racine avant le déploiement.
+
+Configuration locale utile :
+- `.streamlit/config.toml` contient les réglages UI et serveur pour Streamlit.
+- `.streamlit/secrets.toml` reste ignoré par Git pour éviter toute fuite de clé.
+
+Si vous devez exposer aussi l'API FastAPI du dossier `backend/`, déployez-la sur un service séparé. Streamlit Community Cloud héberge l'interface Streamlit, pas le serveur FastAPI.
+
 ---
 
 ## 📖 Documentation
@@ -91,6 +104,7 @@ Puis ouvrez aussi l’interface PV sur [http://localhost:8502](http://localhost:
 Pour démarrer les deux interfaces avec le pont activé, utilisez plutôt :
 
 ```bash
+
 run.bat
 ```
 

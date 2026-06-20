@@ -12,9 +12,13 @@ toolbarMode = "minimal"
 
 [server]
 port = 8501
-headless = false
+headless = true
 runOnSave = true
 maxUploadSize = 200
+enableCORS = false
 
 [logger]
 level = "info"
+
+[browser]
+gatherUsageStats = false
