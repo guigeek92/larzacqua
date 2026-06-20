@@ -6,15 +6,21 @@ import streamlit as st
 
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-LOGO_PATH = os.path.join(PROJECT_ROOT, "assets", "larzacqua_logo.svg")
+LOGO_PATH = os.path.join(PROJECT_ROOT, "data", "logo.png")
 
 
 HERO_STYLE = """
 <style>
+:root {
+    --larzacqua-blue: #2e75cf;
+    --larzacqua-blue-dark: #2458b8;
+    --larzacqua-cyan: #34b6d0;
+    --larzacqua-green: #59d0a6;
+}
 .enr-nav {
     position: relative;
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.96) 0%, rgba(30, 41, 59, 0.94) 100%);
-    border: 1px solid rgba(148, 163, 184, 0.16);
+    background: linear-gradient(135deg, rgba(10, 20, 36, 0.97) 0%, rgba(22, 36, 60, 0.95) 100%);
+    border: 1px solid rgba(52, 182, 208, 0.18);
     border-radius: 18px;
     padding: 0.9rem 1rem;
     margin-bottom: 0.9rem;
@@ -44,7 +50,7 @@ HERO_STYLE = """
     margin-bottom: 0.2rem;
 }
 .enr-nav-subtitle {
-    color: #CBD5E1;
+    color: #d5e8f2;
     line-height: 1.45;
     font-size: 1rem;
 }
@@ -61,8 +67,8 @@ HERO_STYLE = """
     min-width: 9rem;
     padding: 0.48rem 0.95rem;
     border-radius: 999px;
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    background: rgba(15, 23, 42, 0.72);
+    border: 1px solid rgba(52, 182, 208, 0.22);
+    background: rgba(15, 27, 48, 0.78);
     color: #E2E8F0 !important;
     font-size: 0.95rem;
     font-weight: 700;
@@ -71,16 +77,16 @@ HERO_STYLE = """
 }
 .enr-nav-link:hover {
     transform: translateY(-1px);
-    border-color: rgba(255, 255, 255, 0.28);
+    border-color: rgba(89, 208, 166, 0.45);
 }
 .enr-nav-link.active {
-    background: linear-gradient(135deg, #1d68ff 0%, #33c0ff 100%);
-    border-color: rgba(109, 188, 255, 0.85);
+    background: linear-gradient(135deg, var(--larzacqua-blue) 0%, var(--larzacqua-cyan) 55%, var(--larzacqua-green) 100%);
+    border-color: rgba(89, 208, 166, 0.85);
     color: #FFFFFF !important;
-    box-shadow: 0 12px 24px rgba(29, 104, 255, 0.25);
+    box-shadow: 0 12px 24px rgba(46, 117, 207, 0.25);
 }
 .enr-nav-link.inactive {
-    background: rgba(15, 23, 42, 0.84);
+    background: rgba(15, 27, 48, 0.84);
 }
 .enr-nav-text, .hydro-bridge-text {
     color: #CBD5E1;
@@ -118,7 +124,9 @@ def render_bridge_banner(active_label, other_label, active_mode):
     logo_data_uri = ""
     if os.path.exists(LOGO_PATH):
         with open(LOGO_PATH, "rb") as logo_file:
-            logo_data_uri = "data:image/svg+xml;base64," + base64.b64encode(logo_file.read()).decode("ascii")
+            logo_ext = os.path.splitext(LOGO_PATH)[1].lower()
+            mime_type = "image/png" if logo_ext == ".png" else "image/jpeg" if logo_ext in {".jpg", ".jpeg"} else "image/svg+xml"
+            logo_data_uri = f"data:{mime_type};base64," + base64.b64encode(logo_file.read()).decode("ascii")
 
     st.markdown(
         dedent(
@@ -127,9 +135,9 @@ def render_bridge_banner(active_label, other_label, active_mode):
                 <div class="enr-nav-header">
                     {f'<img class="enr-nav-logo" src="{logo_data_uri}" alt="Larzacqua" />' if logo_data_uri else ''}
                     <div class="enr-nav-copy">
-                        <div class="enr-nav-title">Plateforme de solution ENR</div>
+                        <div class="enr-nav-title">Plateforme Larzacqua</div>
                         <div class="enr-nav-subtitle">
-                            Une navigation commune pour comparer les solutions hydroélectriques et photovoltaïques.
+                            Estimation du potentiel hydroélectrique et photovoltaïque du réseau d'eau pour le Lodévois et Larzac.
                         </div>
                     </div>
                 </div>
@@ -142,7 +150,6 @@ def render_bridge_banner(active_label, other_label, active_mode):
         ),
         unsafe_allow_html=True,
     )
-    st.session_state["dashboard_mode"] = active_mode
 
 
 def render_dashboard_switcher(active_mode):

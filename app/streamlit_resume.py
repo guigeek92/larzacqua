@@ -12,11 +12,22 @@ if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
 import pandas as pd
-import openai
 import streamlit as st
 from dotenv import load_dotenv
 
-from bridge_links import render_bridge_banner, render_dashboard_switcher
+try:
+    import openai
+except ImportError:
+    openai = None
+
+try:
+    from bridge_links import render_bridge_banner, render_dashboard_switcher
+except Exception:
+    def render_bridge_banner(*args, **kwargs):
+        return None
+
+    def render_dashboard_switcher(*args, **kwargs):
+        return None
 
 from modules.loader import load_data
 from modules.hydraulics import compute_hydraulics
@@ -87,12 +98,20 @@ else:
                 ranked = ranked.head(1).reset_index(drop=True)
 
         return ranked
-import modules.pdf_report as pdf_report
 try:
-    # optional: WeasyPrint renderer may not be installed on all environments
-    generate_site_pdf_weasy = pdf_report.generate_site_pdf_weasy
-    weasy_available = True
-except Exception:
+    import modules.pdf_report as pdf_report
+except ImportError:
+    pdf_report = None
+
+if pdf_report is not None:
+    try:
+        # optional: WeasyPrint renderer may not be installed on all environments
+        generate_site_pdf_weasy = pdf_report.generate_site_pdf_weasy
+        weasy_available = True
+    except Exception:
+        generate_site_pdf_weasy = None
+        weasy_available = False
+else:
     generate_site_pdf_weasy = None
     weasy_available = False
 try:
@@ -103,12 +122,14 @@ except Exception:
 
 
 def call_generate_site_pdf(**kwargs):
+    if pdf_report is None:
+        raise RuntimeError("Le module PDF n'est pas disponible dans cet environnement.")
     signature = inspect.signature(pdf_report.generate_site_pdf)
     filtered_kwargs = {k: v for k, v in kwargs.items() if k in signature.parameters}
     return pdf_report.generate_site_pdf(**filtered_kwargs)
 
 
-generate_site_simulation_report = getattr(pdf_report, "generate_site_simulation_report", None)
+generate_site_simulation_report = getattr(pdf_report, "generate_site_simulation_report", None) if pdf_report is not None else None
 
 
 load_dotenv()
@@ -129,6 +150,14 @@ def get_groq_api_key():
         return env_value.strip()
 
     return None
+
+
+def ensure_openai_available():
+    if openai is None:
+        raise RuntimeError(
+            "Le package 'openai' n'est pas installé dans cet environnement. "
+            "Installez les dépendances du projet avant d'utiliser le chatbot."
+        )
 
 
 @st.cache_data(show_spinner=False)
@@ -205,6 +234,7 @@ def render_site_ai_generation(prompt, allow_call, cache_key, title="Synthese", m
                 st.session_state.pop(error_key, None)
         if allow_call and result_key not in st.session_state and error_key not in st.session_state:
             try:
+                ensure_openai_available()
                 groq_api_key = get_groq_api_key()
                 if not groq_api_key:
                     raise RuntimeError(
@@ -235,7 +265,7 @@ def render_site_ai_generation(prompt, allow_call, cache_key, title="Synthese", m
         else:
             st.info("Synthese en attente.")
 
-st.set_page_config(page_title="Analyse potentiel hydroélectrique Larzacqua", layout="wide")
+st.set_page_config(page_title="Estimation du potentiel : comparaison des filières | Hydro", layout="wide")
 query_mode = None
 try:
     query_mode = st.query_params.get("mode")
@@ -253,6 +283,9 @@ if query_mode in {"hydro", "pv"}:
     st.session_state["dashboard_mode"] = query_mode
 elif "dashboard_mode" not in st.session_state:
     st.session_state["dashboard_mode"] = "hydro"
+
+st.session_state.setdefault("chatbot_open", False)
+st.session_state.setdefault("chat_history", [])
 
 if st.session_state.get("dashboard_mode") == "pv":
     from streamlit_pv import PVDashboard
@@ -281,8 +314,8 @@ chatbot_icon_data_uri = "data:image/svg+xml;utf8," + urllib.parse.quote(chatbot_
 style_block = """
     <style>
     div[data-testid="stContainer"] {
-        background: linear-gradient(135deg, rgba(15, 23, 42, 0.96) 0%, rgba(17, 24, 39, 0.94) 60%);
-        border: 1px solid rgba(148, 163, 184, 0.16);
+        background: linear-gradient(135deg, rgba(10, 20, 36, 0.96) 0%, rgba(17, 30, 50, 0.94) 60%);
+        border: 1px solid rgba(52, 182, 208, 0.16);
         border-radius: 14px;
         padding: 0.75rem 1rem 0.95rem;
         margin-bottom: 0.6rem;
@@ -301,8 +334,8 @@ style_block = """
         font-size: 0.9rem;
     }
     .analysis-section {
-        background: linear-gradient(135deg, rgba(15, 23, 42, 0.96) 0%, rgba(17, 24, 39, 0.94) 60%);
-        border: 1px solid rgba(148, 163, 184, 0.16);
+        background: linear-gradient(135deg, rgba(10, 20, 36, 0.96) 0%, rgba(17, 30, 50, 0.94) 60%);
+        border: 1px solid rgba(46, 117, 207, 0.18);
         border-radius: 14px;
         padding: 0.75rem 1rem;
         margin-bottom: 0.6rem;
@@ -320,8 +353,8 @@ style_block = """
         font-size: 0.9rem;
     }
     .analysis-kpi {
-        background: rgba(15, 23, 42, 0.92);
-        border: 1px solid rgba(148, 163, 184, 0.16);
+        background: rgba(12, 24, 42, 0.94);
+        border: 1px solid rgba(89, 208, 166, 0.18);
         border-radius: 12px;
         padding: 0.6rem 0.8rem;
         box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.05);
@@ -337,7 +370,7 @@ style_block = """
         height: 48px;
         padding: 0;
         border-radius: 999px;
-        background-color: rgba(15, 23, 42, 0.92);
+        background-color: rgba(10, 20, 36, 0.96);
         background-image: url("__CHATBOT_ICON__");
         background-repeat: no-repeat;
         background-position: center;
@@ -346,18 +379,18 @@ style_block = """
         font-size: 0;
         font-weight: 700;
         letter-spacing: 0;
-        border: 1px solid rgba(148, 163, 184, 0.22);
+        border: 1px solid rgba(52, 182, 208, 0.3);
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 0;
-        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.26);
+        box-shadow: 0 10px 24px rgba(46, 117, 207, 0.24);
         text-transform: none;
     }
     [data-testid="stButton"][data-widget-id="chatbot-bubble"] > button:hover {
         transform: translateY(-2px);
-        border-color: rgba(109, 188, 255, 0.55);
-        box-shadow: 0 12px 28px rgba(29, 104, 255, 0.22);
+        border-color: rgba(89, 208, 166, 0.55);
+        box-shadow: 0 12px 28px rgba(52, 182, 208, 0.22);
     }
     </style>
     """
@@ -520,6 +553,8 @@ def render_analysis_global_summary(results_sorted, power_total_kw, annual_energy
             with col_pdf:
                 if st.button("📄 Exporter en PDF", key="export_analysis_pdf"):
                     try:
+                        if pdf_report is None:
+                            raise RuntimeError("Le module PDF n'est pas disponible dans cet environnement.")
                         import tempfile
                         with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as tmp:
                             pdf_path = tmp.name
@@ -582,6 +617,7 @@ def render_chatbot_panel():
                 st.session_state["chat_history"] = chat_history
                 st.rerun()
             try:
+                ensure_openai_available()
                 groq_api_key = get_groq_api_key()
                 if not groq_api_key:
                     raise RuntimeError(
@@ -633,26 +669,24 @@ def render_chatbot_panel():
             st.session_state["chat_history"] = chat_history
             st.rerun()
 
-render_chatbot_bubble()
-
 if st.session_state.get("chatbot_open"):
     render_chatbot_panel()
 
-tab1, tab_map, tab2, tab_acteurs = st.tabs(
-    ["Analyse", "Carte", "Simulation", "Acteurs du Projet Hydroélectrique"]
+tab1, tab_map, tab2, tab_acteurs, tab_chatbot = st.tabs(
+    ["Projet", "Cartographie", "Simulation", "Acteurs et gouvernance", "Chatbot projet"]
 )
 
 with tab1:
     # Mise en page avec deux colonnes de même taille
     # 1. Chargement des données réelles
-    section = render_section_card("1. Données PRV brutes (issues du CSV)")
+    section = render_section_card("1. Données hydrauliques du territoire (issues du CSV)")
     with section:
         csv_path = 'CSV/aep_organe_pression.csv'
         col1, col2 = st.columns([1.2, 1], gap="large")
         try:
             dfs = load_data({'prv': csv_path})
             raw_df = dfs['prv']
-            col1.success("Fichier PRV chargé !")
+            col1.success("Données hydrauliques chargées pour le projet Larzacqua.")
         except Exception as e:
             col1.error(f"Erreur de chargement : {e}")
             st.stop()
@@ -676,7 +710,7 @@ with tab1:
                     st.bar_chart(raw_df['debit'])
 
     # 2. Calcul hydraulique
-    section = render_section_card("2. Calcul hydraulique (delta_p, débit, etc.)")
+    section = render_section_card("2. Calcul hydraulique du projet (delta_p, débit, etc.)")
     with section:
         flow_df = compute_hydraulics(raw_df)
         col1, col2 = st.columns([1.2, 1], gap="large")
@@ -698,7 +732,7 @@ with tab1:
                     st.bar_chart(flow_df['delta_p'])
 
     # 3. Fusion des résultats
-    section = render_section_card("3. Fusion des résultats (hydraulique et puissance)")
+    section = render_section_card("3. Fusion des résultats hydroélectriques")
     with section:
         power_df = compute_power(flow_df)
         results = flow_df.copy()
@@ -706,7 +740,7 @@ with tab1:
         st.dataframe(results, use_container_width=True, height=360)
 
     # 4. Indicateurs globaux
-    section = render_section_card("4. Indicateurs globaux")
+    section = render_section_card("4. Indicateurs globaux du territoire")
     with section:
         power_total_kw = pd.to_numeric(results['power_kW'], errors="coerce").fillna(0).sum()
         annual_energy_kwh = power_total_kw * 6132
@@ -717,14 +751,14 @@ with tab1:
             st.caption("Hypothèse: 6132 h de fonctionnement par an.")
 
     # 5. Tri des sites par puissance décroissante
-    section = render_section_card("5. Tri des sites par puissance décroissante")
+    section = render_section_card("5. Hiérarchisation des sites du territoire")
     with section:
         results_sorted = results.sort_values('power_kW', ascending=False)
         st.session_state["results_sorted"] = results_sorted
         st.dataframe(results_sorted, use_container_width=True, height=360)
 
     # 6. Synthèse brute (top 3)
-    section = render_section_card("6. Synthèse brute (top 3 sites)")
+    section = render_section_card("6. Synthèse brute des sites prioritaires")
     with section:
         best_sites = results_sorted.head(3)
         synthese_rows = []
@@ -2749,3 +2783,12 @@ with tab_acteurs:
     except Exception as exc:
         st.error("Erreur lors du rendu de l'onglet Acteurs.")
         st.exception(exc)
+
+with tab_chatbot:
+    st.markdown("<div class='pv-section-title'>Assistant de projet</div>", unsafe_allow_html=True)
+    st.caption(
+        "Posez une question sur les sites hydro, les hypothèses de calcul ou la lecture des résultats du projet Larzacqua."
+    )
+    if st.button("Ouvrir le chatbot", key="open-hydro-chatbot", use_container_width=False):
+        st.session_state["chatbot_open"] = True
+        st.rerun()

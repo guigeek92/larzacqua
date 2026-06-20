@@ -6,11 +6,18 @@ import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
 
-from bridge_links import render_bridge_banner, render_dashboard_switcher
+try:
+    from bridge_links import render_bridge_banner, render_dashboard_switcher
+except Exception:
+    def render_bridge_banner(*args, **kwargs):
+        return None
+
+    def render_dashboard_switcher(*args, **kwargs):
+        return None
 
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-LOGO_PATH = os.path.join(ROOT, "assets", "larzacqua_logo.svg")
+LOGO_PATH = os.path.join(ROOT, "data", "logo.png")
 
 
 SITES = [
@@ -404,8 +411,8 @@ def render_chart_panel(title, subtitle, canvas_id, chart_config, height=320):
                     color: var(--color-text);
                 }}
                 .panel {{
-                    background: linear-gradient(135deg, rgba(15, 23, 42, 0.96) 0%, rgba(30, 41, 59, 0.96) 100%);
-                    border: 1px solid rgba(148, 163, 184, 0.16);
+                    background: linear-gradient(135deg, rgba(10, 20, 36, 0.96) 0%, rgba(18, 31, 52, 0.96) 100%);
+                    border: 1px solid rgba(52, 182, 208, 0.16);
                     border-radius: 18px;
                     padding: 1rem 1rem 0.8rem;
                     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.24);
@@ -617,8 +624,8 @@ def render_css():
         }
 
         .pv-hero {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.96) 100%);
-            border: 1px solid rgba(148, 163, 184, 0.16);
+            background: linear-gradient(135deg, rgba(10, 20, 36, 0.98) 0%, rgba(18, 31, 52, 0.96) 100%);
+            border: 1px solid rgba(52, 182, 208, 0.18);
             border-radius: 22px;
             padding: 1.4rem 1.5rem;
             box-shadow: 0 18px 45px rgba(0, 0, 0, 0.26);
@@ -626,7 +633,7 @@ def render_css():
         }
 
         .pv-kicker {
-            color: #FBBF24;
+            color: #34b6d0;
             font-size: 0.82rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -644,7 +651,7 @@ def render_css():
 
         .pv-subtitle {
             margin: 0.45rem 0 0;
-            color: var(--color-muted);
+            color: #D5E8F2;
             max-width: 920px;
             line-height: 1.55;
         }
@@ -660,8 +667,8 @@ def render_css():
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            background: rgba(15, 23, 42, 0.9);
-            border: 1px solid rgba(148, 163, 184, 0.16);
+            background: rgba(15, 27, 48, 0.9);
+            border: 1px solid rgba(89, 208, 166, 0.18);
             color: #E2E8F0;
             border-radius: 999px;
             padding: 0.45rem 0.85rem;
@@ -671,7 +678,7 @@ def render_css():
 
         .pv-section-title {
             margin: 1rem 0 0.6rem;
-            color: #E2E8F0;
+            color: #59d0a6;
             font-size: 1.05rem;
             font-weight: 700;
         }
@@ -684,8 +691,8 @@ def render_css():
         }
 
         .pv-kpi {
-            background: rgba(15, 23, 42, 0.95);
-            border: 1px solid rgba(148, 163, 184, 0.14);
+            background: rgba(10, 20, 36, 0.96);
+            border: 1px solid rgba(52, 182, 208, 0.16);
             border-radius: 16px;
             padding: 0.9rem 1rem;
             box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.04);
@@ -715,20 +722,20 @@ def render_css():
         }
 
         .pv-accent-amber {
-            border-left: 4px solid #F59E0B;
+            border-left: 4px solid #2e75cf;
         }
 
         .pv-accent-green {
-            border-left: 4px solid #10B981;
+            border-left: 4px solid #59d0a6;
         }
 
         .pv-accent-slate {
-            border-left: 4px solid #38BDF8;
+            border-left: 4px solid #34b6d0;
         }
 
         .pv-card, .pv-equipment-card, .pv-finance-step, .pv-site-card {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.96) 0%, rgba(30, 41, 59, 0.95) 100%);
-            border: 1px solid rgba(148, 163, 184, 0.14);
+            background: linear-gradient(135deg, rgba(10, 20, 36, 0.96) 0%, rgba(18, 31, 52, 0.95) 100%);
+            border: 1px solid rgba(52, 182, 208, 0.16);
             border-radius: 18px;
             padding: 1rem 1rem 0.95rem;
             box-shadow: 0 14px 32px rgba(0, 0, 0, 0.20);
@@ -773,8 +780,8 @@ def render_css():
         }
 
         .pv-selected {
-            border-color: rgba(245, 158, 11, 0.45);
-            box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.08), 0 18px 38px rgba(0, 0, 0, 0.24);
+            border-color: rgba(89, 208, 166, 0.55);
+            box-shadow: 0 0 0 1px rgba(89, 208, 166, 0.08), 0 18px 38px rgba(0, 0, 0, 0.24);
         }
 
         .pv-site-head {
@@ -802,8 +809,8 @@ def render_css():
             color: #E2E8F0;
             border-radius: 999px;
             padding: 0.32rem 0.7rem;
-            border: 1px solid rgba(148, 163, 184, 0.18);
-            background: rgba(15, 23, 42, 0.84);
+            border: 1px solid rgba(52, 182, 208, 0.18);
+            background: rgba(15, 27, 48, 0.84);
             font-size: 0.78rem;
             font-weight: 700;
         }
@@ -863,7 +870,7 @@ def render_css():
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.95), rgba(16, 185, 129, 0.95));
+            background: linear-gradient(135deg, #2e75cf, #34b6d0, #59d0a6);
             color: #0F172A;
             font-weight: 900;
             margin-bottom: 0.6rem;
@@ -909,7 +916,7 @@ def render_css():
 
 def PVDashboard(set_page_config=True):
     if set_page_config:
-        st.set_page_config(page_title="LARZACQUA | Tableau de bord photovoltaïque", layout="wide")
+        st.set_page_config(page_title="Estimation du potentiel : comparaison des filières | PV", layout="wide")
     render_css()
 
     query_mode = None
@@ -937,8 +944,8 @@ def PVDashboard(set_page_config=True):
     site_options = ["Tous les sites"] + sites_df["nom"].tolist()
 
     render_bridge_banner(
-        active_label="Interface PV active",
-        other_label="l’interface hydro",
+        active_label="Interface PV du projet active",
+        other_label="l’interface hydro du projet",
         active_mode="pv",
     )
 
@@ -967,11 +974,11 @@ def PVDashboard(set_page_config=True):
     )
 
     tab_analyse, tab_site, tab_dimensionnement, tab_economie = st.tabs(
-        ["Analyse", "Site", "Dimensionnement", "Simulation économique"]
+        ["Projet", "Sites", "Dimensionnement", "Économie du projet"]
     )
 
     with tab_analyse:
-        st.markdown("<div class='pv-section-title'>Vue d’ensemble</div>", unsafe_allow_html=True)
+        st.markdown("<div class='pv-section-title'>Vue d’ensemble du projet PV</div>", unsafe_allow_html=True)
         st.markdown(
             card_html(
                 "Lecture rapide",
@@ -987,14 +994,14 @@ def PVDashboard(set_page_config=True):
             unsafe_allow_html=True,
         )
 
-        st.markdown("<div class='pv-section-title'>Fiches des 6 sites</div>", unsafe_allow_html=True)
+        st.markdown("<div class='pv-section-title'>Fiches des 6 sites du territoire</div>", unsafe_allow_html=True)
         st.markdown(site_cards_html(sites_df, st.session_state["pv_selected_site"]), unsafe_allow_html=True)
 
-        st.markdown("<div class='pv-section-title'>Comparatif parc</div>", unsafe_allow_html=True)
+        st.markdown("<div class='pv-section-title'>Comparatif du parc PV</div>", unsafe_allow_html=True)
         st.dataframe(site_comparison_df(), use_container_width=True, hide_index=True)
 
     with tab_site:
-        st.markdown("<div class='pv-section-title'>Sélection du site</div>", unsafe_allow_html=True)
+        st.markdown("<div class='pv-section-title'>Sélection d’un site du projet</div>", unsafe_allow_html=True)
         st.selectbox("Choisir un site", site_options[1:], key="pv_selected_site")
 
         selected_site = st.session_state["pv_selected_site"]
@@ -1014,7 +1021,7 @@ def PVDashboard(set_page_config=True):
             )
             st.markdown(card_html("Site actif", focus_body, "green"), unsafe_allow_html=True)
 
-        st.markdown("<div class='pv-section-title'>Fiche PVsyst complète</div>", unsafe_allow_html=True)
+        st.markdown("<div class='pv-section-title'>Fiche PVsyst complète du site</div>", unsafe_allow_html=True)
         st.markdown(selected_site_detail_html(selected_site), unsafe_allow_html=True)
 
         monthly_df = monthly_profile_series(selected_profile)
@@ -1045,11 +1052,11 @@ def PVDashboard(set_page_config=True):
             height=320,
         )
 
-        st.markdown("<div class='pv-section-title'>Pertes système du site</div>", unsafe_allow_html=True)
+        st.markdown("<div class='pv-section-title'>Pertes système du site sélectionné</div>", unsafe_allow_html=True)
         st.dataframe(site_losses_df(selected_profile), use_container_width=True, hide_index=True)
 
     with tab_dimensionnement:
-        st.markdown("<div class='pv-section-title'>Dimensionnement technique</div>", unsafe_allow_html=True)
+        st.markdown("<div class='pv-section-title'>Dimensionnement technique du projet</div>", unsafe_allow_html=True)
         st.markdown(
             card_html(
                 "Lecture technique du parc",
@@ -1127,15 +1134,15 @@ def PVDashboard(set_page_config=True):
             height=340,
         )
 
-        st.markdown("<div class='pv-section-title'>Pertes système communes</div>", unsafe_allow_html=True)
+        st.markdown("<div class='pv-section-title'>Pertes système communes au projet</div>", unsafe_allow_html=True)
         losses_profile = get_site_profile(selected_site)
         st.dataframe(site_losses_df(losses_profile), use_container_width=True, hide_index=True)
 
-        st.markdown("<div class='pv-section-title'>Équipements standardisés</div>", unsafe_allow_html=True)
+        st.markdown("<div class='pv-section-title'>Équipements standardisés du projet</div>", unsafe_allow_html=True)
         st.markdown(standardized_equipment_html(), unsafe_allow_html=True)
 
     with tab_economie:
-        st.markdown("<div class='pv-section-title'>Simulation économique</div>", unsafe_allow_html=True)
+        st.markdown("<div class='pv-section-title'>Simulation économique du projet</div>", unsafe_allow_html=True)
         capex_labels = ["Construction", "Infra réseau", "Raccordement"]
         capex_values = [ECONOMIE["capex_construction"], ECONOMIE["capex_infra_reseau"], ECONOMIE["capex_raccordement"]]
 
@@ -1221,7 +1228,7 @@ def PVDashboard(set_page_config=True):
             unsafe_allow_html=True,
         )
 
-        st.markdown("<div class='pv-section-title'>Montage financier (tiers-investisseur)</div>", unsafe_allow_html=True)
+        st.markdown("<div class='pv-section-title'>Montage financier du tiers-investisseur</div>", unsafe_allow_html=True)
         st.markdown(financing_html(), unsafe_allow_html=True)
 
     st.markdown("<div class='pv-divider'></div>", unsafe_allow_html=True)
