@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-03-18 15:43:18",
+  "model": "default",
+  "api_url": "http://127.0.0.1:8010/extract",
+  "total_files": 5,
+  "success_count": 0,
+  "error_count": 5,
+  "results": [],
+  "errors": [
+    {
+      "filename": "aep_canalisation.csv",
+      "error": "Erreur API 500: Internal Server Error"
+    },
+    {
+      "filename": "aep_hydrant.csv",
+      "error": "Erreur API: HTTPConnectionPool(host='127.0.0.1', port=8010): Max retries exceeded with url: /extract (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=8010): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée\"))"
+    },
+    {
+      "filename": "aep_organe_pression.csv",
+      "error": "Erreur API: HTTPConnectionPool(host='127.0.0.1', port=8010): Max retries exceeded with url: /extract (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=8010): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée\"))"
+    },
+    {
+      "filename": "aep_reservoir.csv",
+      "error": "Erreur API: HTTPConnectionPool(host='127.0.0.1', port=8010): Max retries exceeded with url: /extract (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=8010): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée\"))"
+    },
+    {
+      "filename": "aep_ressource.csv",
+      "error": "Erreur API: HTTPConnectionPool(host='127.0.0.1', port=8010): Max retries exceeded with url: /extract (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=8010): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée\"))"
+    }
+  ],
+  "udi_split_done": true,
+  "udi_linking_done": true,
+  "run_id": "33b0aca828844164b3bc64a6adff2d5c",
+  "analysis_signature": "efc1224772af33ec030f6ed5f89080e4d2e3ee8a"
+}

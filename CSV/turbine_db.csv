@@ -1,0 +1,10 @@
+type_turbine,diametre_mm,pression_min_bar,pression_max_bar,debit_min_m3h,debit_max_m3h,puissance_min_kw,puissance_max_kw,rendement_typique,prix_estime_eur,description,source
+pat_micro,25,0.5,12.0,0.5,5.0,0.05,0.50,0.58,2500,"Micro PAT pour tres faibles debits et hautes pressions.",literature
+pat_micro,32,0.5,15.0,1.0,8.0,0.10,0.80,0.62,3200,"Petite pompe centrifuge utilisee en mode turbine.",literature
+pat_micro,40,1.0,15.0,2.0,12.0,0.20,1.00,0.65,4200,"PAT compacte pour petits reseaux AEP.",literature
+pat_pump_as_turbine,50,1.0,12.0,3.0,20.0,0.50,2.00,0.68,5500,"PAT basse puissance pour faibles debits.",literature
+pat_pump_as_turbine,65,1.0,12.0,5.0,40.0,1.00,5.00,0.70,7500,"PAT standard pour petits reseaux AEP.",fallback
+pat_pump_as_turbine,80,1.0,12.0,10.0,80.0,2.0,15.0,0.72,9800,"PAT pour petits reseaux AEP, faible a moyen debit.",fallback
+pat_pump_as_turbine,100,1.0,12.0,20.0,100.0,5.0,30.0,0.74,12400,"PAT polyvalente pour reseaux AEP standards.",fallback
+pat_pico,20,0.5,15.0,0.2,2.0,0.02,0.20,0.50,1800,"Pico PAT derivee d'une petite pompe centrifuge.",literature
+pat_pico,25,0.5,15.0,0.5,4.0,0.05,0.30,0.55,2200,"Pico PAT pour tres faibles debits.",literature

@@ -11,3 +11,5 @@ pytesseract
 pillow
 reportlab
 pytest
+playwright
+weasyprint

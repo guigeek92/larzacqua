@@ -1,10 +1,40 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import sqlite3
 from datetime import datetime
 from pathlib import Path
 from typing import Any
+
+
+def _normalize_filename(value: Any) -> str:
+    text = str(value or "").strip()
+    if not text:
+        return ""
+    return Path(text).name.strip().lower()
+
+
+def compute_run_signature(run_record: dict[str, Any]) -> str:
+    filenames: set[str] = set()
+
+    for entry in run_record.get("results", []) or []:
+        if isinstance(entry, dict):
+            normalized = _normalize_filename(entry.get("filename"))
+            if normalized:
+                filenames.add(normalized)
+
+    for entry in run_record.get("errors", []) or []:
+        if isinstance(entry, dict):
+            normalized = _normalize_filename(entry.get("filename"))
+            if normalized:
+                filenames.add(normalized)
+
+    if not filenames:
+        return ""
+
+    signature_payload = "\n".join(sorted(filenames))
+    return hashlib.sha1(signature_payload.encode("utf-8")).hexdigest()
 
 
 class RunHistoryStore:
@@ -39,7 +69,7 @@ class RunHistoryStore:
         if not run_id:
             raise ValueError("run_record must include a non-empty run_id")
 
-        now_iso = datetime.utcnow().isoformat(timespec="seconds")
+        now_iso = datetime.utcnow().isoformat(timespec="microseconds")
         payload = json.dumps(run_record, ensure_ascii=False)
 
         with self._connect() as conn:
@@ -69,14 +99,30 @@ class RunHistoryStore:
             rows = conn.execute(query, params).fetchall()
 
         runs: list[dict[str, Any]] = []
+        seen_signatures: set[str] = set()
         for row in rows:
             try:
                 payload = json.loads(row["payload_json"])
                 if isinstance(payload, dict):
+                    signature = compute_run_signature(payload)
+                    if signature:
+                        if signature in seen_signatures:
+                            continue
+                        seen_signatures.add(signature)
                     runs.append(payload)
             except json.JSONDecodeError:
                 continue
         return runs
+
+    def find_run_by_signature(self, signature: str) -> dict[str, Any] | None:
+        normalized_signature = str(signature or "").strip()
+        if not normalized_signature:
+            return None
+
+        for run in self.list_runs(limit=0):
+            if compute_run_signature(run) == normalized_signature:
+                return run
+        return None
 
     def clear(self) -> None:
         with self._connect() as conn:
