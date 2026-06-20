@@ -3,6 +3,7 @@ fastapi
 uvicorn
 python-multipart
 requests
+openai
 pypdf
 groq
 python-dotenv
