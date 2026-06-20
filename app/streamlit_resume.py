@@ -423,7 +423,7 @@ def render_analysis_global_summary(results_sorted, power_total_kw, annual_energy
     """
     Affiche un résumé global consolidé de l'analyse: statistiques clés, classement, et recommandations.
     """
-    section = render_section_card("📊 Résumé Global de l'Analyse")
+    section = render_section_card("Résumé Global de l'Analyse")
     with section:
         # Onglets pour navigation
         summary_tab1, summary_tab2, summary_tab3 = st.tabs(["Vue d'ensemble", "Classement complet", "Recommandations"])
