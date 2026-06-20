@@ -1,3 +1,4 @@
+import os
 import json
 from textwrap import dedent
 
@@ -6,6 +7,10 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 from bridge_links import render_bridge_banner, render_dashboard_switcher
+
+
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+LOGO_PATH = os.path.join(ROOT, "assets", "larzacqua_logo.svg")
 
 
 SITES = [
@@ -907,47 +912,37 @@ def PVDashboard(set_page_config=True):
         st.set_page_config(page_title="LARZACQUA | Tableau de bord photovoltaïque", layout="wide")
     render_css()
 
-    if "dashboard_mode" not in st.session_state:
+    query_mode = None
+    try:
+        query_mode = st.query_params.get("mode")
+        if isinstance(query_mode, list):
+            query_mode = query_mode[0] if query_mode else None
+    except Exception:
+        query_mode = None
+    if query_mode not in {"hydro", "pv"}:
+        try:
+            query_mode = st.experimental_get_query_params().get("mode", [None])[0]
+        except Exception:
+            query_mode = None
+
+    if query_mode in {"hydro", "pv"}:
+        st.session_state["dashboard_mode"] = query_mode
+    elif "dashboard_mode" not in st.session_state:
         st.session_state["dashboard_mode"] = "pv"
+
+    if "pv_selected_site" not in st.session_state:
+        st.session_state["pv_selected_site"] = SITES[0]["nom"]
 
     sites_df = build_sites_df()
     site_options = ["Tous les sites"] + sites_df["nom"].tolist()
-
-    st.markdown(
-        dedent(
-            f"""
-            <div class="pv-shell">
-                <div class="pv-hero">
-                    <div class="pv-kicker">LARZACQUA · Programme photovoltaïque</div>
-                    <h1 class="pv-title">Tableau de bord PV du SIELL</h1>
-                    <p class="pv-subtitle">
-                        Interface de synthèse alignée sur l’habillage du dashboard hydroélectrique : même ton sombre,
-                        mêmes cartes, et un pilotage centré sur le dimensionnement technique et le modèle économique.
-                    </p>
-                    <div class="pv-badges">
-                        <span class="pv-pill">{format_kw(7096)} kWc installés</span>
-                        <span class="pv-pill">{format_mwh(BILAN['productible_total_mwh'])}</span>
-                        <span class="pv-pill">{format_int(MODULE['quantite'])} modules bifaciaux</span>
-                        <span class="pv-pill">{format_int(ONDULEUR['quantite'])} onduleurs {ONDULEUR['puissance_kva']} kVA</span>
-                        <span class="pv-pill">6 sites raccordés</span>
-                    </div>
-                </div>
-            </div>
-            """
-        ),
-        unsafe_allow_html=True,
-    )
 
     render_bridge_banner(
         active_label="Interface PV active",
         other_label="l’interface hydro",
         active_mode="pv",
     )
-    render_dashboard_switcher("pv")
 
-    col_site, col_view, col_price = st.columns([1.3, 1, 1])
-    with col_site:
-        selected_site = st.selectbox("Filtrer par site", site_options, index=0)
+    col_price = st.columns([1])[0]
     with col_price:
         price_autoconso = st.slider(
             "Prix autoconsommation (€ / MWh)",
@@ -957,7 +952,6 @@ def PVDashboard(set_page_config=True):
             step=5,
         )
 
-    selected_row = get_selected_site(sites_df, selected_site)
     total_capex = ECONOMIE["capex_total"]
     net_revenue = ECONOMIE["revenu_net_an"]
     payback_years = total_capex / net_revenue
@@ -972,36 +966,12 @@ def PVDashboard(set_page_config=True):
         unsafe_allow_html=True,
     )
 
-    tab_analyse, tab_dimensionnement, tab_economie = st.tabs(
-        ["Analyse", "Dimensionnement", "Simulation économique"]
+    tab_analyse, tab_site, tab_dimensionnement, tab_economie = st.tabs(
+        ["Analyse", "Site", "Dimensionnement", "Simulation économique"]
     )
 
     with tab_analyse:
         st.markdown("<div class='pv-section-title'>Vue d’ensemble</div>", unsafe_allow_html=True)
-        overview_site_name = selected_site if selected_site != "Tous les sites" else SITES[0]["nom"]
-        overview_profile = get_site_profile(overview_site_name)
-        if selected_row is not None:
-            puissance_value = selected_row.get("puissance_kwc")
-            puissance = "non communiqué" if pd.isna(puissance_value) else f"{format_kw(puissance_value)} kWc"
-            focus_body = dedent(
-                f"""
-                <strong>{selected_row['nom']}</strong><br>
-                Secteur : {selected_row['secteur']}<br>
-                Surface : {format_int(selected_row['surface'])} m²<br>
-                Puissance communiquée : {puissance}<br>
-                Part de surface du projet : {selected_row['surface_share_pct']:.1f} %
-                """
-            )
-            st.markdown(card_html("Site filtré", focus_body, "green"), unsafe_allow_html=True)
-        else:
-            focus_body = dedent(
-                f"""
-                Vue d’ensemble sur les {len(sites_df)} sites du programme.
-                Le sélecteur de site permet de mettre en avant une implantation sans perdre la cohérence de la synthèse globale.
-                """
-            )
-            st.markdown(card_html("Périmètre", focus_body, "amber"), unsafe_allow_html=True)
-
         st.markdown(
             card_html(
                 "Lecture rapide",
@@ -1017,14 +987,41 @@ def PVDashboard(set_page_config=True):
             unsafe_allow_html=True,
         )
 
-        st.markdown("<div class='pv-section-title'>Fiche PVsyst du site</div>", unsafe_allow_html=True)
-        st.markdown(selected_site_detail_html(overview_site_name), unsafe_allow_html=True)
+        st.markdown("<div class='pv-section-title'>Fiches des 6 sites</div>", unsafe_allow_html=True)
+        st.markdown(site_cards_html(sites_df, st.session_state["pv_selected_site"]), unsafe_allow_html=True)
 
-        monthly_df = monthly_profile_series(overview_profile)
+        st.markdown("<div class='pv-section-title'>Comparatif parc</div>", unsafe_allow_html=True)
+        st.dataframe(site_comparison_df(), use_container_width=True, hide_index=True)
+
+    with tab_site:
+        st.markdown("<div class='pv-section-title'>Sélection du site</div>", unsafe_allow_html=True)
+        st.selectbox("Choisir un site", site_options[1:], key="pv_selected_site")
+
+        selected_site = st.session_state["pv_selected_site"]
+        selected_row = get_selected_site(sites_df, selected_site)
+        selected_profile = get_site_profile(selected_site)
+        if selected_row is not None:
+            puissance_value = selected_row.get("puissance_kwc")
+            puissance = "non communiqué" if pd.isna(puissance_value) else f"{format_kw(puissance_value)} kWc"
+            focus_body = dedent(
+                f"""
+                <strong>{selected_row['nom']}</strong><br>
+                Secteur : {selected_row['secteur']}<br>
+                Surface : {format_int(selected_row['surface'])} m²<br>
+                Puissance communiquée : {puissance}<br>
+                Part de surface du projet : {selected_row['surface_share_pct']:.1f} %
+                """
+            )
+            st.markdown(card_html("Site actif", focus_body, "green"), unsafe_allow_html=True)
+
+        st.markdown("<div class='pv-section-title'>Fiche PVsyst complète</div>", unsafe_allow_html=True)
+        st.markdown(selected_site_detail_html(selected_site), unsafe_allow_html=True)
+
+        monthly_df = monthly_profile_series(selected_profile)
         render_chart_panel(
-            f"Production mensuelle - {overview_site_name}",
+            f"Production mensuelle - {selected_site}",
             "Profil mensuel E_Grid issu des simulations PVsyst.",
-            "pv_monthly_chart",
+            "pv_monthly_chart_site",
             {
                 "type": "bar",
                 "data": {
@@ -1048,17 +1045,8 @@ def PVDashboard(set_page_config=True):
             height=320,
         )
 
-        st.markdown("<div class='pv-section-title'>Fiches des 6 sites</div>", unsafe_allow_html=True)
-        st.markdown(site_cards_html(sites_df, selected_site), unsafe_allow_html=True)
-
-        if selected_site == "Tous les sites":
-            comparison_df = site_comparison_df()
-            st.markdown("<div class='pv-section-title'>Comparatif parc</div>", unsafe_allow_html=True)
-            st.dataframe(
-                comparison_df,
-                use_container_width=True,
-                hide_index=True,
-            )
+        st.markdown("<div class='pv-section-title'>Pertes système du site</div>", unsafe_allow_html=True)
+        st.dataframe(site_losses_df(selected_profile), use_container_width=True, hide_index=True)
 
     with tab_dimensionnement:
         st.markdown("<div class='pv-section-title'>Dimensionnement technique</div>", unsafe_allow_html=True)
@@ -1082,9 +1070,8 @@ def PVDashboard(set_page_config=True):
 
         surface_labels = [SITE_SHORT_NAMES.get(site["nom"], site["nom"]) for site in SITES]
         surface_values = [site["surface"] for site in SITES]
+        selected_site = st.session_state["pv_selected_site"]
         surface_colors = ["#F59E0B" if site["nom"] == selected_site else "rgba(245, 158, 11, 0.55)" for site in SITES]
-        if selected_site == "Tous les sites":
-            surface_colors = ["rgba(245, 158, 11, 0.82)"] * len(SITES)
 
         render_chart_panel(
             "Surfaces des sites",
@@ -1141,7 +1128,7 @@ def PVDashboard(set_page_config=True):
         )
 
         st.markdown("<div class='pv-section-title'>Pertes système communes</div>", unsafe_allow_html=True)
-        losses_profile = get_site_profile(overview_site_name)
+        losses_profile = get_site_profile(selected_site)
         st.dataframe(site_losses_df(losses_profile), use_container_width=True, hide_index=True)
 
         st.markdown("<div class='pv-section-title'>Équipements standardisés</div>", unsafe_allow_html=True)

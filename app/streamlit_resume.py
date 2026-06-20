@@ -3,6 +3,7 @@ import re
 import sys
 import inspect
 import numpy as np
+import urllib.parse
 from datetime import datetime
 
 # Ajout dynamique du chemin racine du projet pour les imports
@@ -191,12 +192,10 @@ def create_pressure_reducer_map(df, center=None, zoom_start=12, fit_bounds=True)
     return m
 
 
-def render_site_ai_generation(prompt, allow_call, cache_key, title="Generation IA", max_tokens=600):
+def render_site_ai_generation(prompt, allow_call, cache_key, title="Synthese", max_tokens=600):
     st.subheader(title)
     with st.container():
-        st.caption("Synthese pedagogique basee sur les parametres du site et les turbines compatibles.")
-        with st.expander("Prompt utilise", expanded=False):
-            st.code(prompt, language="markdown")
+        st.caption("Synthese automatique basee sur les parametres du site et les turbines compatibles.")
         result_key = f"{cache_key}_result"
         error_key = f"{cache_key}_error"
         regen_key = f"{cache_key}_regen"
@@ -215,7 +214,7 @@ def render_site_ai_generation(prompt, allow_call, cache_key, title="Generation I
                     api_key=groq_api_key,
                     base_url="https://api.groq.com/openai/v1"
                 )
-                with st.spinner("Appel a l'IA Groq en cours..."):
+                with st.spinner("Generation en cours..."):
                     response = client.chat.completions.create(
                         model="openai/gpt-oss-120b",
                         messages=[{"role": "user", "content": prompt}],
@@ -227,17 +226,32 @@ def render_site_ai_generation(prompt, allow_call, cache_key, title="Generation I
 
         st.markdown("#### Resultat")
         if not allow_call:
-            st.info("Generation indisponible pour ce site (aucune turbine compatible).")
+            st.info("Synthese indisponible pour ce site (aucune turbine compatible).")
         elif error_key in st.session_state:
-            st.error(f"Erreur lors de l'appel a l'API Groq : {st.session_state[error_key]}")
+            st.error(f"Erreur lors de la generation : {st.session_state[error_key]}")
         elif result_key in st.session_state:
-            st.success("Generation IA terminee !")
+            st.success("Synthese terminee !")
             st.markdown(st.session_state[result_key])
         else:
-            st.info("Generation en attente.")
+            st.info("Synthese en attente.")
 
 st.set_page_config(page_title="Analyse potentiel hydroélectrique Larzacqua", layout="wide")
-if "dashboard_mode" not in st.session_state:
+query_mode = None
+try:
+    query_mode = st.query_params.get("mode")
+    if isinstance(query_mode, list):
+        query_mode = query_mode[0] if query_mode else None
+except Exception:
+    query_mode = None
+if query_mode not in {"hydro", "pv"}:
+    try:
+        query_mode = st.experimental_get_query_params().get("mode", [None])[0]
+    except Exception:
+        query_mode = None
+
+if query_mode in {"hydro", "pv"}:
+    st.session_state["dashboard_mode"] = query_mode
+elif "dashboard_mode" not in st.session_state:
     st.session_state["dashboard_mode"] = "hydro"
 
 if st.session_state.get("dashboard_mode") == "pv":
@@ -246,16 +260,25 @@ if st.session_state.get("dashboard_mode") == "pv":
     PVDashboard(set_page_config=False)
     st.stop()
 
-st.title("Analyse potentiel hydroélectrique Larzacqua")
 render_bridge_banner(
     active_label="Interface hydro active",
     other_label="l’interface PV",
     active_mode="hydro",
 )
-render_dashboard_switcher("hydro")
 
-st.markdown(
-    """
+chatbot_icon_svg = """
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'>
+  <rect x='4' y='6' width='16' height='12' rx='4' />
+  <circle cx='9' cy='12' r='1' fill='white' stroke='none' />
+  <circle cx='15' cy='12' r='1' fill='white' stroke='none' />
+  <path d='M9 18v2M15 18v2' />
+  <path d='M12 3v3' />
+  <path d='M9 3h6' />
+</svg>
+"""
+chatbot_icon_data_uri = "data:image/svg+xml;utf8," + urllib.parse.quote(chatbot_icon_svg)
+
+style_block = """
     <style>
     div[data-testid="stContainer"] {
         background: linear-gradient(135deg, rgba(15, 23, 42, 0.96) 0%, rgba(17, 24, 39, 0.94) 60%);
@@ -268,7 +291,8 @@ st.markdown(
     div[data-testid="stContainer"] h3 {
         margin: 0;
         color: #e5eef9;
-        font-weight: 700;
+        font-weight: 800;
+        font-size: 1.18rem;
         letter-spacing: 0.02em;
     }
     div[data-testid="stContainer"] p {
@@ -304,36 +328,41 @@ st.markdown(
     }
     [data-testid="stButton"][data-widget-id="chatbot-bubble"] {
         position: fixed;
-        right: 24px;
-        bottom: 24px;
+        left: 18px;
+        top: 18px;
         z-index: 1000;
     }
     [data-testid="stButton"][data-widget-id="chatbot-bubble"] > button {
-        min-width: 190px;
-        height: 58px;
-        padding: 0 22px;
+        width: 48px;
+        height: 48px;
+        padding: 0;
         border-radius: 999px;
-        background: linear-gradient(135deg, #1d68ff 0%, #33c0ff 100%);
-        color: #ffffff;
-        font-size: 1rem;
+        background-color: rgba(15, 23, 42, 0.92);
+        background-image: url("__CHATBOT_ICON__");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 24px 24px;
+        color: transparent;
+        font-size: 0;
         font-weight: 700;
-        letter-spacing: 0.02em;
-        border: none;
+        letter-spacing: 0;
+        border: 1px solid rgba(148, 163, 184, 0.22);
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 0.5rem;
-        box-shadow: 0 12px 30px rgba(29, 104, 255, 0.28);
-        text-transform: uppercase;
+        gap: 0;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.26);
+        text-transform: none;
     }
     [data-testid="stButton"][data-widget-id="chatbot-bubble"] > button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 14px 34px rgba(29, 104, 255, 0.35);
+        border-color: rgba(109, 188, 255, 0.55);
+        box-shadow: 0 12px 28px rgba(29, 104, 255, 0.22);
     }
     </style>
-    """,
-    unsafe_allow_html=True,
-)
+    """
+style_block = style_block.replace("__CHATBOT_ICON__", chatbot_icon_data_uri)
+st.markdown(style_block, unsafe_allow_html=True)
 
 def render_section_card(title, subtitle=None):
     section = st.container(border=True)
@@ -348,17 +377,14 @@ def render_kpi_card():
     return st.container()
 
 def render_chatbot_bubble():
-    """Affiche une bulle de chat pour ouvrir/fermer le chatbot."""
     if "chatbot_open" not in st.session_state:
         st.session_state["chatbot_open"] = False
     if "chat_history" not in st.session_state:
         st.session_state["chat_history"] = []
-    
-    # Bouton flottant pour ouvrir/fermer le chatbot
-    col1, col2, col3 = st.columns([10, 0.5, 0.5])
-    with col3:
-        if st.button("💬", help="Ouvrir le chatbot"):
-            st.session_state["chatbot_open"] = not st.session_state["chatbot_open"]
+
+    if st.button("Chatbot", key="chatbot-bubble", help="Ouvrir le chatbot"):
+        st.session_state["chatbot_open"] = not st.session_state["chatbot_open"]
+        st.rerun()
 
 def render_analysis_global_summary(results_sorted, power_total_kw, annual_energy_kwh):
     """
@@ -512,10 +538,7 @@ def render_analysis_global_summary(results_sorted, power_total_kw, annual_energy
                     except Exception as e:
                         st.error(f"Erreur lors de la génération du PDF: {str(e)}")
     
-    clicked = st.button("🤖 Assistant IA", key="chatbot-bubble", help="Ouvrir le chatbot")
-    if clicked:
-        st.session_state["chatbot_open"] = not st.session_state["chatbot_open"]
-        st.rerun()
+    return None
 
 
 def render_chatbot_panel():
@@ -523,27 +546,26 @@ def render_chatbot_panel():
         st.session_state["chat_history"] = []
     chat_history = st.session_state["chat_history"]
     groq_model = "openai/gpt-oss-120b"
+
     with st.sidebar:
         header_cols = st.columns([1, 1])
         with header_cols[0]:
-            st.markdown("### 🤖 Assistant Groq")
+            st.markdown("### Synthèse interactive")
             st.caption("Questions rapides sur l'analyse du projet et la simulation.")
         with header_cols[1]:
             if st.button("Fermer", key="close-chatbot", width='stretch'):
                 st.session_state["chatbot_open"] = False
                 st.rerun()
         st.markdown("<hr style='border-color:#dbe7f7; margin:0.6rem 0;'>", unsafe_allow_html=True)
-        st.markdown(
-            "<small style='color:#1d68ff;'>Modèle utilisé : <b>" + groq_model + "</b></small>",
-            unsafe_allow_html=True,
-        )
-        if chat_history and st.button("Effacer la conversation", key="clear-chat", width='stretch'):
+        if chat_history and st.button("Effacer l'historique", key="clear-chat", width='stretch'):
             st.session_state["chat_history"] = []
             st.rerun()
+
         for message in chat_history:
             with st.chat_message(message.get("role", "assistant")):
                 st.markdown(str(message.get("content") or ""))
-        question = st.chat_input("Pose ta question ici", key="chat-input")
+
+        question = st.chat_input("Posez votre question", key="chat-input")
         if question:
             chat_history.append({"role": "user", "content": question})
             best_sites = st.session_state.get("results_sorted")
@@ -569,7 +591,7 @@ def render_chatbot_panel():
                     api_key=groq_api_key,
                     base_url="https://api.groq.com/openai/v1",
                 )
-                with st.spinner("Appel a l'IA Groq en cours..."):
+                with st.spinner("Réponse en cours..."):
                     response = client.chat.completions.create(
                         model=groq_model,
                         messages=[
@@ -586,7 +608,7 @@ def render_chatbot_panel():
                 if "rate_limit" in str(e).lower() or "429" in str(e):
                     fallback_model = "llama-3.1-8b-instant"
                     try:
-                        with st.spinner("Limite atteinte, tentative avec un modele plus leger..."):
+                        with st.spinner("Limite atteinte, nouvelle tentative..."):
                             response = client.chat.completions.create(
                                 model=fallback_model,
                                 messages=[
@@ -601,15 +623,17 @@ def render_chatbot_panel():
                         answer = response.choices[0].message.content
                     except Exception as inner:
                         answer = (
-                            "Limite de tokens atteinte pour Groq. "
-                            "Reessaie dans quelques minutes ou reduis la longueur de la question. "
-                            f"Details: {inner}"
+                            "Limite temporaire atteinte. "
+                            "Réessayez dans quelques minutes ou réduisez la longueur de la question. "
+                            f"Détails: {inner}"
                         )
                 else:
-                    answer = f"Erreur lors de l'appel a l'API Groq : {e}"
+                    answer = f"Erreur lors de la génération : {e}"
             chat_history.append({"role": "assistant", "content": answer})
             st.session_state["chat_history"] = chat_history
             st.rerun()
+
+render_chatbot_bubble()
 
 if st.session_state.get("chatbot_open"):
     render_chatbot_panel()
@@ -619,11 +643,6 @@ tab1, tab_map, tab2, tab_acteurs = st.tabs(
 )
 
 with tab1:
-    render_section_card(
-        "Analyse détaillée (pipeline réel)",
-        "Pipeline basé sur outputs/resume_analyse.py, avec étapes pédagogiques.",
-    )
-
     # Mise en page avec deux colonnes de même taille
     # 1. Chargement des données réelles
     section = render_section_card("1. Données PRV brutes (issues du CSV)")
@@ -1106,7 +1125,7 @@ def propose_turbines(site_row, turbine_db, top_n=2):
                         synthese_site,
                         allow_call=not turbines.empty,
                         cache_key=f"site_{site_key}_selection",
-                        title="Generation IA (selection turbine)",
+                        title="Synthese de selection",
                         max_tokens=600,
                     )
                     display_cols = [
@@ -1479,7 +1498,7 @@ def propose_turbines(site_row, turbine_db, top_n=2):
                         synthese_site,
                         allow_call=not turbines.empty,
                         cache_key=f"site_{site_key}_selection",
-                        title="Generation IA (selection turbine)",
+                        title="Synthese de selection",
                         max_tokens=600,
                     )
                     st.subheader("Turbines compatibles (tableau)")

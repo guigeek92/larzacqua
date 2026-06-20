@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Larzacqua</title>
+  <desc id="desc">Logo stylisé Larzacqua avec un cercle, une moitié énergétique et une moitié hydraulique.</desc>
+  <defs>
+    <linearGradient id="ring" x1="70" y1="40" x2="440" y2="460" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2b6cb0"/>
+      <stop offset="0.55" stop-color="#34b6d0"/>
+      <stop offset="1" stop-color="#59d0a6"/>
+    </linearGradient>
+    <linearGradient id="leftFill" x1="135" y1="150" x2="250" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#67d5c8"/>
+      <stop offset="0.55" stop-color="#3a8bdc"/>
+      <stop offset="1" stop-color="#2458b8"/>
+    </linearGradient>
+    <linearGradient id="rightFill" x1="264" y1="150" x2="380" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5de0c9"/>
+      <stop offset="1" stop-color="#29a8cf"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="#ffffff"/>
+  <circle cx="256" cy="194" r="154" fill="none" stroke="url(#ring)" stroke-width="10"/>
+  <path d="M166 104c-10 36-7 73-4 111 2 26 1 53-3 80l86 49 67-39c-8-24-10-50-7-76 4-34 8-73-2-112-40-8-81-8-137-13z" fill="url(#leftFill)" opacity="0.96"/>
+  <path d="M300 110c-1 29 5 57 16 83 11 27 16 51 14 78l63 2c-11 22-28 41-51 59-22 17-47 30-74 40l-68-40c12-24 16-53 13-84-2-27-2-53 4-79 4-18 11-34 23-49 17-22 42-35 67-43 6-2 11-3 13-7z" fill="url(#rightFill)" opacity="0.98"/>
+  <g fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.96">
+    <path d="M192 124v138"/>
+    <path d="M222 124v150"/>
+    <path d="M252 127v146"/>
+    <path d="M174 151h112"/>
+    <path d="M170 180h118"/>
+    <path d="M166 209h118"/>
+    <path d="M164 239h112"/>
+    <path d="M188 104l26 20 30-20 26 20 26-18"/>
+  </g>
+  <g fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <path d="M307 137c-20 18-26 40-13 62 11 18 35 33 63 37"/>
+    <path d="M322 170c-24 15-31 34-18 55 10 16 30 26 53 31"/>
+    <path d="M337 205c-18 10-25 23-18 37 6 11 17 18 31 22"/>
+    <path d="M351 245c-9 5-12 11-9 18 3 6 7 10 14 13"/>
+  </g>
+  <path d="M130 276c16-16 33-26 52-31 11-3 22-5 32-5" fill="none" stroke="#6ad4c5" stroke-width="8" stroke-linecap="round" opacity="0.85"/>
+  <path d="M160 294c15-12 31-18 49-20 12-1 24 0 36 2" fill="none" stroke="#2e75cf" stroke-width="8" stroke-linecap="round" opacity="0.85"/>
+  <path d="M356 276c-11 10-24 16-38 20-13 4-26 5-40 4" fill="none" stroke="#5fd0d4" stroke-width="8" stroke-linecap="round" opacity="0.85"/>
+  <text x="256" y="442" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="58" font-weight="700" fill="#2f7ac7" letter-spacing="0.5">Larzacqua</text>
+</svg>
