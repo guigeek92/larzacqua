@@ -804,6 +804,7 @@ from modules.hydraulics import compute_hydraulics
 from modules.power import compute_power
 from modules.scoring import score_sites
 from modules.turbine import load_turbine_db
+from modules.turbine_selector import select_turbine
 from modules import productible
 
 
@@ -1725,13 +1726,18 @@ def generate_pdf(output_path, csv_path='data/prv.csv', turbine_db_path=None):
     raw_dict = load_data({'prv': csv_path})
     raw_df = raw_dict['prv']
     flow_df = compute_hydraulics(raw_df)
-    power_df = compute_power(flow_df)
+    
+    # Charger la base de turbines et sélectionner pour avoir le rendement
+    turbine_db = load_turbine_db(turbine_db_path)
+    flow_df_with_turbines = select_turbine(flow_df, turbine_db, top_n=1)
+    
+    # Calculer la puissance avec le rendement des turbines sélectionnées
+    power_df = compute_power(flow_df_with_turbines)
     score_df = score_sites(flow_df)
     results = flow_df.copy()
     results['power_kW'] = power_df['power'] / 1000
     results['score'] = score_df['score']
     results_sorted = results.sort_values('score', ascending=False)
-    turbine_db = load_turbine_db(turbine_db_path)
 
     pdf = SimuWatterPDF()
     for idx, site_row in results_sorted.iterrows():

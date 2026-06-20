@@ -734,7 +734,12 @@ with tab1:
     # 3. Fusion des résultats
     section = render_section_card("3. Fusion des résultats hydroélectriques")
     with section:
-        power_df = compute_power(flow_df)
+        # D'abord, sélectionner les turbines pour chaque site (pour avoir le rendement)
+        turbine_db = load_turbine_db()
+        flow_df_with_turbines = select_turbine(flow_df, turbine_db, top_n=1)
+        
+        # Calculer la puissance avec le rendement des turbines sélectionnées
+        power_df = compute_power(flow_df_with_turbines)
         results = flow_df.copy()
         results['power_kW'] = pd.to_numeric(power_df['power'], errors="coerce") / 1000.0
         st.dataframe(results, use_container_width=True, height=360)
@@ -920,7 +925,13 @@ with tab2:
             hydro_df['flow_min'] = hydro_df['estimated_flow_obs'] * 0.8
         if 'flow_max' not in hydro_df.columns and 'estimated_flow_obs' in hydro_df.columns:
             hydro_df['flow_max'] = hydro_df['estimated_flow_obs'] * 1.2
-        power_df = compute_power(hydro_df)
+        
+        # Charger la base de turbines et sélectionner pour avoir le rendement
+        turbine_db = load_turbine_db()
+        hydro_df_with_turbines = select_turbine(hydro_df, turbine_db, top_n=1)
+        
+        # Calculer la puissance avec le rendement des turbines sélectionnées
+        power_df = compute_power(hydro_df_with_turbines)
         scored_df = power_df.copy()
         scored_df['score'] = pd.to_numeric(scored_df['power'], errors='coerce') / 1000.0
 

@@ -93,6 +93,37 @@ HERO_STYLE = """
     line-height: 1.45;
     font-size: 0.92rem;
 }
+/* Style des boutons de navigation Hydro/PV */
+[data-testid="column"]:has(> button) button {
+    font-weight: 900 !important;
+    font-size: 1.05rem !important;
+    letter-spacing: 0.05em !important;
+    padding: 0.7rem 1.5rem !important;
+    border-radius: 12px !important;
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+[data-testid="column"]:has(> button) button[kind="primary"] {
+    background: linear-gradient(135deg, #2e75cf 0%, #34b6d0 100%) !important;
+    color: #FFFFFF !important;
+    border: 2px solid rgba(89, 208, 166, 0.6) !important;
+    box-shadow: 0 6px 20px rgba(46, 117, 207, 0.35) !important;
+}
+[data-testid="column"]:has(> button) button[kind="primary"]:hover {
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 10px 28px rgba(46, 117, 207, 0.5) !important;
+}
+[data-testid="column"]:has(> button) button[kind="secondary"] {
+    background: rgba(20, 35, 55, 0.9) !important;
+    color: #E2E8F0 !important;
+    border: 2px solid rgba(52, 182, 208, 0.35) !important;
+}
+[data-testid="column"]:has(> button) button[kind="secondary"]:hover {
+    background: rgba(30, 50, 75, 0.95) !important;
+    border: 2px solid rgba(52, 182, 208, 0.65) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 16px rgba(52, 182, 208, 0.2) !important;
+}
 </style>
 """
 
@@ -147,13 +178,13 @@ def render_bridge_banner(active_label, other_label, active_mode):
     )
     
     # Navigation buttons using st.query_params (no page reload)
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("Hydro", key="nav_hydro", use_container_width=True, type="primary" if active_mode == "hydro" else "secondary"):
+    nav_col1, nav_col2, nav_spacer = st.columns([1, 1, 1.5])
+    with nav_col1:
+        if st.button("HYDRO", key="nav_hydro", use_container_width=True, type="primary" if active_mode == "hydro" else "secondary"):
             st.query_params.mode = "hydro"
             st.rerun()
-    with col2:
-        if st.button("PV", key="nav_pv", use_container_width=True, type="primary" if active_mode == "pv" else "secondary"):
+    with nav_col2:
+        if st.button("PHOTOVOLTAÏQUE", key="nav_pv", use_container_width=True, type="primary" if active_mode == "pv" else "secondary"):
             st.query_params.mode = "pv"
             st.rerun()
 

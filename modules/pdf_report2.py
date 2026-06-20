@@ -19,6 +19,7 @@ from modules.hydraulics import compute_hydraulics
 from modules.power import compute_power
 from modules.scoring import score_sites
 from modules.turbine import load_turbine_db
+from modules.turbine_selector import select_turbine
 from modules import productible
 
 
@@ -281,11 +282,17 @@ def normalize_table_headers(doc: Document) -> None:
 
 # -------------------- DATA PROCESSING -------------------- #
 
-def load_and_compute(csv_path: str) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+def load_and_compute(csv_path: str, turbine_db_path: str = None) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     raw_dict = load_data({'prv': csv_path})
     raw_df = raw_dict['prv']
     flow_df = compute_hydraulics(raw_df)
-    power_df = compute_power(flow_df)
+    
+    # Charger la base de turbines et sélectionner pour avoir le rendement
+    turbine_db = load_turbine_db(turbine_db_path)
+    flow_df_with_turbines = select_turbine(flow_df, turbine_db, top_n=1)
+    
+    # Calculer la puissance avec le rendement des turbines sélectionnées
+    power_df = compute_power(flow_df_with_turbines)
     score_df = score_sites(flow_df)
     return raw_df, flow_df, power_df, score_df
 
@@ -600,7 +607,7 @@ def main() -> None:
     template_path = PROVIDED_TEMPLATE if docx_has_images(PROVIDED_TEMPLATE) else DEFAULT_TEMPLATE
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    raw_df, flow_df, power_df, score_df = load_and_compute(CSV_PATH)
+    raw_df, flow_df, power_df, score_df = load_and_compute(CSV_PATH, TURBINE_DB_PATH)
     results_sorted = prepare_results(flow_df, power_df, score_df)
     results_clean = results_sorted.dropna(subset=['site_name', 'estimated_flow', 'delta_p', 'power_kW', 'score']).copy()
     indicators = compute_indicators(results_clean)
