@@ -4,8 +4,17 @@ uvicorn
 python-multipart
 requests
 openai
+pandas
+numpy
 pypdf
 groq
+fpdf2
+matplotlib
+pyproj
+folium
+streamlit-folium
+python-docx
+docx2pdf
 python-dotenv
 pymupdf
 pytesseract
