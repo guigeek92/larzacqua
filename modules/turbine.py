@@ -144,12 +144,7 @@ def select_turbine(prv_df, turbine_db):
         # 🔧 filtre turbines
         # =====================================================
         candidates = turbine_db[
-            (turbine_db["pression_min_bar"] <= pressure * 1.2) &
-            (turbine_db["pression_max_bar"] >= pressure * 0.8) &
-            (turbine_db["debit_min_m3h"] <= flow * 1.2) &
-            (turbine_db["debit_max_m3h"] >= flow * 0.8) &
-            (turbine_db["diametre_mm"] <= diameter + 30) &
-            (turbine_db["diametre_mm"] >= diameter - 30) &
+          
             (turbine_db["puissance_min_kw"] <= Pe) &
             (turbine_db["puissance_max_kw"] >= Pe)
         ].copy()
