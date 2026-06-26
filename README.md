@@ -1,10 +1,10 @@
-# 💧 SimuWatter - Analyse Potentiel Hydroélectrique
+#  SimuWatter - Analyse Potentiel Hydroélectrique
 
 **Outil d'analyse énergétique pour infrastructures d'eau à partir de données CSV**
 
 ---
 
-## 🚀 Démarrage Rapide
+##  Démarrage Rapide
 
 Voir le guide rapide : **[QUICKSTART.md](QUICKSTART.md)**
 
